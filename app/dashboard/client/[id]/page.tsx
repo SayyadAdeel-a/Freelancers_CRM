@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getClient, getNotes, deleteClient, Client, Note } from "@/lib/firebase/firestore";
+import { getClient, getNotes, getReminders, deleteClient, Client, Note, Reminder } from "@/lib/firebase/firestore";
 import { AddNote } from "@/components/dashboard/AddNote";
 import { NoteCard } from "@/components/dashboard/NoteCard";
 import { SetReminderModal } from "@/components/dashboard/SetReminderModal";
@@ -27,6 +27,7 @@ export default function ClientPage() {
   const router = useRouter();
   const [client, setClient] = useState<Client | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [reminders, setReminders] = useState<Reminder[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
 
@@ -39,14 +40,21 @@ export default function ClientPage() {
         return;
       }
       setClient(clientData);
-      const notesData = await getNotes(id as string);
+      
+      // Fetch notes and reminders in parallel
+      const [notesData, remindersData] = await Promise.all([
+        getNotes(id as string),
+        getReminders(id as string)
+      ]);
+      
       setNotes(notesData);
+      setReminders(remindersData);
     } catch (error) {
       console.error("Error fetching client data:", error);
     } finally {
       setLoading(false);
     }
-  }, [id, router, getClient, getNotes]);
+  }, [id, router]);
 
   useEffect(() => {
     fetchData();
@@ -168,7 +176,7 @@ export default function ClientPage() {
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 space-y-4">
               <Button 
                 variant="outline" 
                 className="w-full justify-start text-muted-foreground hover:text-foreground"
@@ -177,6 +185,23 @@ export default function ClientPage() {
                 <Plus className="w-4 h-4 mr-2" />
                 Set Reminder
               </Button>
+
+              {reminders.length > 0 && (
+                <div className="space-y-3 pt-4 border-t border-border/50">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Upcoming Reminders</h4>
+                  {reminders.filter(r => !r.isSent).map((reminder) => (
+                    <div key={reminder.id} className="p-3 bg-secondary/30 rounded-xl border border-border/50 text-sm">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-medium text-primary">Follow-up</span>
+                        <span className="text-[10px] text-muted-foreground">
+                          {reminder.remindAt?.toDate?.()?.toLocaleDateString()}
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2">{reminder.message}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -188,7 +213,7 @@ export default function ClientPage() {
         isOpen={isReminderModalOpen}
         onClose={() => setIsReminderModalOpen(false)}
         onSuccess={() => {
-          // You might want to fetch reminders or show a toast
+          fetchData();
         }}
       />
     </div>

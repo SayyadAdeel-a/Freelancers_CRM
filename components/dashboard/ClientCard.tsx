@@ -68,12 +68,18 @@ export function ClientCard({ client, onDelete }: ClientCardProps) {
               <Calendar className="w-4 h-4 mr-2" />
               Added {client.createdAt?.toDate?.()?.toLocaleDateString() || "Just now"}
             </div>
+            {client.nextReminder && (
+              <div className="flex items-center text-primary font-medium">
+                <Calendar className="w-4 h-4 mr-2" />
+                Next Nudge: {client.nextReminder.remindAt?.toDate?.()?.toLocaleDateString()}
+              </div>
+            )}
           </div>
           
           <div className="mt-5 pt-4 border-t border-border flex items-center justify-between text-xs font-medium uppercase tracking-wider text-muted-foreground">
             <div className="flex items-center gap-1.5">
               <MessageSquare className="w-3.5 h-3.5" />
-              0 Notes
+              {client.noteCount || 0} Notes
             </div>
             <div className="px-2 py-0.5 rounded-full bg-secondary text-foreground">
               Active

@@ -9,7 +9,8 @@ import {
   doc,
   serverTimestamp,
   orderBy,
-  limit
+  limit,
+  getCountFromServer
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -22,6 +23,18 @@ export interface Client {
   createdAt: any;
   lastContacted?: any;
   plan?: string;
+  noteCount?: number;
+  nextReminder?: Reminder | null;
+}
+
+export interface Reminder {
+  id: string;
+  clientId: string;
+  userId: string;
+  remindAt: any;
+  message: string;
+  isSent: boolean;
+  createdAt: any;
 }
 
 export interface Note {
@@ -47,10 +60,36 @@ export async function getClients(userId: string) {
   );
 
   const querySnapshot = await getDocsFn(q);
-  return querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...(doc.data() as object)
-  })) as Client[];
+  const clients = await Promise.all(querySnapshot.docs.map(async (docSnap) => {
+    const clientData = docSnap.data() as Client;
+    // Fetch note count
+    const notesQ = query(collection(db, "notes"), where("clientId", "==", docSnap.id));
+    const countSnapshot = await getCountFromServer(notesQ);
+    
+    // Fetch next reminder
+    const remindersQ = query(
+      collection(db, "reminders"), 
+      where("clientId", "==", docSnap.id),
+      where("isSent", "==", false),
+      where("remindAt", ">=", new Date()),
+      orderBy("remindAt", "asc"),
+      limit(1)
+    );
+    const reminderSnapshot = await getDocsFn(remindersQ);
+    const nextReminder = reminderSnapshot.empty ? null : {
+      id: reminderSnapshot.docs[0].id,
+      ...(reminderSnapshot.docs[0].data() as object)
+    } as Reminder;
+
+    return {
+      id: docSnap.id,
+      ...clientData,
+      noteCount: countSnapshot.data().count,
+      nextReminder
+    };
+  }));
+
+  return clients as Client[];
 }
 
 export async function addClient(userId: string, clientData: Omit<Client, "id" | "userId" | "createdAt">) {
@@ -101,6 +140,20 @@ export async function addNote(clientId: string, content: string) {
 export async function getNotesByClient(clientId: string) {
   return await getNotes(clientId);
 }
+export async function getReminders(clientId: string) {
+  const q = query(
+    collection(db, "reminders"),
+    where("clientId", "==", clientId),
+    orderBy("remindAt", "asc")
+  );
+
+  const querySnapshot = await getDocsFn(q);
+  return querySnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...(doc.data() as object)
+  })) as Reminder[];
+}
+
 export async function addReminder(clientId: string, userId: string, remindAt: Date, message: string) {
   return await addDoc(collection(db, "reminders"), {
     clientId,
