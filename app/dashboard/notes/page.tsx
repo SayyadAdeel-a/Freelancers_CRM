@@ -32,7 +32,6 @@ export default function NotesPage() {
   const handleAddNote = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user || !selectedClient || !content) return;
-  const notes = useState<Note[]>([])[0];
     try {
       await createNote(selectedClient, user.uid, content);
       const updated = await getNotesByClient(selectedClient);
