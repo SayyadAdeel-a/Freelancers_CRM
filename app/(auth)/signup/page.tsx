@@ -6,7 +6,6 @@ import { createUserWithEmailAndPassword, signInWithGoogle } from "@/lib/firebase
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { GithubIcon, MailIcon } from "lucide-react";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");

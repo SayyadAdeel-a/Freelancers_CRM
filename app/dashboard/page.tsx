@@ -98,11 +98,10 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <AddClientModal 
-        isOpen={isAddModalOpen} 
-        onClose={() => setIsAddModalOpen(false)} 
+      <AddClientModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
         onSuccess={fetchClients}
-        userId={user?.uid || ""}
       />
       
       <UpgradeModal 
