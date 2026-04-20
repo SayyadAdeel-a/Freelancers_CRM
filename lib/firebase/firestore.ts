@@ -8,7 +8,8 @@ import {
   doc,
   serverTimestamp,
   orderBy,
-  limit
+  limit,
+  getDocs as getDocsFn
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -31,7 +32,7 @@ export interface Note {
 }
 
 export { query, collection, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp };
-export { getDocs as getDocsFn };
+export { getDocsFn };
 export async function getDocs(collectionRef: any) {
   const q = query(collectionRef);
   const querySnapshot = await getDocsFn(q);

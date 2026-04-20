@@ -23,6 +23,6 @@ export const logout = async () => {
   }
 };
 
-export const createUserWithEmailAndPassword = (email: string, password: string) => rawCreateUserWithEmailAndPassword(email, password);
-export const signInWithEmailAndPassword = (email: string, password: string) => rawSignInWithEmailAndPassword(email, password);
+export const createUserWithEmailAndPassword = (email: string, password: string) => rawCreateUserWithEmailAndPassword(auth, email, password);
+export const signInWithEmailAndPassword = (email: string, password: string) => rawSignInWithEmailAndPassword(auth, email, password);
 export const sendPasswordResetEmail = (email: string) => rawSendPasswordResetEmail(auth, email);
