@@ -2,13 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { Receiver } from "@upstash/qstash";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const receiver = new Receiver({
-  currentSigningKey: process.env.QSTASH_CURRENT_SIGNING_KEY!,
-  nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
-});
-
 export async function POST(req: NextRequest) {
+  // 0. Ensure keys exist (prevents crash during build/runtime if missing)
+  if (!process.env.RESEND_API_KEY || !process.env.QSTASH_CURRENT_SIGNING_KEY) {
+    console.error("Missing required environment variables for reminders.");
+    return new NextResponse("Configuration Error", { status: 500 });
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const receiver = new Receiver({
+    currentSigningKey: process.env.QSTASH_CURRENT_SIGNING_KEY,
+    nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
+  });
   // 1. Verify QStash Signature
   const signature = req.headers.get("upstash-signature")!;
   const body = await req.text();

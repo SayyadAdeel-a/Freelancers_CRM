@@ -22,6 +22,10 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
     console.log(`[QStash] Firestore entry created.`);
 
     // 2. Schedule with QStash
+    if (!qstashClient) {
+      throw new Error("QStash client is not initialized. Check your QSTASH_TOKEN.");
+    }
+
     const result = await qstashClient.publishJSON({
       url: `${process.env.NEXT_PUBLIC_APP_URL}/api/reminders/send`,
       body: {
