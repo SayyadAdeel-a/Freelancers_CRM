@@ -146,8 +146,14 @@ export default function ClientPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                {notes.map((note) => (
-                  <NoteCard key={note.id} note={note} />
+                {notes.map((note, i) => (
+                  <div
+                    key={note.id}
+                    className="animate-in fade-in slide-in-from-bottom-3"
+                    style={{ animationDelay: `${i * 70}ms`, animationFillMode: "both" }}
+                  >
+                    <NoteCard note={note} />
+                  </div>
                 ))}
               </div>
             )}
@@ -155,7 +161,7 @@ export default function ClientPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white border border-border p-6 rounded-2xl shadow-sm space-y-6 sticky top-24">
+          <div className="bg-card border border-border p-6 rounded-2xl shadow-sm space-y-6 sticky top-24">
             <h3 className="font-bold text-lg flex items-center gap-2">
               <Calendar className="w-5 h-5 text-primary" />
               Client Details

@@ -92,24 +92,24 @@ export default function LandingPage() {
             
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6 pt-12">
-                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
                   <Users className="w-10 h-10 text-[#FF4C00]" />
                   <h3 className="font-bold text-xl">Client Directory</h3>
                   <p className="text-sm text-muted-foreground">Keep all your contacts in one clean, scannable list.</p>
                 </div>
-                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
                   <FileText className="w-10 h-10 text-[#FF4C00]" />
                   <h3 className="font-bold text-xl">Activity Notes</h3>
                   <p className="text-sm text-muted-foreground">Chronological logs of every interaction you have.</p>
                 </div>
               </div>
               <div className="space-y-6">
-                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: "400ms", animationFillMode: "both" }}>
                   <Bell className="w-10 h-10 text-[#FF4C00]" />
                   <h3 className="font-bold text-xl">Reminders</h3>
                   <p className="text-sm text-muted-foreground">Never drop a lead again with smart email follow-ups.</p>
                 </div>
-                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+                <div className="bg-[#F9F9F9] p-8 rounded-3xl border border-gray-100 shadow-sm space-y-4 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: "500ms", animationFillMode: "both" }}>
                   <Check className="w-10 h-10 text-[#FF4C00]" />
                   <h3 className="font-bold text-xl">Simplicity</h3>
                   <p className="text-sm text-muted-foreground">No pipelines. No dashboards. No noise. Just work.</p>

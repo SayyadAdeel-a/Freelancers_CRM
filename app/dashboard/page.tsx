@@ -5,21 +5,21 @@ import { useUser } from "@/hooks/use-user";
 import { getClients, deleteClient, Client } from "@/lib/firebase/firestore";
 import { ClientCard } from "@/components/dashboard/ClientCard";
 import { EmptyState } from "@/components/dashboard/EmptyState";
-import { AddClientModal } from "@/components/dashboard/AddClientModal";
 import { UpgradeModal } from "@/components/dashboard/UpgradeModal";
 import { Button } from "@/components/ui/button";
-import { Plus, Search } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { ClientCardSkeleton } from "@/components/dashboard/Skeletons";
+import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 
 export default function DashboardPage() {
   const { user, loading: authLoading } = useUser();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
-  const [plan, setPlan] = useState("free");
+  const [plan] = useState("free");
+  const { setIsAddClientModalOpen, setRefreshClients } = useDashboardContext();
 
   const fetchClients = useCallback(async () => {
     if (!user) return;
@@ -39,20 +39,24 @@ export default function DashboardPage() {
     }
   }, [fetchClients, authLoading]);
 
+  // Register refreshClients with the context so AddClientModal can call it
+  useEffect(() => {
+    setRefreshClients(fetchClients);
+  }, [fetchClients, setRefreshClients]);
+
   const handleAddClick = () => {
     if (plan === "free" && clients.length >= 5) {
       setIsUpgradeModalOpen(true);
     } else {
-      setIsAddModalOpen(true);
+      setIsAddClientModalOpen(true);
     }
   };
-
 
   const handleDelete = (clientId: string) => async (confirmed: string) => {
     if (confirmed === "true") {
       try {
         await deleteClient(clientId);
-        setClients(clients.filter(c => c.id !== clientId));
+        setClients(clients.filter((c) => c.id !== clientId));
         toast.success("Client deleted successfully");
       } catch (error) {
         console.error("Error deleting client:", error);
@@ -60,6 +64,7 @@ export default function DashboardPage() {
       }
     }
   };
+
   if (authLoading || (loading && clients.length === 0)) {
     return (
       <div className="space-y-8">
@@ -98,25 +103,21 @@ export default function DashboardPage() {
         <EmptyState onAddClick={handleAddClick} />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {clients.map((client) => (
-            <ClientCard
+          {clients.map((client, i) => (
+            <div
               key={client.id}
-              client={client}
-              onDelete={handleDelete(client.id)}
-            />
+              className="animate-in fade-in slide-in-from-bottom-4"
+              style={{ animationDelay: `${i * 55}ms`, animationFillMode: "both" }}
+            >
+              <ClientCard client={client} onDelete={handleDelete(client.id)} />
+            </div>
           ))}
         </div>
       )}
 
-      <AddClientModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onSuccess={fetchClients}
-      />
-      
-      <UpgradeModal 
-        isOpen={isUpgradeModalOpen} 
-        onClose={() => setIsUpgradeModalOpen(false)} 
+      <UpgradeModal
+        isOpen={isUpgradeModalOpen}
+        onClose={() => setIsUpgradeModalOpen(false)}
       />
     </div>
   );
