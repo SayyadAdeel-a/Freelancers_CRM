@@ -195,6 +195,7 @@ export default function ClientPage() {
 
       <SetReminderModal 
         clientId={client.id}
+        clientName={client.name}
         isOpen={isReminderModalOpen}
         onClose={() => setIsReminderModalOpen(false)}
         onSuccess={() => {

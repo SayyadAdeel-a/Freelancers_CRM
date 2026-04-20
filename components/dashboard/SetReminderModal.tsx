@@ -16,17 +16,18 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { addReminder } from "@/lib/firebase/firestore";
-import { useUser } from "@/hooks/use-user";
-
 interface SetReminderModalProps {
   clientId: string;
+  clientName: string;
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
 }
 
-export function SetReminderModal({ clientId, isOpen, onClose, onSuccess }: SetReminderModalProps) {
+import { useUser } from "@/hooks/use-user";
+import { scheduleReminderAction } from "@/app/actions/reminders";
+
+export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSuccess }: SetReminderModalProps) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>();
@@ -38,7 +39,14 @@ export function SetReminderModal({ clientId, isOpen, onClose, onSuccess }: SetRe
     
     setLoading(true);
     try {
-      await addReminder(clientId, user.uid, date, message);
+      await scheduleReminderAction({
+        clientId,
+        userId: user.uid,
+        userEmail: user.email!,
+        clientName,
+        remindAt: date.toISOString(),
+        message: message.trim()
+      });
       onSuccess();
       setDate(undefined);
       setMessage("");
@@ -62,27 +70,14 @@ export function SetReminderModal({ clientId, isOpen, onClose, onSuccess }: SetRe
           </DialogHeader>
           <div className="grid gap-6 py-6">
             <div className="grid gap-2">
-              <Label>Follow-up Date</Label>
-              <Popover>
-                <PopoverTrigger
-                  className={cn(
-                    "w-full flex items-center justify-start text-left font-normal bg-secondary/30 border border-input rounded-md h-12 px-4 cursor-pointer",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? format(date, "PPP") : <span>Pick a date</span>}
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <input
-                    type="date"
-                    value={date ? format(date, "yyyy-MM-dd") : ""}
-                    onChange={(e) => setDate(new Date(e.target.value))}
-                    className="w-full p-2 border rounded"
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                </PopoverContent>
-              </Popover>
+              <Label>Follow-up Date & Time</Label>
+              <Input
+                type="datetime-local"
+                required
+                onChange={(e) => setDate(new Date(e.target.value))}
+                className="bg-secondary/30 h-12"
+                min={new Date().toISOString().slice(0, 16)}
+              />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="message">Reminder Message</Label>
