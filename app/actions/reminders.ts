@@ -16,8 +16,11 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
   const { clientId, userId, userEmail, clientName, remindAt, message } = params;
   
   // 0. Robust URL detection
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
-                  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  let baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
+                (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  
+  // Remove trailing slash if present to avoid // in URL
+  baseUrl = baseUrl.replace(/\/$/, "");
 
   console.log(`[QStash] Using Base URL: ${baseUrl}`);
   console.log(`[QStash] Scheduling reminder for ${userEmail} at ${remindAt}...`);
