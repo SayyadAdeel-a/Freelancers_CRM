@@ -64,17 +64,14 @@ export function SetReminderModal({ clientId, isOpen, onClose, onSuccess }: SetRe
             <div className="grid gap-2">
               <Label>Follow-up Date</Label>
               <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-full justify-start text-left font-normal bg-secondary/30 border-none h-12",
-                      !date && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
-                  </Button>
+                <PopoverTrigger
+                  className={cn(
+                    "w-full flex items-center justify-start text-left font-normal bg-secondary/30 border border-input rounded-md h-12 px-4 cursor-pointer",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                   <input
