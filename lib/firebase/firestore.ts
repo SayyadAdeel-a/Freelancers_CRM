@@ -50,7 +50,7 @@ export const getDocsFn = getDocs;
 export async function getDocsData(collectionRef: any) {
   const q = query(collectionRef);
   const querySnapshot = await getDocsFn(q);
-  return querySnapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as object) }));
+  return querySnapshot.docs.map(doc => ({ ...(doc.data() as object), id: doc.id }));
 }
 export async function getClients(userId: string) {
   const q = query(
@@ -61,7 +61,7 @@ export async function getClients(userId: string) {
 
   const querySnapshot = await getDocsFn(q);
   const clients = await Promise.all(querySnapshot.docs.map(async (docSnap) => {
-    const clientData = docSnap.data() as Client;
+    const clientData = docSnap.data();
     // Fetch note count
     const notesQ = query(collection(db, "notes"), where("clientId", "==", docSnap.id));
     const countSnapshot = await getCountFromServer(notesQ);
@@ -77,16 +77,16 @@ export async function getClients(userId: string) {
     );
     const reminderSnapshot = await getDocsFn(remindersQ);
     const nextReminder = reminderSnapshot.empty ? null : {
-      id: reminderSnapshot.docs[0].id,
-      ...(reminderSnapshot.docs[0].data() as object)
+      ...(reminderSnapshot.docs[0].data() as object),
+      id: reminderSnapshot.docs[0].id
     } as Reminder;
 
     return {
-      id: docSnap.id,
       ...clientData,
+      id: docSnap.id,
       noteCount: countSnapshot.data().count,
       nextReminder
-    };
+    } as Client;
   }));
 
   return clients as Client[];
@@ -113,7 +113,7 @@ export async function getClient(clientId: string) {
   const q = query(collection(db, "clients"), where("__name__", "==", clientId));
   const querySnapshot = await getDocsFn(q);
   if (querySnapshot.empty) return null;
-  return { id: querySnapshot.docs[0].id, ...(querySnapshot.docs[0].data() as object) } as Client;
+  return { ...(querySnapshot.docs[0].data() as object), id: querySnapshot.docs[0].id } as Client;
 }
 
 export async function getNotes(clientId: string) {
@@ -125,8 +125,8 @@ export async function getNotes(clientId: string) {
 
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...(doc.data() as object)
+    ...(doc.data() as object),
+    id: doc.id
   })) as Note[];
 }
 
@@ -149,8 +149,8 @@ export async function getReminders(clientId: string) {
 
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map(doc => ({
-    id: doc.id,
-    ...(doc.data() as object)
+    ...(doc.data() as object),
+    id: doc.id
   })) as Reminder[];
 }
 
