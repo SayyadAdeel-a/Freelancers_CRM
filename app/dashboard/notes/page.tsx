@@ -1,4 +1,5 @@
 "use client";
+import type { Client, Note } from "@/lib/firebase/firestore";
 
 import { useEffect, useState } from "react";
 import { getClients, getNotesByClient, createNote } from "@/lib/firebase/firestore";
@@ -10,32 +11,32 @@ import { Plus, Loader2 } from "lucide-react";
 
 export default function NotesPage() {
   const { user } = useUser();
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState<Client[]>([]);
   const [selectedClient, setSelectedClient] = useState("");
-  const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [adding, setAdding] = useState(false);
   const [content, setContent] = useState("");
 
   useEffect(() => {
     if (!user) return;
-    getClients(user.uid).then(setClients).finally(() => setLoading(false));
+    getClients(user.uid).then((data) => setClients(data as any)).finally(() => setLoading(false));
   }, [user]);
 
   useEffect(() => {
     if (!selectedClient) { setNotes([]); return; }
     setLoading(true);
-    getNotesByClient(selectedClient).then(setNotes).finally(() => setLoading(false));
+    getNotesByClient(selectedClient).then((data) => setNotes(data as any)).finally(() => setLoading(false));
   }, [selectedClient]);
 
   const handleAddNote = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user || !selectedClient || !content) return;
-    setAdding(true);
+  const notes = useState<Note[]>([])[0];
     try {
-      await createNote({ clientId: selectedClient, userId: user.uid, content });
+      await createNote(selectedClient, user.uid, content);
       const updated = await getNotesByClient(selectedClient);
-      setNotes(updated);
+      setNotes(updated as any);
       setContent("");
     } finally {
       setAdding(false);

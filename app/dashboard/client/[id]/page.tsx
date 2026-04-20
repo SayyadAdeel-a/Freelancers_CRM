@@ -1,20 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getClient, getNotes, deleteClient, Client, Note } from "@/lib/firebase/firestore";
 import { AddNote } from "@/components/dashboard/AddNote";
 import { NoteCard } from "@/components/dashboard/NoteCard";
 import { SetReminderModal } from "@/components/dashboard/SetReminderModal";
 import { Button } from "@/components/ui/button";
-import { 
-  ChevronLeft, 
-  Mail, 
-  Building, 
-  Trash2, 
+import {
+  ChevronLeft,
+  Mail,
+  Building,
+  Trash2,
   ExternalLink,
   MessageSquare,
-  Calendar
+  Calendar,
+  Plus
 } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -24,10 +25,10 @@ export default function ClientPage() {
   const router = useRouter();
   const [client, setClient] = useState<Client | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async (): Promise<void> => {
     if (!id) return;
     try {
       const clientData = await getClient(id as string);
@@ -43,11 +44,11 @@ export default function ClientPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, router, getClient, getNotes]);
 
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [fetchData]);
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this client and all their data?")) {
@@ -92,8 +93,8 @@ export default function ClientPage() {
           Back to Dashboard
         </Link>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" asChild>
-            <a href={`mailto:${client.email}`}>
+          <Button variant="outline" size="sm" className="flex justify-start gap-2">
+            <a href={`mailto:${client.email}`} className="flex items-center gap-2">
               <Mail className="w-4 h-4 mr-2" />
               Email Client
             </a>

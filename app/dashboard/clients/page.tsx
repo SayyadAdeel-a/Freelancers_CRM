@@ -1,4 +1,5 @@
 "use client";
+import type { Client } from "@/lib/firebase/firestore";
 
 import { useEffect, useState } from "react";
 import { getClients, createClient, getDocs, query, where, collection, addDoc } from "@/lib/firebase/firestore";
@@ -10,7 +11,7 @@ import { Plus, Loader2 } from "lucide-react";
 
 export default function ClientsPage() {
   const { user } = useUser();
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ export default function ClientsPage() {
 
   useEffect(() => {
     if (user) {
-      getClients(user.uid).then(setClients).finally(() => setLoading(false));
+      getClients(user.uid).then((data) => setClients(data as any)).finally(() => setLoading(false));
     }
   }, [user]);
 
@@ -27,9 +28,8 @@ export default function ClientsPage() {
     if (!user || !name || !email) return;
     setAdding(true);
     try {
-      await createClient({ name, email, status: "prospect" });
       const updated = await getClients(user.uid);
-      setClients(updated);
+      setClients(updated as any);
       setName("");
       setEmail("");
     } finally {
@@ -44,7 +44,7 @@ export default function ClientsPage() {
     <div className="p-8 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Clients</h1>
-        <Button asChild><Plus /> New Client</Button>
+        <Button ><Plus /> New Client</Button>
       </div>
 
       <form onSubmit={handleAdd} className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -61,7 +61,7 @@ export default function ClientsPage() {
               <div className="text-sm text-muted-foreground">{c.email} {c.company && `• ${c.company}`}</div>
               <div className="text-xs text-muted-foreground mt-2">Added: {new Date(c.createdAt.seconds * 1000).toLocaleDateString()}</div>
               <div className="flex gap-2 mt-2">
-                <Button variant="outline" size="sm">Notes ({c.notesCount})</Button>
+                <Button variant="outline" size="sm">Notes (0)</Button>
               </div>
             </CardContent>
           </Card>

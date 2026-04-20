@@ -1,0 +1,2869 @@
+{
+  "nodes": [
+    {
+      "id": "eslint_config_mjs",
+      "label": "eslint.config.mjs",
+      "file_type": "code",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "middleware_ts",
+      "label": "middleware.ts",
+      "file_type": "code",
+      "source_file": "middleware.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "middleware_middleware",
+      "label": "middleware()",
+      "file_type": "code",
+      "source_file": "middleware.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "next_env_d_ts",
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "next_config_ts",
+      "label": "next.config.ts",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "or_proxy_js",
+      "label": "or-proxy.js",
+      "file_type": "code",
+      "source_file": "or-proxy.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "postcss_config_mjs",
+      "label": "postcss.config.mjs",
+      "file_type": "code",
+      "source_file": "postcss.config.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_tsx",
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "layout_rootlayout",
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "app/layout.tsx",
+      "source_location": "L22"
+    },
+    {
+      "id": "app_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_home",
+      "label": "Home()",
+      "file_type": "code",
+      "source_file": "app/page.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "app_auth_login_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_loginpage",
+      "label": "LoginPage()",
+      "file_type": "code",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "app_auth_signup_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_signuppage",
+      "label": "SignupPage()",
+      "file_type": "code",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "app_dashboard_layout_tsx",
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "app/dashboard/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "layout_dashboardlayout",
+      "label": "DashboardLayout()",
+      "file_type": "code",
+      "source_file": "app/dashboard/layout.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "app_dashboard_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_handleaddclick",
+      "label": "handleAddClick()",
+      "file_type": "code",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L40"
+    },
+    {
+      "id": "page_handledelete",
+      "label": "handleDelete()",
+      "file_type": "code",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L48"
+    },
+    {
+      "id": "app_dashboard_client_id_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_handledelete",
+      "label": "handleDelete()",
+      "file_type": "code",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L53"
+    },
+    {
+      "id": "app_dashboard_clients_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_handleadd",
+      "label": "handleAdd()",
+      "file_type": "code",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "app_dashboard_notes_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_handleaddnote",
+      "label": "handleAddNote()",
+      "file_type": "code",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L31"
+    },
+    {
+      "id": "app_settings_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "page_settingspage",
+      "label": "SettingsPage()",
+      "file_type": "code",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "components_dashboard_addclientmodal_tsx",
+      "label": "AddClientModal.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "addclientmodal_addclientmodal",
+      "label": "AddClientModal()",
+      "file_type": "code",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L24"
+    },
+    {
+      "id": "components_dashboard_addnote_tsx",
+      "label": "AddNote.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "addnote_addnote",
+      "label": "AddNote()",
+      "file_type": "code",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "components_dashboard_clientcard_tsx",
+      "label": "ClientCard.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "clientcard_clientcard",
+      "label": "ClientCard()",
+      "file_type": "code",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "components_dashboard_emptystate_tsx",
+      "label": "EmptyState.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/EmptyState.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "emptystate_emptystate",
+      "label": "EmptyState()",
+      "file_type": "code",
+      "source_file": "components/dashboard/EmptyState.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "components_dashboard_navbar_tsx",
+      "label": "Navbar.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "navbar_navbar",
+      "label": "Navbar()",
+      "file_type": "code",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "components_dashboard_notecard_tsx",
+      "label": "NoteCard.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/NoteCard.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "notecard_notecard",
+      "label": "NoteCard()",
+      "file_type": "code",
+      "source_file": "components/dashboard/NoteCard.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "components_dashboard_setremindermodal_tsx",
+      "label": "SetReminderModal.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "setremindermodal_handlesubmit",
+      "label": "handleSubmit()",
+      "file_type": "code",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L35"
+    },
+    {
+      "id": "components_dashboard_sidebar_tsx",
+      "label": "Sidebar.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "sidebar_handlelogout",
+      "label": "handleLogout()",
+      "file_type": "code",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L32"
+    },
+    {
+      "id": "components_dashboard_upgrademodal_tsx",
+      "label": "UpgradeModal.tsx",
+      "file_type": "code",
+      "source_file": "components/dashboard/UpgradeModal.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "upgrademodal_upgrademodal",
+      "label": "UpgradeModal()",
+      "file_type": "code",
+      "source_file": "components/dashboard/UpgradeModal.tsx",
+      "source_location": "L19"
+    },
+    {
+      "id": "components_ui_button_tsx",
+      "label": "button.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/button.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "button_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/button.tsx",
+      "source_location": "L52"
+    },
+    {
+      "id": "components_ui_card_tsx",
+      "label": "card.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "card_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "card_cardaction",
+      "label": "CardAction()",
+      "file_type": "code",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L59"
+    },
+    {
+      "id": "components_ui_dialog_tsx",
+      "label": "dialog.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "dialog_dialog",
+      "label": "Dialog()",
+      "file_type": "code",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "dialog_dialogtrigger",
+      "label": "DialogTrigger()",
+      "file_type": "code",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "dialog_dialogportal",
+      "label": "DialogPortal()",
+      "file_type": "code",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L18"
+    },
+    {
+      "id": "dialog_dialogclose",
+      "label": "DialogClose()",
+      "file_type": "code",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L22"
+    },
+    {
+      "id": "dialog_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L55"
+    },
+    {
+      "id": "components_ui_dropdown_menu_tsx",
+      "label": "dropdown-menu.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "dropdown_menu_dropdownmenu",
+      "label": "DropdownMenu()",
+      "file_type": "code",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "dropdown_menu_dropdownmenuportal",
+      "label": "DropdownMenuPortal()",
+      "file_type": "code",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "dropdown_menu_dropdownmenutrigger",
+      "label": "DropdownMenuTrigger()",
+      "file_type": "code",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "dropdown_menu_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L44"
+    },
+    {
+      "id": "dropdown_menu_dropdownmenucheckboxitem",
+      "label": "DropdownMenuCheckboxItem()",
+      "file_type": "code",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L148"
+    },
+    {
+      "id": "components_ui_input_tsx",
+      "label": "input.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/input.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "input_input",
+      "label": "Input()",
+      "file_type": "code",
+      "source_file": "components/ui/input.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "components_ui_label_tsx",
+      "label": "label.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/label.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "label_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/label.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "components_ui_popover_tsx",
+      "label": "popover.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "popover_popover",
+      "label": "Popover()",
+      "file_type": "code",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "popover_popovertrigger",
+      "label": "PopoverTrigger()",
+      "file_type": "code",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "popover_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L39"
+    },
+    {
+      "id": "popover_popovertitle",
+      "label": "PopoverTitle()",
+      "file_type": "code",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L60"
+    },
+    {
+      "id": "popover_popoverdescription",
+      "label": "PopoverDescription()",
+      "file_type": "code",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L70"
+    },
+    {
+      "id": "components_ui_skeleton_tsx",
+      "label": "skeleton.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/skeleton.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "skeleton_skeleton",
+      "label": "Skeleton()",
+      "file_type": "code",
+      "source_file": "components/ui/skeleton.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "components_ui_textarea_tsx",
+      "label": "textarea.tsx",
+      "file_type": "code",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "textarea_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "hooks_use_user_ts",
+      "label": "use-user.ts",
+      "file_type": "code",
+      "source_file": "hooks/use-user.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "use_user_useuser",
+      "label": "useUser()",
+      "file_type": "code",
+      "source_file": "hooks/use-user.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_utils_ts",
+      "label": "utils.ts",
+      "file_type": "code",
+      "source_file": "lib/utils.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_cn",
+      "label": "cn()",
+      "file_type": "code",
+      "source_file": "lib/utils.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "lib_firebase_auth_config_ts",
+      "label": "auth-config.ts",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth-config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_firebase_auth_context_tsx",
+      "label": "auth-context.tsx",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth-context.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "auth_context_useauth",
+      "label": "useAuth()",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth-context.tsx",
+      "source_location": "L41"
+    },
+    {
+      "id": "lib_firebase_auth_ts",
+      "label": "auth.ts",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "auth_signinwithgoogle",
+      "label": "signInWithGoogle()",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "auth_logout",
+      "label": "logout()",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "auth_createuserwithemailandpassword",
+      "label": "createUserWithEmailAndPassword()",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L26"
+    },
+    {
+      "id": "auth_signinwithemailandpassword",
+      "label": "signInWithEmailAndPassword()",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "auth_sendpasswordresetemail",
+      "label": "sendPasswordResetEmail()",
+      "file_type": "code",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L28"
+    },
+    {
+      "id": "lib_firebase_config_ts",
+      "label": "config.ts",
+      "file_type": "code",
+      "source_file": "lib/firebase/config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_firebase_firestore_ts",
+      "label": "firestore.ts",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "firestore_getdocs",
+      "label": "getDocs()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L35"
+    },
+    {
+      "id": "firestore_getclients",
+      "label": "getClients()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L40"
+    },
+    {
+      "id": "firestore_addclient",
+      "label": "addClient()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L54"
+    },
+    {
+      "id": "firestore_updateclient",
+      "label": "updateClient()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L62"
+    },
+    {
+      "id": "firestore_deleteclient",
+      "label": "deleteClient()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L67"
+    },
+    {
+      "id": "firestore_getclient",
+      "label": "getClient()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L71"
+    },
+    {
+      "id": "firestore_getnotes",
+      "label": "getNotes()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L78"
+    },
+    {
+      "id": "firestore_addnote",
+      "label": "addNote()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L92"
+    },
+    {
+      "id": "firestore_getnotesbyclient",
+      "label": "getNotesByClient()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L99"
+    },
+    {
+      "id": "firestore_addreminder",
+      "label": "addReminder()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L102"
+    },
+    {
+      "id": "firestore_createclient",
+      "label": "createClient()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L112"
+    },
+    {
+      "id": "firestore_createnote",
+      "label": "createNote()",
+      "file_type": "code",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L119"
+    },
+    {
+      "id": "lib_firebase_index_ts",
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "lib/firebase/index.ts",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "eslint_config_mjs",
+      "target": "config",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_mjs",
+      "target": "core_web_vitals",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_mjs",
+      "target": "typescript",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "middleware_ts",
+      "target": "server",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "middleware.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "middleware_ts",
+      "target": "server",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "middleware.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "middleware_ts",
+      "target": "middleware_middleware",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "middleware.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "next_env_d_ts",
+      "target": "next_types_routes_d_ts",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "next-env.d.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "next_config_ts",
+      "target": "next",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "next.config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "next",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "google",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "app_globals_css",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "auth_context",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "layout_rootlayout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/layout.tsx",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "page_home",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "navigation",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "card",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_login_page_tsx",
+      "target": "page_loginpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/login/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "navigation",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "card",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_auth_signup_page_tsx",
+      "target": "page_signuppage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/(auth)/signup/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_layout_tsx",
+      "target": "sidebar",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/layout.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_layout_tsx",
+      "target": "navbar",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/layout.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_layout_tsx",
+      "target": "layout_dashboardlayout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/layout.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "clientcard",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "emptystate",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "addclientmodal",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "upgrademodal",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "skeleton",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "page_handleaddclick",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "page_handledelete",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/page.tsx",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "navigation",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "addnote",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "notecard",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "setremindermodal",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "skeleton",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_client_id_page_tsx",
+      "target": "page_handledelete",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "card",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_clients_page_tsx",
+      "target": "page_handleadd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "card",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_notes_page_tsx",
+      "target": "page_handleaddnote",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "app_settings_page_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_settings_page_tsx",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_settings_page_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_settings_page_tsx",
+      "target": "navigation",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_settings_page_tsx",
+      "target": "page_settingspage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "dialog",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "label",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addclientmodal_tsx",
+      "target": "addclientmodal_addclientmodal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addnote_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addnote_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addnote_tsx",
+      "target": "textarea",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addnote_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_addnote_tsx",
+      "target": "addnote_addnote",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/AddNote.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_clientcard_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_clientcard_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_clientcard_tsx",
+      "target": "card",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_clientcard_tsx",
+      "target": "dropdown_menu",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_clientcard_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_clientcard_tsx",
+      "target": "clientcard_clientcard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/ClientCard.tsx",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_emptystate_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/EmptyState.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_emptystate_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/EmptyState.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_emptystate_tsx",
+      "target": "emptystate_emptystate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/EmptyState.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_navbar_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_navbar_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_navbar_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_navbar_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_navbar_tsx",
+      "target": "navbar_navbar",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_notecard_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/NoteCard.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_notecard_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/NoteCard.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_notecard_tsx",
+      "target": "notecard_notecard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/NoteCard.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "dialog",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "label",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "popover",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "date_fns",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "use_user",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_setremindermodal_tsx",
+      "target": "setremindermodal_handlesubmit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "navigation",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "navigation",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_sidebar_tsx",
+      "target": "sidebar_handlelogout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_upgrademodal_tsx",
+      "target": "dialog",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/UpgradeModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_upgrademodal_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/UpgradeModal.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_upgrademodal_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/UpgradeModal.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_upgrademodal_tsx",
+      "target": "upgrademodal_upgrademodal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/dashboard/UpgradeModal.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_button_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/button.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_button_tsx",
+      "target": "class_variance_authority",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/button.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_button_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/button.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_button_tsx",
+      "target": "button_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/button.tsx",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_card_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_card_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_card_tsx",
+      "target": "card_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_card_tsx",
+      "target": "card_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_card_tsx",
+      "target": "card_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_card_tsx",
+      "target": "card_cardaction",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/card.tsx",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "button",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog_dialog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog_dialogtrigger",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog_dialogportal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog_dialogclose",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dialog_tsx",
+      "target": "dialog_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dialog.tsx",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "menu",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_dropdownmenu",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_dropdownmenuportal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_dropdownmenutrigger",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L138",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_dropdownmenucheckboxitem",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_dropdown_menu_tsx",
+      "target": "dropdown_menu_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/dropdown-menu.tsx",
+      "source_location": "L243",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_input_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/input.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_input_tsx",
+      "target": "input",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/input.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_input_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/input.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_input_tsx",
+      "target": "input_input",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/input.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_label_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/label.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_label_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/label.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_label_tsx",
+      "target": "label_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/label.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "popover",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "popover_popover",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "popover_popovertrigger",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "popover_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "popover_popovertitle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_popover_tsx",
+      "target": "popover_popoverdescription",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/popover.tsx",
+      "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_skeleton_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/skeleton.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_skeleton_tsx",
+      "target": "skeleton_skeleton",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/skeleton.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_textarea_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_textarea_tsx",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_textarea_tsx",
+      "target": "textarea_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components/ui/textarea.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_use_user_ts",
+      "target": "auth_context",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "hooks/use-user.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_use_user_ts",
+      "target": "use_user_useuser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "hooks/use-user.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_utils_ts",
+      "target": "clsx",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/utils.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_utils_ts",
+      "target": "tailwind_merge",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/utils.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_utils_ts",
+      "target": "utils_cn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/utils.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_config_ts",
+      "target": "app",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_config_ts",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-config.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_config_ts",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-config.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_context_tsx",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-context.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_context_tsx",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-context.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_context_tsx",
+      "target": "lib_firebase_config",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-context.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_context_tsx",
+      "target": "auth_context_useauth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth-context.tsx",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "lib_firebase_config",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth_signinwithgoogle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth_logout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth_createuserwithemailandpassword",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth_signinwithemailandpassword",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_auth_ts",
+      "target": "auth_sendpasswordresetemail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/auth.ts",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_config_ts",
+      "target": "app",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_config_ts",
+      "target": "auth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/config.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_config_ts",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/config.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "lib_firebase_config",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_getdocs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_getclients",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_addclient",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_updateclient",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L62",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_deleteclient",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_getclient",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_getnotes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_addnote",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_getnotesbyclient",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_addreminder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_createclient",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_firebase_firestore_ts",
+      "target": "firestore_createnote",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "firestore_getnotesbyclient",
+      "target": "firestore_getnotes",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/firebase/firestore.ts",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "page_handledelete",
+      "target": "firestore_deleteclient",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/dashboard/client/[id]/page.tsx",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "page_handleadd",
+      "target": "firestore_createclient",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "page_handleadd",
+      "target": "firestore_getclients",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/dashboard/clients/page.tsx",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "page_handleaddnote",
+      "target": "firestore_createnote",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "page_handleaddnote",
+      "target": "firestore_getnotesbyclient",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/dashboard/notes/page.tsx",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "page_settingspage",
+      "target": "use_user_useuser",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/settings/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "addclientmodal_addclientmodal",
+      "target": "use_user_useuser",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "components/dashboard/AddClientModal.tsx",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "navbar_navbar",
+      "target": "use_user_useuser",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "components/dashboard/Navbar.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "setremindermodal_handlesubmit",
+      "target": "firestore_addreminder",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "components/dashboard/SetReminderModal.tsx",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "sidebar_handlelogout",
+      "target": "auth_logout",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "components/dashboard/Sidebar.tsx",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "use_user_useuser",
+      "target": "auth_context_useauth",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "hooks/use-user.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

@@ -1,12 +1,11 @@
-import { 
-  collection, 
-  query, 
-  where, 
-  getDocs, 
-  addDoc, 
-  updateDoc, 
-  deleteDoc, 
-  doc, 
+import {
+  collection,
+  query,
+  where,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
   serverTimestamp,
   orderBy,
   limit
@@ -31,6 +30,13 @@ export interface Note {
   createdAt: any;
 }
 
+export { query, collection, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp };
+export { getDocs as getDocsFn };
+export async function getDocs(collectionRef: any) {
+  const q = query(collectionRef);
+  const querySnapshot = await getDocsFn(q);
+  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
 export async function getClients(userId: string) {
   const q = query(
     collection(db, "clients"),
@@ -38,7 +44,7 @@ export async function getClients(userId: string) {
     orderBy("createdAt", "desc")
   );
 
-  const querySnapshot = await getDocs(q);
+  const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
@@ -64,7 +70,7 @@ export async function deleteClient(clientId: string) {
 
 export async function getClient(clientId: string) {
   const q = query(collection(db, "clients"), where("__name__", "==", clientId));
-  const querySnapshot = await getDocs(q);
+  const querySnapshot = await getDocsFn(q);
   if (querySnapshot.empty) return null;
   return { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() } as Client;
 }
@@ -76,7 +82,7 @@ export async function getNotes(clientId: string) {
     orderBy("createdAt", "desc")
   );
 
-  const querySnapshot = await getDocs(q);
+  const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()

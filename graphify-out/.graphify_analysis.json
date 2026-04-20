@@ -1,0 +1,345 @@
+{
+  "communities": {
+    "0": [
+      "app_dashboard_clients_page_tsx",
+      "app_dashboard_notes_page_tsx",
+      "components_dashboard_setremindermodal_tsx",
+      "firestore_addclient",
+      "firestore_addnote",
+      "firestore_addreminder",
+      "firestore_createclient",
+      "firestore_createnote",
+      "firestore_getclient",
+      "firestore_getclients",
+      "firestore_getdocs",
+      "firestore_getnotes",
+      "firestore_getnotesbyclient",
+      "firestore_updateclient",
+      "lib_firebase_firestore_ts",
+      "page_handleadd",
+      "page_handleaddnote",
+      "setremindermodal_handlesubmit"
+    ],
+    "1": [
+      "addclientmodal_addclientmodal",
+      "app_settings_page_tsx",
+      "auth_context_useauth",
+      "components_dashboard_addclientmodal_tsx",
+      "components_dashboard_navbar_tsx",
+      "hooks_use_user_ts",
+      "lib_firebase_auth_context_tsx",
+      "navbar_navbar",
+      "page_settingspage",
+      "use_user_useuser"
+    ],
+    "2": [
+      "auth_createuserwithemailandpassword",
+      "auth_logout",
+      "auth_sendpasswordresetemail",
+      "auth_signinwithemailandpassword",
+      "auth_signinwithgoogle",
+      "components_dashboard_sidebar_tsx",
+      "lib_firebase_auth_ts",
+      "sidebar_handlelogout"
+    ],
+    "3": [
+      "components_ui_dialog_tsx",
+      "dialog_cn",
+      "dialog_dialog",
+      "dialog_dialogclose",
+      "dialog_dialogportal",
+      "dialog_dialogtrigger"
+    ],
+    "4": [
+      "components_ui_dropdown_menu_tsx",
+      "dropdown_menu_cn",
+      "dropdown_menu_dropdownmenu",
+      "dropdown_menu_dropdownmenucheckboxitem",
+      "dropdown_menu_dropdownmenuportal",
+      "dropdown_menu_dropdownmenutrigger"
+    ],
+    "5": [
+      "components_ui_popover_tsx",
+      "popover_cn",
+      "popover_popover",
+      "popover_popoverdescription",
+      "popover_popovertitle",
+      "popover_popovertrigger"
+    ],
+    "6": [
+      "app_dashboard_client_id_page_tsx",
+      "app_dashboard_page_tsx",
+      "firestore_deleteclient",
+      "page_handleaddclick",
+      "page_handledelete"
+    ],
+    "7": [
+      "card_cardaction",
+      "card_cn",
+      "components_ui_card_tsx"
+    ],
+    "8": [
+      "middleware_middleware",
+      "middleware_ts"
+    ],
+    "9": [
+      "app_layout_tsx",
+      "layout_rootlayout"
+    ],
+    "10": [
+      "app_page_tsx",
+      "page_home"
+    ],
+    "11": [
+      "app_auth_login_page_tsx",
+      "page_loginpage"
+    ],
+    "12": [
+      "app_auth_signup_page_tsx",
+      "page_signuppage"
+    ],
+    "13": [
+      "app_dashboard_layout_tsx",
+      "layout_dashboardlayout"
+    ],
+    "14": [
+      "addnote_addnote",
+      "components_dashboard_addnote_tsx"
+    ],
+    "15": [
+      "clientcard_clientcard",
+      "components_dashboard_clientcard_tsx"
+    ],
+    "16": [
+      "components_dashboard_emptystate_tsx",
+      "emptystate_emptystate"
+    ],
+    "17": [
+      "components_dashboard_notecard_tsx",
+      "notecard_notecard"
+    ],
+    "18": [
+      "components_dashboard_upgrademodal_tsx",
+      "upgrademodal_upgrademodal"
+    ],
+    "19": [
+      "button_cn",
+      "components_ui_button_tsx"
+    ],
+    "20": [
+      "components_ui_input_tsx",
+      "input_input"
+    ],
+    "21": [
+      "components_ui_label_tsx",
+      "label_cn"
+    ],
+    "22": [
+      "components_ui_skeleton_tsx",
+      "skeleton_skeleton"
+    ],
+    "23": [
+      "components_ui_textarea_tsx",
+      "textarea_cn"
+    ],
+    "24": [
+      "lib_utils_ts",
+      "utils_cn"
+    ],
+    "25": [
+      "eslint_config_mjs"
+    ],
+    "26": [
+      "next_env_d_ts"
+    ],
+    "27": [
+      "next_config_ts"
+    ],
+    "28": [
+      "or_proxy_js"
+    ],
+    "29": [
+      "postcss_config_mjs"
+    ],
+    "30": [
+      "lib_firebase_auth_config_ts"
+    ],
+    "31": [
+      "lib_firebase_config_ts"
+    ],
+    "32": [
+      "lib_firebase_index_ts"
+    ]
+  },
+  "cohesion": {
+    "0": 0.13,
+    "1": 0.2,
+    "2": 0.25,
+    "3": 0.33,
+    "4": 0.33,
+    "5": 0.33,
+    "6": 0.4,
+    "7": 0.67,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0
+  },
+  "gods": [
+    {
+      "id": "use_user_useuser",
+      "label": "useUser()",
+      "degree": 5
+    },
+    {
+      "id": "page_handledelete",
+      "label": "handleDelete()",
+      "degree": 3
+    },
+    {
+      "id": "page_handleadd",
+      "label": "handleAdd()",
+      "degree": 3
+    },
+    {
+      "id": "page_handleaddnote",
+      "label": "handleAddNote()",
+      "degree": 3
+    },
+    {
+      "id": "firestore_getnotesbyclient",
+      "label": "getNotesByClient()",
+      "degree": 3
+    },
+    {
+      "id": "page_settingspage",
+      "label": "SettingsPage()",
+      "degree": 2
+    },
+    {
+      "id": "addclientmodal_addclientmodal",
+      "label": "AddClientModal()",
+      "degree": 2
+    },
+    {
+      "id": "navbar_navbar",
+      "label": "Navbar()",
+      "degree": 2
+    },
+    {
+      "id": "setremindermodal_handlesubmit",
+      "label": "handleSubmit()",
+      "degree": 2
+    },
+    {
+      "id": "sidebar_handlelogout",
+      "label": "handleLogout()",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "SettingsPage()",
+      "target": "useUser()",
+      "source_files": [
+        "app/settings/page.tsx",
+        "hooks/use-user.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `SettingsPage()` unexpectedly reaches hub `useUser()`"
+    },
+    {
+      "source": "AddClientModal()",
+      "target": "useUser()",
+      "source_files": [
+        "components/dashboard/AddClientModal.tsx",
+        "hooks/use-user.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `AddClientModal()` unexpectedly reaches hub `useUser()`"
+    },
+    {
+      "source": "Navbar()",
+      "target": "useUser()",
+      "source_files": [
+        "components/dashboard/Navbar.tsx",
+        "hooks/use-user.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `Navbar()` unexpectedly reaches hub `useUser()`"
+    },
+    {
+      "source": "useUser()",
+      "target": "useAuth()",
+      "source_files": [
+        "hooks/use-user.ts",
+        "lib/firebase/auth-context.tsx"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `useAuth()` unexpectedly reaches hub `useUser()`"
+    },
+    {
+      "source": "handleDelete()",
+      "target": "deleteClient()",
+      "source_files": [
+        "app/dashboard/page.tsx",
+        "lib/firebase/firestore.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `deleteClient()` connect `Community 6` to `Community 0`?",
+      "why": "High betweenness centrality (0.014) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 4 inferred relationships involving `useUser()` (e.g. with `SettingsPage()` and `AddClientModal()`) actually correct?",
+      "why": "`useUser()` has 4 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `handleAdd()` (e.g. with `createClient()` and `getClients()`) actually correct?",
+      "why": "`handleAdd()` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `handleAddNote()` (e.g. with `createNote()` and `getNotesByClient()`) actually correct?",
+      "why": "`handleAddNote()` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
