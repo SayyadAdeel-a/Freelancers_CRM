@@ -33,23 +33,22 @@ export async function POST(req: NextRequest) {
   try {
     // 3. Send Email via Resend
     const { error } = await resend.emails.send({
-      from: "Nudge <reminders@nudge-crm.com>",
-      to: userEmail,
+      from: "Nudge CRM <reminders@mail.adeelsayyad.tech>",
+      to: [userEmail],
       subject: `Nudge: Follow up with ${clientName}`,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #262626;">
-          <h2 style="color: #FF4C00;">Nudge Reminder</h2>
-          <p>Hi there,</p>
-          <p>This is a reminder to follow up with <strong>${clientName}</strong>.</p>
-          <p style="background: #f9f9f9; padding: 15px; border-radius: 8px; border-left: 4px solid #FF4C00;">
-            "${message}"
+          <h2 style="color: #FF4C00;">Reminder for ${clientName}</h2>
+          <p><strong>Message:</strong></p>
+          <p style="background: #f4f4f4; padding: 15px; border-left: 4px solid #FF4C00;">
+            ${message}
           </p>
           <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-          <p style="font-size: 12px; color: #737373;">
-            Sent by Nudge — The dead-simple CRM for freelancers.
+          <p style="font-size: 12px; color: #666;">
+            Sent from your Nudge CRM dashboard.
           </p>
         </div>
-      `
+      `,
     });
 
     if (error) {
