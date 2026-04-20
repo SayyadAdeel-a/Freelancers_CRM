@@ -125,7 +125,7 @@ export default function LoginPage() {
             </a>
           </p>
           <p className="text-center text-sm">
-            <a href="/forgot-password" **bold** className="text-muted-foreground hover:text-primary hover:underline">
+            <a href="/forgot-password" className="font-semibold text-muted-foreground hover:text-primary hover:underline">
               Forgot your password?
             </a>
           </p>
