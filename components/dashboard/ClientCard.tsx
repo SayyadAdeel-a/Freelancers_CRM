@@ -41,10 +41,11 @@ export function ClientCard({ client, onDelete }: ClientCardProps) {
           </div>
           
           <DropdownMenu>
-            <DropdownMenuTrigger asChild onClick={(e) => e.preventDefault()}>
-              <button className="p-1 hover:bg-secondary rounded-md transition-colors">
-                <MoreVertical className="w-5 h-5 text-muted-foreground" />
-              </button>
+            <DropdownMenuTrigger
+              onClick={(e: React.MouseEvent) => e.preventDefault()}
+              className="p-1 hover:bg-secondary rounded-md transition-colors cursor-pointer"
+            >
+              <MoreVertical className="w-5 h-5 text-muted-foreground" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem className="text-destructive" onClick={(e) => {
