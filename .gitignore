@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local proxy & utilities
+or-proxy.js
+cl
+/tmp/or-proxy.log
+.claude/
+
+# project docs (optional for deployment)
+AGENTS.md
+CLAUDE.md
+Doc/

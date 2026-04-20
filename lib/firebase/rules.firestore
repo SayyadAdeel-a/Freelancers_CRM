@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users: users/{userId}
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Clients: clients/{clientId}
+    match /clients/{clientId} {
+      allow read: if request.auth != null && resource.data.ownerId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.ownerId == request.auth.uid;
+      allow update, delete: if request.auth != null && resource.data.ownerId == request.auth.uid;
+    }
+
+    // Notes: notes/{noteId}
+    match /notes/{noteId} {
+      allow read: if request.auth != null && get(/databases/$(database)/documents/clients/$(resource.data.clientId)).data.ownerId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if request.auth != null && get(/databases/$(database)/documents/notes/$(noteId)).data.userId == request.auth.uid;
+    }
+
+    // Reminders: reminders/{reminderId}
+    match /reminders/{reminderId} {
+      allow read, create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+  }
+}
