@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useUser } from "@/hooks/use-user";
 import { getClient, getNotes, getReminders, deleteClient, Client, Note, Reminder } from "@/lib/firebase/firestore";
 import { AddNote } from "@/components/dashboard/AddNote";
 import { NoteCard } from "@/components/dashboard/NoteCard";
@@ -25,6 +26,7 @@ import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
 export default function ClientPage() {
   const { id } = useParams();
   const router = useRouter();
+  const { user } = useUser();
   const [client, setClient] = useState<Client | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [reminders, setReminders] = useState<Reminder[]>([]);
@@ -44,7 +46,7 @@ export default function ClientPage() {
       // Fetch notes and reminders in parallel
       const [notesData, remindersData] = await Promise.all([
         getNotes(id as string),
-        getReminders(id as string, user.uid)
+        getReminders(id as string, user?.uid || "")
       ]);
       
       setNotes(notesData);
@@ -54,7 +56,7 @@ export default function ClientPage() {
     } finally {
       setLoading(false);
     }
-  }, [id, router]);
+  }, [id, router, user?.uid]);
 
   useEffect(() => {
     fetchData();
