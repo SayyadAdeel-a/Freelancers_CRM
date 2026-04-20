@@ -195,6 +195,50 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-24 bg-white border-y border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold">Questions? Answers.</h2>
+            <p className="text-lg text-muted-foreground">Everything you need to know about Nudge.</p>
+          </div>
+
+          <div className="space-y-6">
+            {[
+              {
+                q: "Can I receive payments through Payoneer?",
+                a: "Nudge is a CRM, not a payment processor. Track your client relationships here, but handle payments via Payoneer, Wise, or your preferred platform."
+              },
+              {
+                q: "Why is it so simple compared to other CRMs?",
+                a: "We believe freelancers don't need enterprise complexity. No pipelines, no lead scoring, no bloat—just the essentials to manage your client relationships."
+              },
+              {
+                q: "Is my data secure?",
+                a: "Absolutely. Your data is stored with Firebase (Google Cloud) and protected with industry-standard encryption. We never sell or share your information."
+              },
+              {
+                q: "What happens when I hit 5 clients on the Free plan?",
+                a: "You'll need to upgrade to Pro to add more clients. Your existing clients and data remain accessible—you just can't add new ones until you upgrade."
+              },
+              {
+                q: "Can I cancel my Pro subscription anytime?",
+                a: "Yes, cancel anytime with no questions asked. You'll keep Pro features until the end of your billing period, then automatically down to Free."
+              },
+              {
+                q: "Is there a mobile app?",
+                a: "Not yet, but Nudge is fully responsive and works great on mobile browsers. A native app is on our roadmap for late 2025."
+              }
+            ].map(({ q, a }) => (
+              <div key={q} className="bg-[#F9F9F9] p-6 rounded-2xl">
+                <h3 className="font-bold text-lg mb-2">{q}</h3>
+                <p className="text-muted-foreground leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-12 border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center space-y-6">
