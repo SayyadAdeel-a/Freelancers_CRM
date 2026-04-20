@@ -39,7 +39,7 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
     
     setLoading(true);
     try {
-      await scheduleReminderAction({
+      const result = await scheduleReminderAction({
         clientId,
         userId: user.uid,
         userEmail: user.email!,
@@ -47,12 +47,18 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
         remindAt: date.toISOString(),
         message: message.trim()
       });
-      onSuccess();
-      setDate(undefined);
-      setMessage("");
-      onClose();
+
+      if (result.success) {
+        onSuccess();
+        setDate(undefined);
+        setMessage("");
+        onClose();
+      } else {
+        alert(`Failed: ${result.error}`);
+      }
     } catch (error) {
       console.error("Error adding reminder:", error);
+      alert("An unexpected error occurred.");
     } finally {
       setLoading(false);
     }

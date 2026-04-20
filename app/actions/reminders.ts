@@ -14,6 +14,12 @@ interface ScheduleReminderParams {
 
 export async function scheduleReminderAction(params: ScheduleReminderParams) {
   const { clientId, userId, userEmail, clientName, remindAt, message } = params;
+  
+  // 0. Robust URL detection
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
+                  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
+  console.log(`[QStash] Using Base URL: ${baseUrl}`);
   console.log(`[QStash] Scheduling reminder for ${userEmail} at ${remindAt}...`);
 
   try {
@@ -23,11 +29,12 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
 
     // 2. Schedule with QStash
     if (!qstashClient) {
-      throw new Error("QStash client is not initialized. Check your QSTASH_TOKEN.");
+      console.error("[QStash] Client missing - check QSTASH_TOKEN");
+      return { success: false, error: "QStash token is missing in environment variables." };
     }
 
     const result = await qstashClient.publishJSON({
-      url: `${process.env.NEXT_PUBLIC_APP_URL}/api/reminders/send`,
+      url: `${baseUrl}/api/reminders/send`,
       body: {
         userEmail,
         clientName,
@@ -40,6 +47,6 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
     return { success: true };
   } catch (error: any) {
     console.error("[QStash] Error:", error.message);
-    throw new Error(error.message);
+    return { success: false, error: error.message };
   }
 }
