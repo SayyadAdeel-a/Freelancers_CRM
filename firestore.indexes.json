@@ -33,6 +33,10 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "clientId",
           "order": "ASCENDING"
         },
@@ -46,6 +50,10 @@
       "collectionGroup": "reminders",
       "queryScope": "COLLECTION",
       "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
         {
           "fieldPath": "clientId",
           "order": "ASCENDING"

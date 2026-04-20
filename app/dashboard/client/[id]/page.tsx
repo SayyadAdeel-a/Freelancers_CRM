@@ -44,7 +44,7 @@ export default function ClientPage() {
       // Fetch notes and reminders in parallel
       const [notesData, remindersData] = await Promise.all([
         getNotes(id as string),
-        getReminders(id as string)
+        getReminders(id as string, user.uid)
       ]);
       
       setNotes(notesData);

@@ -69,6 +69,7 @@ export async function getClients(userId: string) {
     // Fetch next reminder
     const remindersQ = query(
       collection(db, "reminders"), 
+      where("userId", "==", userId),
       where("clientId", "==", docSnap.id),
       where("isSent", "==", false),
       where("remindAt", ">=", new Date()),
@@ -140,9 +141,10 @@ export async function addNote(clientId: string, content: string) {
 export async function getNotesByClient(clientId: string) {
   return await getNotes(clientId);
 }
-export async function getReminders(clientId: string) {
+export async function getReminders(clientId: string, userId: string) {
   const q = query(
     collection(db, "reminders"),
+    where("userId", "==", userId),
     where("clientId", "==", clientId),
     orderBy("remindAt", "asc")
   );
