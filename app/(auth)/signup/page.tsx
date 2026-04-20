@@ -74,12 +74,13 @@ export default function SignupPage() {
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button 
-              type="submit" 
-              className="w-full shadow-brand font-semibold" 
+            <Button
+              type="submit"
+              className="w-full shadow-brand font-semibold"
               disabled={loading}
             >
               {loading ? "Creating account..." : "Sign Up"}
+            </Button>
           </form>
 
           <div className="relative">
