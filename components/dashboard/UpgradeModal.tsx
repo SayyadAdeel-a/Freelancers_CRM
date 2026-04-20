@@ -26,7 +26,7 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
           </div>
           <DialogTitle className="text-2xl font-bold">Upgrade to Pro</DialogTitle>
           <DialogDescription className="text-base">
-            You&apos;ve reached the limit of 5 clients on the free plan. Upgrade to Pro for unlimited clients and more.
+            You&apos;ve reached the limit of 25 clients on the free plan. Upgrade to Pro for unlimited clients and more.
           </DialogDescription>
         </DialogHeader>
         

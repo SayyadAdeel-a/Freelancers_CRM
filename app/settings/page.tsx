@@ -192,7 +192,7 @@ export default function SettingsPage() {
         <SettingRow
           icon={CreditCard}
           label={`${profile?.plan === 'pro' ? 'Pro' : 'Free'} Plan`}
-          description={profile?.plan === 'pro' ? 'Unlimited clients and premium features' : 'Up to 5 clients, basic features'}
+          description={profile?.plan === 'pro' ? 'Unlimited clients and premium features' : 'Up to 25 clients, basic features'}
         >
           {profile?.plan !== 'pro' && (
             <Button size="sm" className="shadow-brand text-xs" onClick={() => router.push("/dashboard?upgrade=true")}>
@@ -202,7 +202,7 @@ export default function SettingsPage() {
         </SettingRow>
         <div className="py-4 space-y-2.5">
           {[
-            { label: "Clients", used: `${clientCount}/${profile?.plan === 'pro' ? '∞' : '5'}`, note: profile?.plan === 'pro' ? 'Unlimited' : 'Free plan limit' },
+            { label: "Clients", used: `${clientCount}/${profile?.plan === 'pro' ? '∞' : '25'}`, note: profile?.plan === 'pro' ? 'Unlimited' : 'Free plan limit' },
             { label: "Follow-up Reminders", used: profile?.plan === 'pro' ? 'Active' : 'Basic', note: profile?.plan === 'pro' ? 'Full access' : 'Upgrade for priority' },
           ].map((item) => (
             <div key={item.label} className="flex items-center justify-between text-sm">
