@@ -3,13 +3,13 @@ import {
   query,
   where,
   addDoc,
+  getDocs,
   updateDoc,
   deleteDoc,
   doc,
   serverTimestamp,
   orderBy,
-  limit,
-  getDocs as getDocsFn
+  limit
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -31,12 +31,13 @@ export interface Note {
   createdAt: any;
 }
 
-export { query, collection, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp };
-export { getDocsFn };
-export async function getDocs(collectionRef: any) {
+export { query, collection, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, getDocs };
+export const getDocsFn = getDocs;
+
+export async function getDocsData(collectionRef: any) {
   const q = query(collectionRef);
   const querySnapshot = await getDocsFn(q);
-  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return querySnapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as object) }));
 }
 export async function getClients(userId: string) {
   const q = query(
@@ -48,7 +49,7 @@ export async function getClients(userId: string) {
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map(doc => ({
     id: doc.id,
-    ...doc.data()
+    ...(doc.data() as object)
   })) as Client[];
 }
 
@@ -73,7 +74,7 @@ export async function getClient(clientId: string) {
   const q = query(collection(db, "clients"), where("__name__", "==", clientId));
   const querySnapshot = await getDocsFn(q);
   if (querySnapshot.empty) return null;
-  return { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() } as Client;
+  return { id: querySnapshot.docs[0].id, ...(querySnapshot.docs[0].data() as object) } as Client;
 }
 
 export async function getNotes(clientId: string) {
@@ -86,7 +87,7 @@ export async function getNotes(clientId: string) {
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map(doc => ({
     id: doc.id,
-    ...doc.data()
+    ...(doc.data() as object)
   })) as Note[];
 }
 
