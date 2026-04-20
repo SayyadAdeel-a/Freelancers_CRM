@@ -27,6 +27,7 @@ interface SetReminderModalProps {
 import { useUser } from "@/hooks/use-user";
 import { scheduleReminderAction } from "@/app/actions/reminders";
 import { addReminder } from "@/lib/firebase/firestore";
+import { toast } from "sonner";
 
 export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSuccess }: SetReminderModalProps) {
   const { user } = useUser();
@@ -54,16 +55,17 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
       });
 
       if (result.success) {
+        toast.success("Reminder scheduled successfully!");
         onSuccess();
         setDate(undefined);
         setMessage("");
         onClose();
       } else {
-        alert(`Failed to schedule email: ${result.error}`);
+        toast.error(`Failed to schedule email: ${result.error}`);
       }
     } catch (error: any) {
       console.error("Error adding reminder:", error);
-      alert(`Error: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

@@ -10,6 +10,8 @@ import { UpgradeModal } from "@/components/dashboard/UpgradeModal";
 import { Button } from "@/components/ui/button";
 import { Plus, Search } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
+import { ClientCardSkeleton } from "@/components/dashboard/Skeletons";
 
 export default function DashboardPage() {
   const { user, loading: authLoading } = useUser();
@@ -46,23 +48,31 @@ export default function DashboardPage() {
   };
 
 
-  const handleDelete = (clientId: string) => (confirmed: string) => {
+  const handleDelete = (clientId: string) => async (confirmed: string) => {
     if (confirmed === "true") {
-      deleteClient(clientId).then(() => {
+      try {
+        await deleteClient(clientId);
         setClients(clients.filter(c => c.id !== clientId));
-      });
+        toast.success("Client deleted successfully");
+      } catch (error) {
+        console.error("Error deleting client:", error);
+        toast.error("Failed to delete client");
+      }
     }
   };
   if (authLoading || (loading && clients.length === 0)) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <Skeleton className="h-10 w-48" />
-          <Skeleton className="h-10 w-32" />
+          <div className="space-y-2">
+            <Skeleton className="h-10 w-48" />
+            <Skeleton className="h-4 w-64" />
+          </div>
+          <Skeleton className="h-10 w-32 hidden sm:block" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-48 w-full rounded-2xl" />
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <ClientCardSkeleton key={i} />
           ))}
         </div>
       </div>

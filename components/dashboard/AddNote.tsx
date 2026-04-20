@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { addNote } from "@/lib/firebase/firestore";
+import { toast } from "sonner";
 
 interface AddNoteProps {
   clientId: string;
@@ -23,8 +24,10 @@ export function AddNote({ clientId, onSuccess }: AddNoteProps) {
       await addNote(clientId, content);
       setContent("");
       onSuccess();
+      toast.success("Note added successfully!");
     } catch (error) {
       console.error("Error adding note:", error);
+      toast.error("Failed to add note. Please try again.");
     } finally {
       setLoading(false);
     }

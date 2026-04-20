@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword, signInWithGoogle } from "@/lib/firebase/aut
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -20,9 +21,11 @@ export default function LoginPage() {
     setError(null);
     try {
       await signInWithEmailAndPassword(email, password);
+      toast.success("Welcome back!");
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
+      toast.error("Invalid credentials. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -33,9 +36,11 @@ export default function LoginPage() {
     setError(null);
     try {
       await signInWithGoogle();
+      toast.success("Signed in with Google!");
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
+      toast.error("Google sign in failed.");
     } finally {
       setLoading(false);
     }

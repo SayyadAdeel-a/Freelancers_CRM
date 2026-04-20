@@ -5,6 +5,7 @@ import { sendPasswordResetEmail } from "@/lib/firebase/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -22,8 +23,10 @@ export default function ForgotPasswordPage() {
     try {
       await sendPasswordResetEmail(email);
       setMessage("Check your email for the password reset link.");
+      toast.success("Reset link sent! Check your inbox.");
     } catch (err: any) {
       setError(err.message);
+      toast.error("Failed to send reset link.");
     } finally {
       setLoading(false);
     }

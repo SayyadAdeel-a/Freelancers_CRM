@@ -13,12 +13,18 @@ export function Navbar() {
   const { user } = useUser();
 
   return (
-    <header className="h-16 border-b border-border bg-white flex items-center justify-between px-6 sticky top-0 z-10">
-      <div className="flex-1 max-w-md relative">
+    <header className="h-16 border-b border-border bg-white flex items-center justify-between px-4 sm:px-6 sticky top-0 z-10">
+      <div className="flex lg:hidden items-center gap-2 mr-4">
+        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
+          <span className="text-white font-bold text-lg italic">N</span>
+        </div>
+      </div>
+
+      <div className="flex-1 max-w-md relative hidden xs:block">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <Input 
           placeholder="Search clients..." 
-          className="pl-10 bg-secondary/50 border-none focus-visible:ring-1 focus-visible:ring-primary/20"
+          className="pl-10 bg-secondary/50 border-none focus-visible:ring-1 focus-visible:ring-primary/20 h-9"
         />
       </div>
 

@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, signInWithGoogle } from "@/lib/firebase
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -20,9 +21,11 @@ export default function SignupPage() {
     setError(null);
     try {
       await createUserWithEmailAndPassword(email, password);
+      toast.success("Account created! Welcome to Nudge.");
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
+      toast.error("Signup failed. Please check your details.");
     } finally {
       setLoading(false);
     }
@@ -33,9 +36,11 @@ export default function SignupPage() {
     setError(null);
     try {
       await signInWithGoogle();
+      toast.success("Signed in with Google!");
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
+      toast.error("Google sign in failed.");
     } finally {
       setLoading(false);
     }

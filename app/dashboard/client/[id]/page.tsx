@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
+import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
 
 export default function ClientPage() {
   const { id } = useParams();
@@ -52,32 +54,19 @@ export default function ClientPage() {
 
   const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this client and all their data?")) {
-      await deleteClient(id as string);
-      router.push("/dashboard");
+      try {
+        await deleteClient(id as string);
+        toast.success("Client deleted successfully");
+        router.push("/dashboard");
+      } catch (error) {
+        console.error("Error deleting client:", error);
+        toast.error("Failed to delete client");
+      }
     }
   };
 
   if (loading) {
-    return (
-      <div className="space-y-8">
-        <Skeleton className="h-10 w-32" />
-        <div className="space-y-4">
-          <Skeleton className="h-12 w-64" />
-          <Skeleton className="h-6 w-48" />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            <Skeleton className="h-[200px] w-full rounded-2xl" />
-            <Skeleton className="h-6 w-32" />
-            <div className="space-y-4">
-              <Skeleton className="h-32 w-full rounded-2xl" />
-              <Skeleton className="h-32 w-full rounded-2xl" />
-            </div>
-          </div>
-          <Skeleton className="h-[400px] w-full rounded-2xl" />
-        </div>
-      </div>
-    );
+    return <ClientDetailSkeleton />;
   }
 
   if (!client) return null;

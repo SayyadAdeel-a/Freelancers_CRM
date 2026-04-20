@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { addClient } from "@/lib/firebase/firestore";
 import { useUser } from "@/hooks/use-user";
+import { toast } from "sonner";
 
 interface AddClientModalProps {
   isOpen: boolean;
@@ -40,8 +41,10 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
       onSuccess();
       setFormData({ name: "", email: "", company: "" });
       onClose();
+      toast.success("Client added successfully!");
     } catch (error) {
       console.error("Error adding client:", error);
+      toast.error("Failed to add client. Please try again.");
     } finally {
       setLoading(false);
     }
