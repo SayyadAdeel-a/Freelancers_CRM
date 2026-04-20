@@ -45,6 +45,14 @@ export default function DashboardPage() {
     }
   };
 
+
+  const handleDelete = (clientId: string) => (confirmed: string) => {
+    if (confirmed === "true") {
+      deleteClient(clientId).then(() => {
+        setClients(clients.filter(c => c.id !== clientId));
+      });
+    }
+  };
   if (authLoading || (loading && clients.length === 0)) {
     return (
       <div className="space-y-6">
@@ -83,10 +91,24 @@ export default function DashboardPage() {
           {clients.map((client) => (
             <ClientCard
               key={client.id}
-              onDelete={(confirmed) => handleDelete(client.id)(confirmed)}
+              client={client}
+              onDelete={handleDelete(client.id)}
             />
           ))}
+        </div>
+      )}
 
-
+      <AddClientModal 
+        isOpen={isAddModalOpen} 
+        onClose={() => setIsAddModalOpen(false)} 
+        onSuccess={fetchClients}
+        userId={user?.uid || ""}
+      />
+      
+      <UpgradeModal 
+        isOpen={isUpgradeModalOpen} 
+        onClose={() => setIsUpgradeModalOpen(false)} 
+      />
+    </div>
   );
 }

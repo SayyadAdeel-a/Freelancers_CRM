@@ -50,3 +50,8 @@ cl
 AGENTS.md
 CLAUDE.md
 Doc/
+
+# Extra exclusions for clean deployment
+/graphify-out/
+/.obsidian/
+/docs/
