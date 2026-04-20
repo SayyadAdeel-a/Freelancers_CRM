@@ -24,6 +24,13 @@ export interface Client {
   plan?: string;
 }
 
+export interface Note {
+  id: string;
+  clientId: string;
+  content: string;
+  createdAt: any;
+}
+
 export async function getClients(userId: string) {
   const q = query(
     collection(db, "clients"),
@@ -53,4 +60,43 @@ export async function updateClient(clientId: string, data: Partial<Client>) {
 
 export async function deleteClient(clientId: string) {
   return await deleteDoc(doc(db, "clients", clientId));
+}
+
+export async function getClient(clientId: string) {
+  const q = query(collection(db, "clients"), where("__name__", "==", clientId));
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.empty) return null;
+  return { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() } as Client;
+}
+
+export async function getNotes(clientId: string) {
+  const q = query(
+    collection(db, "notes"),
+    where("clientId", "==", clientId),
+    orderBy("createdAt", "desc")
+  );
+
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as Note[];
+}
+
+export async function addNote(clientId: string, content: string) {
+  return await addDoc(collection(db, "notes"), {
+    clientId,
+    content,
+    createdAt: serverTimestamp(),
+  });
+}
+export async function addReminder(clientId: string, userId: string, remindAt: Date, message: string) {
+  return await addDoc(collection(db, "reminders"), {
+    clientId,
+    userId,
+    remindAt,
+    message,
+    isSent: false,
+    createdAt: serverTimestamp(),
+  });
 }
