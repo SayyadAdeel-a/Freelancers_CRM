@@ -90,6 +90,9 @@ export async function addNote(clientId: string, content: string) {
     createdAt: serverTimestamp(),
   });
 }
+export async function getNotesByClient(clientId: string) {
+  return await getNotes(clientId);
+}
 export async function addReminder(clientId: string, userId: string, remindAt: Date, message: string) {
   return await addDoc(collection(db, "reminders"), {
     clientId,
@@ -97,6 +100,21 @@ export async function addReminder(clientId: string, userId: string, remindAt: Da
     remindAt,
     message,
     isSent: false,
+    createdAt: serverTimestamp(),
+  });
+}
+export async function createClient(userId: string, clientData: Omit<Client, "id" | "userId" | "createdAt">) {
+  return await addDoc(collection(db, "clients"), {
+    userId,
+    ...clientData,
+    createdAt: serverTimestamp(),
+  });
+}
+export async function createNote(clientId: string, userId: string, content: string) {
+  return await addDoc(collection(db, "notes"), {
+    clientId,
+    userId,
+    content,
     createdAt: serverTimestamp(),
   });
 }

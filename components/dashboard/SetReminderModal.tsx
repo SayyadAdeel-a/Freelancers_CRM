@@ -12,7 +12,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
@@ -78,12 +77,12 @@ export function SetReminderModal({ clientId, isOpen, onClose, onSuccess }: SetRe
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                    disabled={(date) => date < new Date()}
+                  <input
+                    type="date"
+                    value={date ? format(date, "yyyy-MM-dd") : ""}
+                    onChange={(e) => setDate(new Date(e.target.value))}
+                    className="w-full p-2 border rounded"
+                    min={new Date().toISOString().split("T")[0]}
                   />
                 </PopoverContent>
               </Popover>
