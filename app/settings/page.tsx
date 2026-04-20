@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useUser } from "@/hooks/use-user";
+import { useProfile } from "@/hooks/use-profile";
 import { logout } from "@/lib/firebase/auth";
+import { updateUserProfile, getClients, UserProfile } from "@/lib/firebase/firestore";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import {
@@ -58,10 +60,43 @@ function SectionCard({ title, children }: { title: string; children: React.React
 }
 
 export default function SettingsPage() {
-  const { user, loading } = useUser();
+  const { user, loading: authLoading } = useUser();
+  const { profile, loading: profileLoading, refreshProfile } = useProfile();
   const router = useRouter();
+  const [clientCount, setClientCount] = useState(0);
   const [loggingOut, setLoggingOut] = useState(false);
-  const [notifications, setNotifications] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  const fetchStats = useCallback(async () => {
+    if (!user) return;
+    try {
+      const clients = await getClients(user.uid);
+      setClientCount(clients.length);
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchStats();
+    }
+  }, [user, fetchStats]);
+
+  const handleToggleNotifications = async () => {
+    if (!user || !profile || saving) return;
+    setSaving(true);
+    try {
+      const newVal = !profile.notifications;
+      await updateUserProfile(user.uid, { notifications: newVal });
+      refreshProfile();
+      toast.success(newVal ? "Reminders enabled" : "Reminders disabled");
+    } catch (error) {
+      toast.error("Failed to update preferences");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleLogout = async () => {
     setLoggingOut(true);
@@ -74,7 +109,7 @@ export default function SettingsPage() {
     }
   };
 
-  if (loading) {
+  if (authLoading || profileLoading) {
     return (
       <div className="space-y-8 animate-pulse">
         <div className="space-y-2">
@@ -107,9 +142,12 @@ export default function SettingsPage() {
         <div className="flex-1 min-w-0">
           <h2 className="font-bold text-lg capitalize">{displayName}</h2>
           <p className="text-sm text-muted-foreground truncate">{user?.email}</p>
-          <div className="inline-flex items-center gap-1.5 mt-2 bg-secondary px-2.5 py-1 rounded-full text-xs font-medium text-muted-foreground">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-            Free Plan
+          <div className="inline-flex items-center gap-1.5 mt-2 bg-secondary px-2.5 py-1 rounded-full text-xs font-medium text-muted-foreground capitalize">
+            <div className={cn(
+              "w-1.5 h-1.5 rounded-full",
+              profile?.plan === "pro" ? "bg-indigo-500" : "bg-green-500"
+            )} />
+            {profile?.plan || "Free"} Plan
           </div>
         </div>
       </div>
@@ -117,32 +155,10 @@ export default function SettingsPage() {
       {/* Account section */}
       <SectionCard title="Account">
         <SettingRow
-          icon={User}
-          label="Display Name"
-          description={displayName}
-        >
-          <Button variant="ghost" size="sm" className="text-xs text-muted-foreground hover:text-foreground" disabled>
-            Edit
-          </Button>
-        </SettingRow>
-        <SettingRow
           icon={Mail}
           label="Email Address"
           description={user?.email || "Not set"}
-        >
-          <Button variant="ghost" size="sm" className="text-xs text-muted-foreground hover:text-foreground" disabled>
-            Edit
-          </Button>
-        </SettingRow>
-        <SettingRow
-          icon={Shield}
-          label="Password"
-          description="Last changed: never"
-        >
-          <Button variant="ghost" size="sm" className="text-xs text-muted-foreground hover:text-foreground" disabled>
-            Change
-          </Button>
-        </SettingRow>
+        />
       </SectionCard>
 
       {/* Preferences */}
@@ -153,16 +169,18 @@ export default function SettingsPage() {
           description="Get notified when a follow-up is due"
         >
           <button
-            onClick={() => setNotifications(!notifications)}
+            onClick={handleToggleNotifications}
+            disabled={saving}
             className={cn(
               "relative w-10 h-5.5 rounded-full transition-colors duration-200 shrink-0",
-              notifications ? "bg-primary" : "bg-secondary"
+              profile?.notifications ? "bg-primary" : "bg-secondary",
+              saving && "opacity-50 cursor-not-allowed"
             )}
           >
             <span
               className={cn(
                 "absolute top-0.5 left-0.5 w-4.5 h-4.5 rounded-full bg-white shadow-sm transition-transform duration-200",
-                notifications ? "translate-x-[18px]" : "translate-x-0"
+                profile?.notifications ? "translate-x-[18px]" : "translate-x-0"
               )}
             />
           </button>
@@ -170,20 +188,22 @@ export default function SettingsPage() {
       </SectionCard>
 
       {/* Plan section */}
-      <SectionCard title="Plan">
+      <SectionCard title="Plan Usage">
         <SettingRow
           icon={CreditCard}
-          label="Free Plan"
-          description="Up to 5 clients, basic features"
+          label={`${profile?.plan === 'pro' ? 'Pro' : 'Free'} Plan`}
+          description={profile?.plan === 'pro' ? 'Unlimited clients and premium features' : 'Up to 5 clients, basic features'}
         >
-          <Button size="sm" className="shadow-brand text-xs">
-            Upgrade to Pro
-          </Button>
+          {profile?.plan !== 'pro' && (
+            <Button size="sm" className="shadow-brand text-xs" onClick={() => router.push("/dashboard?upgrade=true")}>
+              Upgrade
+            </Button>
+          )}
         </SettingRow>
         <div className="py-4 space-y-2.5">
           {[
-            { label: "Clients", used: "0/5", note: "Free plan limit" },
-            { label: "Email reminders", used: "Unavailable", note: "Pro feature" },
+            { label: "Clients", used: `${clientCount}/${profile?.plan === 'pro' ? '∞' : '5'}`, note: profile?.plan === 'pro' ? 'Unlimited' : 'Free plan limit' },
+            { label: "Follow-up Reminders", used: profile?.plan === 'pro' ? 'Active' : 'Basic', note: profile?.plan === 'pro' ? 'Full access' : 'Upgrade for priority' },
           ].map((item) => (
             <div key={item.label} className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">{item.label}</span>

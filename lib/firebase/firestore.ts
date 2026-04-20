@@ -7,6 +7,8 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  getDoc,
+  setDoc,
   serverTimestamp,
   orderBy,
   limit,
@@ -34,6 +36,13 @@ export interface Reminder {
   remindAt: any;
   message: string;
   isSent: boolean;
+  createdAt: any;
+}
+
+export interface UserProfile {
+  uid: string;
+  plan: 'free' | 'pro';
+  notifications: boolean;
   createdAt: any;
 }
 
@@ -180,4 +189,30 @@ export async function createNote(clientId: string, userId: string, content: stri
     content,
     createdAt: serverTimestamp(),
   });
+}
+
+// User Profile Functions
+export async function getUserProfile(uid: string) {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data() as UserProfile;
+  }
+  return null;
+}
+
+export async function createUserProfile(uid: string, data: Partial<UserProfile> = {}) {
+  const docRef = doc(db, "users", uid);
+  await setDoc(docRef, {
+    uid,
+    plan: 'free',
+    notifications: true,
+    createdAt: serverTimestamp(),
+    ...data
+  }, { merge: true });
+}
+
+export async function updateUserProfile(uid: string, data: Partial<UserProfile>) {
+  const docRef = doc(db, "users", uid);
+  await updateDoc(docRef, data as any);
 }
