@@ -26,6 +26,7 @@ interface SetReminderModalProps {
 
 import { useUser } from "@/hooks/use-user";
 import { scheduleReminderAction } from "@/app/actions/reminders";
+import { addReminder } from "@/lib/firebase/firestore";
 
 export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSuccess }: SetReminderModalProps) {
   const { user } = useUser();
@@ -39,6 +40,10 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
     
     setLoading(true);
     try {
+      // 1. Save to Firestore from CLIENT (where auth works!)
+      await addReminder(clientId, user.uid, date, message.trim());
+
+      // 2. Schedule the email from SERVER
       const result = await scheduleReminderAction({
         clientId,
         userId: user.uid,
@@ -54,11 +59,11 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
         setMessage("");
         onClose();
       } else {
-        alert(`Failed: ${result.error}`);
+        alert(`Failed to schedule email: ${result.error}`);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error adding reminder:", error);
-      alert("An unexpected error occurred.");
+      alert(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }

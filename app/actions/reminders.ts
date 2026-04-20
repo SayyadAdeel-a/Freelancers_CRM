@@ -23,10 +23,6 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
   console.log(`[QStash] Scheduling reminder for ${userEmail} at ${remindAt}...`);
 
   try {
-    // 1. Save to Firestore
-    await addReminder(clientId, userId, new Date(remindAt), message);
-    console.log(`[QStash] Firestore entry created.`);
-
     // 2. Schedule with QStash
     if (!qstashClient) {
       console.error("[QStash] Client missing - check QSTASH_TOKEN");
