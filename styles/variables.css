@@ -1,0 +1,79 @@
+/* ============================================
+   Nothing Design System — CSS Custom Properties
+   ============================================ */
+
+/* ============================================
+   1. TOKENS — Core Design Variables
+   ============================================ */
+
+:root {
+  /* ===== Color System ===== */
+  --black: #000000;
+  --white: #FFFFFF;
+
+  /* Dark mode palette (OLED black) */
+  --surface: #111111;
+  --surface-raised: #1A1A1A;
+  --border: #222222;
+  --border-visible: #333333;
+  --text-disabled: #666666;
+  --text-secondary: #999999;
+  --text-primary: #E8E8E8;
+  --text-display: #FFFFFF;
+  --accent: #D71921;        /* Signal light - one per screen */
+  --accent-subtle: rgba(215, 25, 33, 0.15);
+  --success: #4A9E5C;       /* Confirmed, connected */
+  --warning: #D4A843;       /* Caution, pending */
+  --error: #D71921;         /* Shares accent - errors ARE the accent */
+  --info: #999999;          /* Uses secondary text */
+  --interactive: #5B9BF6;   /* Tappable text/links */
+
+  /* Light mode overrides */
+  --light-surface: #FFFFFF;
+  --light-surface-raised: #F0F0F0;
+  --light-border: #E8E8E8;
+  --light-border-visible: #CCCCCC;
+  --light-text-primary: #1A1A1A;
+  --light-text-display: #000000;
+
+  /* ===== Type Scale ===== */
+  --display-xl: 72px;
+  --display-lg: 48px;
+  --display-md: 36px;
+  --heading: 24px;
+  --subheading: 18px;
+  --body: 16px;
+  --body-sm: 14px;
+  --caption: 12px;
+  --label: 11px;
+
+  /* ===== Spacing Scale (8px base) ===== */
+  --space-2xs: 2px;    /* Optical adjustments only */
+  --space-xs: 4px;     /* Icon-to-label gaps */
+  --space-sm: 8px;     /* Component internal spacing */
+  --space-md: 16px;    /* Standard padding, element gaps */
+  --space-lg: 24px;    /* Group separation */
+  --space-xl: 32px;    /* Section margins */
+  --space-2xl: 48px;   /* Major section breaks */
+  --space-3xl: 64px;   /* Page-level vertical rhythm */
+  --space-4xl: 96px;   /* Hero breathing room */
+
+  /* ===== Motion ===== */
+  --duration-micro: 150ms;
+  --duration-transition: 250ms;
+  --easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* ===== Component Variables ===== */
+  --radius-card: 12px;
+  --radius-compact: 8px;
+  --radius-technical: 4px;
+  --radius-pill: 999px;
+  --button-min-height: 44px;
+  --input-min-height: 44px;
+  --nav-item-height: 44px;
+
+  /* ===== Dot Grid ===== */
+  --dot-size: 1px;
+  --dot-grid-size: 16px;
+  --dot-grid-opacity: 0.1;
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nothing Design System Implementation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Doto:slnt,wght@-10..0,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/globals.css">
+</head>
+<body>
+  <!-- Header / Hero -->
+  <header class="nd-container py-6">
+    <div class="text-center">
+      <div class="nd-display-lg text-gradient-brand mb-2">36GB/s</div>
+      <div class="nd-display-md text-muted-foreground mb-3">PERFORMANCE METRICS</div>
+      <div class="nd-body text-muted-foreground opacity-70">Real-time throughput monitoring • Live data streams</div>
+    </div>
+  </header>
+
+  <!-- Primary Metrics Grid -->
+  <section class="nd-container">
+    <div class="nd-grid nd-grid--3up mb-8">
+      <div class="nd-card nd-card--raised text-center p-5">
+        <div class="nd-display-md mb-2">142,891</div>
+        <div class="nd-label text-muted-foreground mb-1">requests/sec</div>
+        <div class="nd-body-sm text-muted-foreground opacity-60">+12.4% from baseline</div>
+      </div>
+      <div class="nd-card nd-card--raised text-center p-5">
+        <div class="nd-display-md mb-2">89ms</div>
+        <div class="nd-label text-muted-foreground mb-1">latency p95</div>
+        <div class="nd-body-sm text-muted-foreground opacity-60">-3.2ms vs yesterday</div>
+      </div>
+      <div class="nd-card nd-card--raised text-center p-5">
+        <div class="nd-display-md mb-2">99.97%</div>
+        <div class="nd-label text-muted-foreground mb-1">uptime</div>
+        <div class="nd-body-sm text-muted-foreground opacity-60">SLA compliance</div>
+      </div>
+    </div>
+
+    <!-- Secondary Metrics with Segmented Progress -->
+    <div class="nd-grid nd-grid--2up gap-6 mb-8">
+      <div>
+        <div class="nd-label text-muted-foreground mb-3 uppercase tracking-wider">System Load</div>
+        <div class="nd-progress mb-3">
+          <div class="nd-progress__label">CPU</div>
+          <div class="nd-progress__bar">
+            <div class="nd-progress__fill" style="width: 65%"></div>
+          </div>
+        </div>
+        <div class="nd-progress mb-3">
+          <div class="nd-progress__label">Memory</div>
+          <div class="nd-progress__bar">
+            <div class="nd-progress__fill" style="width: 42%"></div>
+          </div>
+        </div>
+        <div class="nd-progress">
+          <div class="nd-progress__label">Network</div>
+          <div class="nd-progress__bar">
+            <div class="nd-progress__fill" style="width: 28%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="nd-label text-muted-foreground mb-3 uppercase tracking-wider">Data Status</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="nd-status nd-status--success">In Range</div>
+        </div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="nd-status nd-status--warning">Moderate</div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="nd-status nd-status--error">Critical</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Tables -->
+  <section class="nd-container mb-8">
+    <div class="nd-label text-muted-foreground mb-3 uppercase tracking-wider">Active Connections</div>
+    <div class="nd-scrollbar">
+      <table class="nd-table">
+        <thead>
+          <tr class="nd-table__header">
+            <th class="nd-table__header-cell">Endpoint</th>
+            <th class="nd-table__header-cell">Status</th>
+            <th class="nd-table__header-cell">Latency</th>
+            <th class="nd-table__header-cell">Traffic</th>
+            <th class="nd-table__header-cell">Uptime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="nd-table__row nd-table__row--active">
+            <td class="nd-table__cell">/api/v1/stream</td>
+            <td class="nd-table__cell nd-table__cell--status"><span class="nd-status nd-status--success">ACTIVE</span></td>
+            <td class="nd-table__cell nd-table__cell--numeric">12ms</td>
+            <td class="nd-table__cell nd-table__cell--numeric">4.2 GB</td>
+            <td class="nd-table__cell nd-table__cell--status">24h 12m</td>
+          </tr>
+          <tr class="nd-table__row">
+            <td class="nd-table__cell">/api/v1/query</td>
+            <td class="nd-table__cell nd-table__cell--status"><span class="nd-status nd-status--success">ACTIVE</span></td>
+            <td class="nd-table__cell nd-table__cell--numeric">8ms</td>
+            <td class="nd-table__cell nd-table__cell--numeric">1.8 GB</td>
+            <td class="nd-table__cell nd-table__cell--status">24h 08m</td>
+          </tr>
+          <tr class="nd-table__row">
+            <td class="nd-table__cell">/api/v1/batch</td>
+            <td class="nd-table__cell nd-table__cell--status"><span class="nd-status nd-status--warning">DEGRADED</span></td>
+            <td class="nd-table__cell nd-table__cell--numeric">45ms</td>
+            <td class="nd-table__cell nd-table__cell--numeric">890 MB</td>
+            <td class="nd-table__cell nd-table__cell--status">18h 34m</td>
+          </tr>
+          <tr class="nd-table__row">
+            <td class="nd-table__cell">/api/v1/auth</td>
+            <td class="nd-table__cell nd-table__cell--status"><span class="nd-status nd-status--success">ACTIVE</span></td>
+            <td class="nd-table__cell nd-table__cell--numeric">3ms</td>
+            <td class="nd-table__cell nd-table__cell--numeric">2.1 GB</td>
+            <td class="nd-table__cell nd-table__cell--status">24h 15m</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Stat Cards -->
+  <section class="nd-container mb-8">
+    <div class="nd-grid nd-grid--4up">
+      <div class="nd-card">
+        <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">TOTAL</div>
+        <div class="nd-display-sm mb-1">1.2M</div>
+        <div class="nd-body-sm text-muted-foreground">requests processed</div>
+      </div>
+      <div class="nd-card">
+        <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">AVG</div>
+        <div class="nd-display-sm mb-1">1.8ms</div>
+        <div class="nd-body-sm text-muted-foreground">response time</div>
+      </div>
+      <div class="nd-card">
+        <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">PEAK</div>
+        <div class="nd-display-sm mb-1">42.7 GB/s</div>
+        <div class="nd-body-sm text-muted-foreground">throughput</div>
+      </div>
+      <div class="nd-card">
+        <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">ERRORS</div>
+        <div class="nd-display-sm mb-1">0</div>
+        <div class="nd-body-sm text-muted-foreground">critical failures</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buttons -->
+  <section class="nd-container mb-8">
+    <div class="flex gap-3 flex-wrap">
+      <button class="nd-button nd-button--primary">SAVE</button>
+      <button class="nd-button nd-button--secondary">CANCEL</button>
+      <button class="nd-button nd-button--ghost">RESET</button>
+      <button class="nd-button nd-button--destructive">DELETE</button>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <nav class="nd-nav">
+    <div class="nd-nav__item nd-nav__item--active">DASHBOARD</div>
+    <div class="nd-nav__item">METRICS</div>
+    <div class="nd-nav__item">ALERTS</div>
+    <div class="nd-nav__divider"></div>
+    <div class="nd-nav__item">CONFIG</div>
+    <div class="nd-nav__item">LOGS</div>
+    <div class="nd-nav__item">HELP</div>
+  </nav>
+
+  <!-- Modal -->
+  <div class="nd-container mb-8">
+    <div class="nd-card">
+      <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">Alert Configuration</div>
+      <div class="nd-body mb-3">Set threshold for anomaly detection</div>
+      <div class="nd-form-group">
+        <label class="nd-form-label" for="threshold">CPU Threshold %</label>
+        <input class="nd-form-input" id="threshold" placeholder="95">
+      </div>
+      <div class="flex gap-3 mt-3">
+        <button class="nd-button nd-button--secondary">CANCEL</button>
+        <button class="nd-button nd-button--primary">SAVE</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggleTheme = () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    };
+  </script>
+</body>
+</html>

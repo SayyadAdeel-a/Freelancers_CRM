@@ -1,0 +1,627 @@
+/* ============================================
+   Nothing Design System — Component Library
+   ============================================ */
+
+/* ============================================
+   1. CARDS / SURFACES
+   ============================================ */
+
+.nd-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-md);
+  width: 100%;
+}
+
+.nd-card--raised {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-md);
+}
+
+.nd-card--compact {
+  border-radius: var(--radius-compact);
+  padding: var(--space-sm);
+}
+
+.nd-card--technical {
+  border-radius: var(--radius-technical);
+  padding: var(--space-xs);
+}
+
+/* ============================================
+   2. BUTTONS
+   ============================================ */
+
+.nd-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-min-height);
+  padding: 0 var(--space-xl);
+  font-family: inherit;
+  font-size: var(--caption);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  transition: opacity var(--duration-micro) var(--easing);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.nd-button--primary {
+  background: var(--text-display);
+  color: var(--black);
+  border: none;
+}
+
+.nd-button--primary:hover {
+  opacity: 0.9;
+}
+
+.nd-button--secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-visible);
+}
+
+.nd-button--secondary:hover {
+  border-color: var(--text-primary);
+}
+
+.nd-button--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+}
+
+.nd-button--ghost:hover {
+  color: var(--text-primary);
+}
+
+.nd-button--destructive {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.nd-button--destructive:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+}
+
+/* ============================================
+   3. INPUTS
+   ============================================ */
+
+.nd-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.nd-input__field {
+  width: 100%;
+  min-height: var(--input-min-height);
+  padding: var(--space-sm) var(--space-md);
+  font-family: 'Space Mono', monospace;
+  font-size: var(--body);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-visible);
+  transition: border-color var(--duration-micro) var(--easing);
+  outline: none;
+}
+
+.nd-input__field:focus {
+  border-bottom-color: var(--text-primary);
+}
+
+.nd-input__field:focus ~ .nd-input__label,
+.nd-input__field:not(:placeholder-shown) ~ .nd-input__label {
+  color: var(--text-secondary);
+  font-size: var(--caption);
+  transform: translateY(-20px) scale(0.85);
+  pointer-events: none;
+}
+
+.nd-input__label {
+  position: absolute;
+  left: var(--space-md);
+  top: var(--space-sm);
+  color: var(--text-secondary);
+  font-family: 'Space Mono', monospace;
+  font-size: var(--body);
+  pointer-events: none;
+  transition: all var(--duration-micro) var(--easing);
+}
+
+.nd-input--error .nd-input__field {
+  border-bottom-color: var(--accent);
+}
+
+.nd-input--error ~ .nd-input__error {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.nd-input__error {
+  font-size: var(--caption);
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity var(--duration-micro) var(--easing);
+  margin-top: var(--space-xs);
+}
+
+/* ============================================
+   4. LISTS / DATA ROWS
+   ============================================ */
+
+.nd-list {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.nd-list__row {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--duration-micro) var(--easing);
+}
+
+.nd-list__row:last-child {
+  border-bottom: none;
+}
+
+.nd-list__row:hover {
+  background: var(--surface-raised);
+}
+
+.nd-list__label {
+  flex: 1;
+  font-family: 'Space Mono', monospace;
+  font-size: var(--body);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nd-list__value {
+  font-size: var(--body);
+  color: var(--text-primary);
+  text-align: right;
+  min-width: 120px;
+}
+
+.nd-list__unit {
+  font-size: var(--label);
+  color: var(--text-secondary);
+  margin-left: var(--space-xs);
+}
+
+.nd-list__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nd-list__status--success {
+  color: var(--success);
+}
+
+.nd-list__status--warning {
+  color: var(--warning);
+}
+
+.nd-list__status--error {
+  color: var(--error);
+}
+
+.nd-list__status--info {
+  color: var(--text-secondary);
+}
+
+.nd-list__indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nd-list__indicator--active {
+  background: var(--text-display);
+}
+
+.nd-list__indicator--inactive {
+  background: var(--border);
+}
+
+/* ============================================
+   5. TABLES / DATA GRIDS
+   ============================================ */
+
+.nd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--body-sm);
+}
+
+.nd-table__header {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border-visible);
+}
+
+.nd-table__header-cell {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  font-family: 'Space Mono', monospace;
+  font-size: var(--caption);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: none;
+  width: 1%;
+  white-space: nowrap;
+}
+
+.nd-table__row {
+  border-bottom: 1px solid var(--border);
+}
+
+.nd-table__row:hover {
+  background: var(--surface-raised);
+}
+
+.nd-table__row--active {
+  background: var(--surface-raised);
+  border-left: 2px solid var(--accent);
+  padding-left: calc(var(--space-md) - 2px);
+}
+
+.nd-table__cell {
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-primary);
+}
+
+.nd-table__cell--numeric {
+  text-align: right;
+  font-family: 'Space Mono', monospace;
+}
+
+.nd-table__cell--status {
+  font-family: 'Space Mono', monospace;
+  font-size: var(--caption);
+}
+
+/* ============================================
+   6. NAVIGATION
+   ============================================ */
+
+.nd-nav {
+  display: flex;
+  align-items: center;
+  height: var(--nav-item-height);
+  padding: 0 var(--space-md);
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  gap: var(--space-md);
+}
+
+.nd-nav__item {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--label);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  transition: all var(--duration-micro) var(--easing);
+  position: relative;
+  overflow: hidden;
+}
+
+.nd-nav__item:hover {
+  color: var(--text-primary);
+  background: var(--surface-raised);
+}
+
+.nd-nav__item--active {
+  color: var(--text-display);
+}
+
+.nd-nav__item--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: var(--text-display);
+}
+
+.nd-nav__divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  margin: 0 var(--space-sm);
+}
+
+/* ============================================
+   7. TAGS / CHIPS
+   ============================================ */
+
+.nd-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-visible);
+  border-radius: 4px;
+  font-family: 'Space Mono', monospace;
+  font-size: var(--label);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  gap: var(--space-xs);
+  cursor: default;
+}
+
+.nd-tag--active {
+  border-color: var(--text-display);
+  color: var(--text-display);
+}
+
+/* ============================================
+   8. SEGMENTED CONTROL
+   ============================================ */
+
+.nd-segmented {
+  display: inline-flex;
+  background: var(--border);
+  border-radius: var(--radius-compact);
+  padding: 2px;
+  gap: 2px;
+}
+
+.nd-segmented__item {
+  flex: 1;
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: calc(var(--radius-compact) - 2px);
+  font-family: 'Space Mono', monospace;
+  font-size: var(--label);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-micro) var(--easing);
+  user-select: none;
+}
+
+.nd-segmented__item--active {
+  background: var(--text-display);
+  color: var(--black);
+}
+
+.nd-segmented__item:hover:not(.nd-segmented__item--active) {
+  background: var(--border-visible);
+}
+
+/* ============================================
+   9. DATE / PERIOD NAVIGATION
+   ============================================ */
+
+.nd-date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  height: var(--nav-item-height);
+}
+
+.nd-date-nav__label {
+  font-family: 'Space Mono', monospace;
+  font-size: var(--body);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  transition: background var(--duration-micro) var(--easing);
+}
+
+.nd-date-nav__label:hover {
+  background: var(--surface-raised);
+}
+
+.nd-date-nav__arrow {
+  width: 40px;
+  height: var(--nav-item-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background var(--duration-micro) var(--easing);
+}
+
+.nd-date-nav__arrow:hover {
+  background: var(--surface-raised);
+}
+
+.nd-date-nav__arrow--disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ============================================
+   10. TOGGLES / SWITCHES
+   ============================================ */
+
+.nd-toggle {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.nd-toggle__track {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--border);
+  transition: background var(--duration-micro) var(--easing);
+  pointer-events: none;
+}
+
+.nd-toggle--on .nd-toggle__track {
+  background: var(--text-display);
+}
+
+.nd-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  transition: transform var(--duration-micro) var(--easing);
+  pointer-events: none;
+}
+
+.nd-toggle--on .nd-toggle__thumb {
+  transform: translateX(24px);
+}
+
+/* ============================================
+   11. PROGRESS / LOADING
+   ============================================ */
+
+.nd-progress {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-compact);
+}
+
+.nd-progress__label {
+  font-family: 'Space Mono', monospace;
+  font-size: var(--caption);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.nd-progress__bar {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.nd-progress__fill {
+  height: 100%;
+  background: var(--text-display);
+  border-radius: 2px;
+  transition: width var(--duration-transition) var(--easing);
+  position: relative;
+}
+
+.nd-progress__fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.nd-progress__segment {
+  flex: 1;
+  height: 100%;
+  background: var(--border);
+  transition: background var(--duration-micro) var(--easing);
+}
+
+.nd-progress__segment--done {
+  background: var(--success);
+}
+
+.nd-progress__segment--current {
+  background: var(--text-display);
+  box-shadow: 0 0 0 1px var(--text-display);
+}
+
+.nd-progress__segment--over {
+  background: var(--accent);
+}
+
+.nd-progress__text {
+  font-family: 'Space Mono', monospace;
+  font-size: var(--caption);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ============================================
+   12. OTHER UTILITIES
+   ============================================ */
+
+.nd-divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-md) 0;
+  border: none;
+}
+
+.nd-spacer {
+  height: var(--space-md);
+}
+
+.nd-text--center { text-align: center; }
+.nd-text--right { text-align: right; }
+.nd-text--nowrap { white-space: nowrap; }
+.nd-text--truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.nd-mb-xs { margin-bottom: var(--space-xs); }
+.nd-mb-sm { margin-bottom: var(--space-sm); }
+.nd-mb-md { margin-bottom: var(--space-md); }
+.nd-mb-lg { margin-bottom: var(--space-lg); }
+.nd-mb-xl { margin-bottom: var(--space-xl); }
+
+.nd-mt-xs { margin-top: var(--space-xs); }
+.nd-mt-sm { margin-top: var(--space-sm); }
+.nd-mt-md { margin-top: var(--space-md); }
+.nd-mt-lg { margin-top: var(--space-lg); }
+.nd-mt-xl { margin-top: var(--space-xl); }
