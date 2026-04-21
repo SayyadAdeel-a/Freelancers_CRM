@@ -1,14 +1,14 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useMemo, ReactNode } from "react";
 import { useProfile } from "@/hooks/use-profile";
 import { UserProfile } from "@/lib/firebase/firestore";
 
 interface DashboardContextValue {
   isAddClientModalOpen: boolean;
   setIsAddClientModalOpen: (open: boolean) => void;
-  refreshClients: () => void;
-  setRefreshClients: (fn: () => void) => void;
+  refreshTrigger: number;
+  triggerRefresh: () => void;
   profile: UserProfile | null;
   profileLoading: boolean;
   refreshProfile: () => Promise<void>;
@@ -17,8 +17,8 @@ interface DashboardContextValue {
 export const DashboardContext = createContext<DashboardContextValue>({
   isAddClientModalOpen: false,
   setIsAddClientModalOpen: () => {},
-  refreshClients: () => {},
-  setRefreshClients: () => {},
+  refreshTrigger: 0,
+  triggerRefresh: () => {},
   profile: null,
   profileLoading: true,
   refreshProfile: async () => {},
@@ -26,25 +26,25 @@ export const DashboardContext = createContext<DashboardContextValue>({
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
-  const [refreshClients, setRefreshClientsState] = useState<() => void>(() => () => {});
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const { profile, loading: profileLoading, refreshProfile } = useProfile();
 
-  const setRefreshClients = useCallback((fn: () => void) => {
-    setRefreshClientsState(() => fn);
+  const triggerRefresh = useCallback(() => {
+    setRefreshTrigger((prev) => prev + 1);
   }, []);
 
+  const value = useMemo(() => ({
+    isAddClientModalOpen,
+    setIsAddClientModalOpen,
+    refreshTrigger,
+    triggerRefresh,
+    profile,
+    profileLoading,
+    refreshProfile
+  }), [isAddClientModalOpen, refreshTrigger, profile, profileLoading, refreshProfile]);
+
   return (
-    <DashboardContext.Provider
-      value={{ 
-        isAddClientModalOpen, 
-        setIsAddClientModalOpen, 
-        refreshClients, 
-        setRefreshClients,
-        profile,
-        profileLoading,
-        refreshProfile
-      }}
-    >
+    <DashboardContext.Provider value={value}>
       {children}
     </DashboardContext.Provider>
   );

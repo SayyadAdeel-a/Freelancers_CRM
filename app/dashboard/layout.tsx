@@ -8,7 +8,7 @@ import { AddClientModal } from "@/components/dashboard/AddClientModal";
 import { DashboardProvider, useDashboardContext } from "@/components/dashboard/DashboardContext";
 
 function DashboardShell({ children }: { children: React.ReactNode }) {
-  const { isAddClientModalOpen, setIsAddClientModalOpen, refreshClients } =
+  const { isAddClientModalOpen, setIsAddClientModalOpen, triggerRefresh } =
     useDashboardContext();
 
   return (
@@ -17,7 +17,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 pb-16 lg:pb-0">
           <Navbar />
-          <main className="flex-1 overflow-y-auto p-6 lg:p-8">
+          <main className="flex-1 overflow-y-auto p-6 lg:p-8 bg-dots">
             <div className="max-w-7xl mx-auto">{children}</div>
           </main>
         </div>
@@ -27,7 +27,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       <AddClientModal
         isOpen={isAddClientModalOpen}
         onClose={() => setIsAddClientModalOpen(false)}
-        onSuccess={refreshClients}
+        onSuccess={triggerRefresh}
       />
     </>
   );

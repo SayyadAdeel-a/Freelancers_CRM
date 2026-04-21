@@ -17,13 +17,8 @@ export const metadata: Metadata = {
   description: APP_CONFIG.description,
   keywords: ["CRM", "freelancer", "client management", "productivity", "reminders"],
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: '/logo.svg',
+    apple: '/logo.svg',
   },
   manifest: '/site.webmanifest',
   appleWebApp: {
@@ -42,6 +37,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { PostHogProvider } from "@/components/providers/PostHogProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,12 +47,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-full flex flex-col font-sans antialiased">
-        <ThemeProvider>
-          <AuthProvider>
-            {children}
-            <Toaster position="top-center" richColors />
-          </AuthProvider>
-        </ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              {children}
+              <Toaster position="top-center" richColors />
+            </AuthProvider>
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

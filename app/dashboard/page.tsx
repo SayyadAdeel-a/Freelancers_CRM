@@ -17,7 +17,7 @@ import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 
 export default function DashboardPage() {
   const { user, loading: authLoading } = useUser();
-  const { profile, setIsAddClientModalOpen, setRefreshClients } = useDashboardContext();
+  const { profile, setIsAddClientModalOpen, refreshTrigger } = useDashboardContext();
   const searchParams = useSearchParams();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,12 +40,7 @@ export default function DashboardPage() {
     if (!authLoading && user) {
       fetchClients();
     }
-  }, [fetchClients, authLoading]);
-
-  // Register refreshClients with the context so AddClientModal can call it
-  useEffect(() => {
-    setRefreshClients(fetchClients);
-  }, [fetchClients, setRefreshClients]);
+  }, [fetchClients, authLoading, refreshTrigger]);
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") {

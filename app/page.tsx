@@ -239,21 +239,55 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-gray-100 bg-white">
-        <div className="max-w-7xl mx-auto px-4 text-center space-y-6">
-          <div className="flex items-center justify-center gap-2">
-            <Logo size="sm" />
-            <span className="font-bold tracking-tight">Nudge</span>
+      <footer className="py-20 border-t border-border/50 bg-background relative overflow-hidden">
+        <div className="absolute inset-0 bg-dots opacity-[0.02] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="space-y-6 text-center md:text-left max-w-sm">
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <Logo size="md" />
+                <span className="font-black text-2xl tracking-tighter uppercase">Nudge.</span>
+              </div>
+              <p className="text-sm text-muted-foreground font-bold leading-relaxed">
+                The minimalist CRM for solo freelancers who hate complexity. 
+                Focus on your craft, not your tools.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+              <div className="space-y-4">
+                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Product</h4>
+                <ul className="space-y-2 text-sm font-bold">
+                  <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a></li>
+                  <li><a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Account</h4>
+                <ul className="space-y-2 text-sm font-bold">
+                  <li><Link href="/login" className="text-muted-foreground hover:text-foreground transition-colors">Login</Link></li>
+                  <li><Link href="/signup" className="text-muted-foreground hover:text-foreground transition-colors">Sign Up</Link></li>
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Legal</h4>
+                <ul className="space-y-2 text-sm font-bold">
+                  <li><Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms</Link></li>
+                  <li><Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link></li>
+                  <li><Link href="/cookies" className="text-muted-foreground hover:text-foreground transition-colors">Cookies</Link></li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Built by solo freelancers, for solo freelancers. © 2024 Nudge.
-          </p>
-          <div className="flex justify-center gap-6 text-sm text-muted-foreground">
-            <Link href="/login" className="hover:text-[#FF4C00]">Login</Link>
-            <Link href="/signup" className="hover:text-[#FF4C00]">Signup</Link>
-            <Link href="/terms" className="hover:text-[#FF4C00]">Terms</Link>
-            <Link href="/privacy" className="hover:text-[#FF4C00]">Privacy</Link>
-            <Link href="/cookies" className="hover:text-[#FF4C00]">Cookies</Link>
+          
+          <div className="mt-20 pt-8 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
+              © 2026 Nudge CRM. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">System Operational</span>
+            </div>
           </div>
         </div>
       </footer>

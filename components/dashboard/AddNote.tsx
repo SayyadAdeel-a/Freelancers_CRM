@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { addNote } from "@/lib/firebase/firestore";
+import { useUser } from "@/hooks/use-user";
+import { createNote } from "@/lib/firebase/firestore";
 import { toast } from "sonner";
 import posthog from "posthog-js";
 
@@ -13,16 +14,17 @@ interface AddNoteProps {
 }
 
 export function AddNote({ clientId, onSuccess }: AddNoteProps) {
+  const { user } = useUser();
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!content.trim()) return;
+    if (!content.trim() || !user) return;
 
     setLoading(true);
     try {
-      await addNote(clientId, content);
+      await createNote(clientId, user.uid, content);
       posthog.capture("note_added", { client_id: clientId, note_length: content.length });
       setContent("");
       onSuccess();

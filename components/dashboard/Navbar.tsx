@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
@@ -21,9 +21,14 @@ export function Navbar() {
   const { user } = useUser();
   const { setIsAddClientModalOpen, profile } = useDashboardContext();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Use profile displayName if available
   const displayName = profile?.displayName || user?.email?.split("@")[0] || "User";
@@ -72,11 +77,12 @@ export function Navbar() {
           className="p-2 text-muted-foreground hover:bg-secondary rounded-full transition-colors"
           aria-label="Toggle theme"
         >
-          {theme === "dark" ? (
+          {mounted && (theme === "dark" ? (
             <Sun className="w-4 h-4" />
           ) : (
             <Moon className="w-4 h-4" />
-          )}
+          ))}
+          {!mounted && <div className="w-4 h-4" />}
         </button>
 
         {/* Add Client */}

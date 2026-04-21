@@ -70,7 +70,7 @@ export async function getClients(userId: string) {
   const querySnapshot = await getDocsFn(q);
   const clients = await Promise.all(
     querySnapshot.docs.map(async (docSnap) => {
-      const notesQ = query(collection(db, "notes"), where("clientId", "==", docSnap.id));
+      const notesQ = query(collection(db, "notes"), where("clientId", "==", docSnap.id), where("userId", "==", userId));
       const countSnapshot = await getCountFromServer(notesQ);
 
       const remindersQ = query(
@@ -105,25 +105,30 @@ export async function deleteClient(clientId: string) {
   return deleteDoc(doc(db, "clients", clientId));
 }
 
-export async function getClient(clientId: string) {
-  const q = query(collection(db, "clients"), where("__name__", "==", clientId));
+export async function getClient(clientId: string, userId: string) {
+  const q = query(collection(db, "clients"), where("__name__", "==", clientId), where("userId", "==", userId));
   const querySnapshot = await getDocsFn(q);
   if (querySnapshot.empty) return null;
   return { ...querySnapshot.docs[0].data(), id: querySnapshot.docs[0].id } as Client;
 }
 
-export async function getNotes(clientId: string) {
-  const q = query(collection(db, "notes"), where("clientId", "==", clientId), orderBy("createdAt", "desc"));
+export async function getNotes(clientId: string, userId: string) {
+  const q = query(
+    collection(db, "notes"), 
+    where("clientId", "==", clientId), 
+    where("userId", "==", userId),
+    orderBy("createdAt", "desc")
+  );
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map((d) => ({ ...d.data(), id: d.id })) as Note[];
 }
 
-export async function addNote(clientId: string, content: string) {
-  return addDoc(collection(db, "notes"), { clientId, content, createdAt: serverTimestamp() });
+export async function createNote(clientId: string, userId: string, content: string) {
+  return addDoc(collection(db, "notes"), { clientId, userId, content, createdAt: serverTimestamp() });
 }
 
-export async function getNotesByClient(clientId: string) {
-  return getNotes(clientId);
+export async function getNotesByClient(clientId: string, userId: string) {
+  return getNotes(clientId, userId);
 }
 
 export async function getReminders(clientId: string, userId: string) {
@@ -154,12 +159,9 @@ export async function deleteReminder(reminderId: string) {
 export async function getNotesThisWeek(userId: string) {
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const q = query(collection(db, "notes"), where("userId", "==", userId));
+  const q = query(collection(db, "notes"), where("userId", "==", userId), where("createdAt", ">=", oneWeekAgo));
   const querySnapshot = await getDocsFn(q);
-  return querySnapshot.docs.filter((d) => {
-    const ts = d.data().createdAt;
-    return ts?.toDate && ts.toDate() >= oneWeekAgo;
-  }).length;
+  return querySnapshot.size;
 }
 
 export async function getUpcomingReminders(userId: string) {
@@ -174,14 +176,6 @@ export async function getUpcomingReminders(userId: string) {
   );
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map((d) => ({ ...d.data(), id: d.id })) as Reminder[];
-}
-
-export async function createClient(userId: string, clientData: Omit<Client, "id" | "userId" | "createdAt">) {
-  return addDoc(collection(db, "clients"), { userId, ...clientData, createdAt: serverTimestamp() });
-}
-
-export async function createNote(clientId: string, userId: string, content: string) {
-  return addDoc(collection(db, "notes"), { clientId, userId, content, createdAt: serverTimestamp() });
 }
 
 export async function getUserProfile(uid: string) {

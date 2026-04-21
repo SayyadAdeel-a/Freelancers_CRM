@@ -129,11 +129,14 @@ export default function SettingsPage() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto pb-20">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-8">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-          <p className="text-muted-foreground mt-1">
-            Personalize your experience and manage your workspace.
+          <div className="flex items-center gap-3 mb-2">
+            <Logo size="lg" className="rounded-2xl" />
+            <h1 className="text-4xl font-black tracking-tighter">Settings</h1>
+          </div>
+          <p className="text-muted-foreground font-medium">
+            Personalize your workspace and manage your solo operation.
           </p>
         </div>
       </div>
@@ -141,20 +144,23 @@ export default function SettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Profile & Preferences */}
         <div className="lg:col-span-2 space-y-8">
-          <Card>
-            <div className="p-6 sm:p-8 space-y-8">
-              <div className="flex flex-col sm:flex-row items-center gap-6">
+          <Card className="overflow-hidden border-border/40 shadow-sm">
+            <div className="p-6 sm:p-10 space-y-10">
+              <div className="flex flex-col sm:flex-row items-center gap-8">
                 <div className="relative group">
-                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl font-bold text-primary">
+                  <div className="w-24 h-24 rounded-[2rem] bg-primary/5 border-2 border-primary/10 flex items-center justify-center text-4xl font-black text-primary shadow-inner">
                     {initials}
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-background border-2 border-primary flex items-center justify-center shadow-lg">
+                    <User className="w-4 h-4 text-primary" />
                   </div>
                 </div>
                 <div className="flex-1 text-center sm:text-left space-y-1">
-                  <h2 className="font-black text-3xl tracking-tight">
+                  <h2 className="font-black text-3xl tracking-tight leading-tight">
                     {displayName || user?.email?.split("@")[0]}
                   </h2>
-                  <p className="text-muted-foreground font-semibold flex items-center justify-center sm:justify-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <p className="text-muted-foreground font-bold flex items-center justify-center sm:justify-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                     {user?.email}
                   </p>
                 </div>
@@ -163,80 +169,82 @@ export default function SettingsPage() {
               <form onSubmit={handleUpdateProfile} className="space-y-8">
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <Label htmlFor="displayName">
-                      Display Name
+                    <Label htmlFor="displayName" className="text-xs font-black uppercase tracking-widest text-muted-foreground">
+                      Public Display Name
                     </Label>
                     <div className="relative group">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors" />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                       <Input
                         id="displayName"
                         value={displayName}
                         onChange={(e) => setDisplayName(e.target.value)}
                         placeholder="Your full name"
-                        className="pl-10"
+                        className="pl-11 h-12 bg-secondary/30 border-border/50 focus:border-primary/50 transition-all rounded-xl font-medium"
                       />
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <Label htmlFor="companyName">
-                      Company / Studio
+                    <Label htmlFor="companyName" className="text-xs font-black uppercase tracking-widest text-muted-foreground">
+                      Company / Brand Name
                     </Label>
                     <div className="relative group">
-                      <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/40 group-focus-within:text-primary transition-colors" />
+                      <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/30 group-focus-within:text-primary transition-colors" />
                       <Input
                         id="companyName"
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="Company name"
-                        className="pl-10"
+                        className="pl-11 h-12 bg-secondary/30 border-border/50 focus:border-primary/50 transition-all rounded-xl font-medium"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between p-4 rounded-xl bg-secondary/50 border border-border">
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Bell className="w-5 h-5 text-primary" />
+                <div className="p-1 rounded-2xl bg-secondary/20 border border-border/50">
+                  <div className="flex items-center justify-between p-5 rounded-xl bg-background shadow-sm border border-border/40">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center border border-primary/10">
+                        <Bell className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="space-y-0.5">
+                        <p className="font-black text-sm uppercase tracking-tight">Email Nudges</p>
+                        <p className="text-xs text-muted-foreground font-medium">Smart follow-up reminders via email</p>
+                      </div>
                     </div>
-                    <div className="space-y-0.5">
-                      <p className="text-sm font-semibold">Notification System</p>
-                      <p className="text-xs text-muted-foreground">Smart email nudges for client follow-ups</p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleToggleNotifications}
-                    disabled={savingPreferences}
-                    className={cn(
-                      "relative w-14 h-7 rounded-full transition-all duration-500 shadow-inner",
-                      profile?.notifications ? "bg-primary shadow-[0_0_15px_rgba(244,81,30,0.4)]" : "bg-muted",
-                      savingPreferences && "opacity-50 cursor-not-allowed"
-                    )}
-                  >
-                    <div
+                    <button
+                      type="button"
+                      onClick={handleToggleNotifications}
+                      disabled={savingPreferences}
                       className={cn(
-                        "absolute top-1 left-1 w-5 h-5 rounded-full bg-white shadow-xl transition-all duration-500 flex items-center justify-center",
-                        profile?.notifications ? "translate-x-7 rotate-0" : "translate-x-0 -rotate-90"
+                        "relative w-16 h-8 rounded-full transition-all duration-500",
+                        profile?.notifications ? "bg-primary" : "bg-muted",
+                        savingPreferences && "opacity-50 cursor-not-allowed"
                       )}
                     >
-                      <Zap className={cn("w-2.5 h-2.5", profile?.notifications ? "text-primary fill-primary" : "text-muted-foreground")} />
-                    </div>
-                  </button>
+                      <div
+                        className={cn(
+                          "absolute top-1 left-1 w-6 h-6 rounded-full bg-white shadow-md transition-all duration-500 flex items-center justify-center",
+                          profile?.notifications ? "translate-x-8" : "translate-x-0"
+                        )}
+                      >
+                        <Zap className={cn("w-3 h-3", profile?.notifications ? "text-primary fill-primary" : "text-muted-foreground")} />
+                      </div>
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="flex justify-end pt-4">
                   <Button
                     type="submit"
                     disabled={updatingProfile}
-                    className="shadow-brand"
+                    className="h-12 px-8 rounded-xl font-bold shadow-brand text-base"
                   >
                     {updatingProfile ? (
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                     ) : (
-                      <Save className="w-4 h-4 mr-2" />
+                      <Save className="w-5 h-5 mr-2" />
                     )}
-                    Save Changes
+                    Save Profile
                   </Button>
                 </div>
               </form>
@@ -245,64 +253,57 @@ export default function SettingsPage() {
         </div>
 
         {/* Right Column: Billing & Plan */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           <Card className={cn(
-            isPro && "border-primary/50"
+            "overflow-hidden border-border/40 shadow-sm",
+            isPro && "border-primary/30 ring-1 ring-primary/10"
           )}>
-            {isPro && (
-              <div className="absolute top-0 right-0 p-4">
-                <div className="bg-primary text-primary-foreground text-xs font-bold uppercase px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
-                  <ShieldCheck className="w-3 h-3" /> PRO
-                </div>
-              </div>
-            )}
-            
-            <div className="p-6 space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-sm font-bold flex items-center gap-2 text-foreground">
-                  <CreditCard className="w-4 h-4 text-muted-foreground" />
-                  Subscription Plan
+            <div className="p-6 sm:p-8 space-y-8">
+              <div className="space-y-6">
+                <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                  <CreditCard className="w-4 h-4" />
+                  Your Subscription
                 </h3>
 
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 border border-border">
+                <div className="space-y-8">
+                  <div className="flex items-center gap-5 p-5 rounded-2xl bg-secondary/30 border border-border/40">
                     <div className={cn(
-                      "w-12 h-12 rounded-xl flex items-center justify-center",
-                      isPro ? "bg-primary text-primary-foreground" : "bg-primary/10 text-primary"
+                      "w-14 h-14 rounded-2xl flex items-center justify-center border",
+                      isPro ? "bg-primary text-primary-foreground border-primary" : "bg-primary/5 text-primary border-primary/10"
                     )}>
-                      <Zap className="w-6 h-6" />
+                      <Zap className="w-7 h-7" />
                     </div>
                     <div className="space-y-0.5">
-                      <h4 className="font-semibold">
-                        {isPro ? 'Pro Plan' : 'Free Plan'}
+                      <h4 className="font-black text-xl tracking-tight">
+                        {isPro ? 'Pro Member' : 'Free Tier'}
                       </h4>
-                      <p className="text-xs text-muted-foreground">
-                        Current Membership
+                      <p className="text-xs text-muted-foreground font-bold">
+                        {isPro ? 'Unlimited Access' : 'Core Features'}
                       </p>
                     </div>
                   </div>
 
-                  <div className="space-y-3 p-4 rounded-xl bg-secondary/30 border border-border/50">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">Clients</span>
-                      <span className="font-semibold">
-                        {clientCount} <span className="text-muted-foreground mx-0.5">/</span> {isPro ? '∞' : FREE_PLAN_CLIENT_LIMIT}
+                  <div className="space-y-4 p-5 rounded-2xl bg-background border border-border/40 shadow-inner">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">Client Capacity</span>
+                      <span className="font-black text-sm">
+                        {clientCount} <span className="text-muted-foreground/50 mx-0.5">/</span> {isPro ? '∞' : FREE_PLAN_CLIENT_LIMIT}
                       </span>
                     </div>
-                    <div className="h-3 w-full bg-secondary rounded-full overflow-hidden p-0.5 border border-border/10">
+                    <div className="h-4 w-full bg-secondary rounded-full overflow-hidden p-1 border border-border/10">
                       <div 
                         className={cn(
                           "h-full transition-all duration-1000 ease-out rounded-full",
-                          (clientCount / FREE_PLAN_CLIENT_LIMIT) > 0.9 && !isPro ? "bg-destructive animate-pulse" : isPro ? "bg-indigo-500" : "bg-primary"
+                          (clientCount / FREE_PLAN_CLIENT_LIMIT) > 0.9 && !isPro ? "bg-destructive shadow-[0_0_8px_rgba(239,68,68,0.4)]" : isPro ? "bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.4)]" : "bg-primary shadow-[0_0_8px_rgba(244,81,30,0.4)]"
                         )}
                         style={{ width: `${isPro ? (clientCount > 0 ? 100 : 0) : Math.min((clientCount / FREE_PLAN_CLIENT_LIMIT) * 100, 100)}%` }}
                       />
                     </div>
                     {!isPro && (
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-[10px] text-muted-foreground font-bold text-center uppercase tracking-wider">
                         {clientCount >= FREE_PLAN_CLIENT_LIMIT 
-                          ? "Limit reached. Upgrade to add more clients."
-                          : `${FREE_PLAN_CLIENT_LIMIT - clientCount} slots remaining in your free plan.`}
+                          ? "Capacity Reached"
+                          : `${FREE_PLAN_CLIENT_LIMIT - clientCount} spots remaining`}
                       </p>
                     )}
                   </div>
@@ -310,11 +311,11 @@ export default function SettingsPage() {
                   {!isPro && (
                     <Button 
                       type="button"
-                      className="w-full shadow-brand"
+                      className="w-full h-14 rounded-2xl font-black shadow-brand text-lg group"
                       onClick={() => router.push("/dashboard?upgrade=true")}
                     >
-                      <Zap className="w-4 h-4 mr-2" />
-                      Upgrade Plan
+                      <Zap className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                      Upgrade to Pro
                     </Button>
                   )}
                 </div>
@@ -323,21 +324,21 @@ export default function SettingsPage() {
           </Card>
 
           {/* Danger Zone / Logout */}
-          <Card className="border-destructive/20 bg-destructive/5">
-            <div className="p-6 space-y-4">
+          <div className="p-1 rounded-2xl bg-destructive/5 border border-destructive/10">
+            <div className="p-6 space-y-4 bg-background rounded-xl border border-destructive/20 shadow-sm">
               <div className="space-y-1">
-                <h4 className="text-sm font-semibold text-destructive flex items-center gap-2">
+                <h4 className="text-xs font-black uppercase tracking-widest text-destructive flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4" />
-                  Danger Zone
+                  Account Session
                 </h4>
-                <p className="text-xs text-muted-foreground">Sign out of your account on this device.</p>
+                <p className="text-xs text-muted-foreground font-medium">Securely sign out of your dashboard.</p>
               </div>
               <Button
                 type="button"
                 variant="destructive"
                 onClick={handleLogout}
                 disabled={loggingOut}
-                className="w-full"
+                className="w-full h-11 rounded-xl font-bold"
               >
                 {loggingOut ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -347,7 +348,7 @@ export default function SettingsPage() {
                 Sign Out
               </Button>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
     </div>

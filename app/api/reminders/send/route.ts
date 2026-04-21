@@ -15,7 +15,11 @@ export async function POST(req: NextRequest) {
     nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
   });
   // 1. Verify QStash Signature
-  const signature = req.headers.get("upstash-signature")!;
+  const signature = req.headers.get("upstash-signature");
+  if (!signature) {
+    return new NextResponse("Missing signature", { status: 401 });
+  }
+
   const body = await req.text();
   
   const isValid = await receiver.verify({
@@ -24,6 +28,7 @@ export async function POST(req: NextRequest) {
   });
 
   if (!isValid) {
+    console.error("Invalid QStash signature");
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
