@@ -67,11 +67,11 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-sm transition-all group relative border",
                 isActive 
-                  ? "bg-foreground text-background border-foreground shadow-brand" 
-                  : "text-muted-foreground border-transparent hover:bg-accent hover:text-foreground hover:border-border"
+                  ? "bg-accent text-foreground border-border" 
+                  : "text-muted-foreground border-transparent hover:bg-accent/50 hover:text-foreground hover:border-border/50"
               )}
             >
-              <item.icon className={cn("w-5 h-5 shrink-0 transition-colors", isActive ? "text-background" : "group-hover:text-primary")} />
+              <item.icon className={cn("w-5 h-5 shrink-0 transition-colors", isActive ? "text-foreground" : "group-hover:text-primary")} />
               {!isCollapsed && <span className="font-medium tracking-wide uppercase text-xs">{item.label}</span>}
               {isActive && (
                 <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary" />

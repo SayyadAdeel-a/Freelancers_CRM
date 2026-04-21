@@ -26,15 +26,15 @@ interface ClientCardProps {
 export function ClientCard({ client, onDelete }: ClientCardProps) {
   return (
     <Link href={`/dashboard/client/${client.id}`} className="block group">
-      <Card className="hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] overflow-hidden relative group-hover:translate-y-[-2px]">
-        <CardHeader className="p-5 flex flex-row items-start justify-between space-y-0">
+      <Card className="hover:border-foreground transition-all duration-300 overflow-hidden relative group-hover:translate-y-[-2px] rounded-sm bg-card border-border">
+        <CardHeader className="p-5 flex flex-row items-start justify-between space-y-0 border-b border-border/50">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-brand flex items-center justify-center font-bold text-lg text-white shadow-brand">
+            <div className="w-12 h-12 rounded-sm bg-foreground flex items-center justify-center font-bold text-lg text-background font-mono border border-border">
               {client.name[0].toUpperCase()}
             </div>
             <div>
-              <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{client.name}</h3>
-              <div className="flex items-center text-sm text-muted-foreground mt-1">
+              <h3 className="font-bold text-lg group-hover:text-primary transition-colors font-sans tracking-tight">{client.name}</h3>
+              <div className="flex items-center text-sm text-muted-foreground mt-1 font-mono uppercase text-[11px] tracking-wider">
                 <Building className="w-3.5 h-3.5 mr-1.5" />
                 {client.company}
               </div>
@@ -44,12 +44,12 @@ export function ClientCard({ client, onDelete }: ClientCardProps) {
           <DropdownMenu>
             <DropdownMenuTrigger
               onClick={(e: React.MouseEvent) => e.preventDefault()}
-              className="p-1 hover:bg-secondary rounded-md transition-colors cursor-pointer"
+              className="p-1 hover:bg-accent rounded-sm transition-colors cursor-pointer border border-transparent hover:border-border"
             >
               <MoreVertical className="w-5 h-5 text-muted-foreground" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem className="text-destructive" onClick={(e) => {
+            <DropdownMenuContent align="end" className="rounded-sm font-mono text-xs uppercase tracking-wider">
+              <DropdownMenuItem className="text-destructive focus:text-destructive focus:bg-destructive/10 cursor-pointer" onClick={(e) => {
                 e.preventDefault();
                 onDelete(client.id);
               }}>
@@ -59,30 +59,30 @@ export function ClientCard({ client, onDelete }: ClientCardProps) {
           </DropdownMenu>
         </CardHeader>
         
-        <CardContent className="px-5 pb-5 pt-0">
-          <div className="grid grid-cols-1 gap-3 text-sm">
+        <CardContent className="px-5 pb-5 pt-5">
+          <div className="grid grid-cols-1 gap-3 text-sm font-mono text-xs">
             <div className="flex items-center text-muted-foreground">
-              <Mail className="w-4 h-4 mr-2" />
+              <Mail className="w-4 h-4 mr-3" />
               {client.email}
             </div>
             <div className="flex items-center text-muted-foreground">
-              <Calendar className="w-4 h-4 mr-2" />
+              <Calendar className="w-4 h-4 mr-3" />
               Added {formatDate(client.createdAt)}
             </div>
             {client.nextReminder && (
-              <div className="flex items-center text-primary font-medium">
-                <Calendar className="w-4 h-4 mr-2" />
+              <div className="flex items-center text-primary font-bold">
+                <Calendar className="w-4 h-4 mr-3" />
                 Next Nudge: {formatDate(client.nextReminder.remindAt)}
               </div>
             )}
           </div>
           
-          <div className="mt-5 pt-4 border-t border-border flex items-center justify-between text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <div className="mt-5 pt-4 border-t border-border flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-muted-foreground font-mono">
             <div className="flex items-center gap-1.5">
               <MessageSquare className="w-3.5 h-3.5" />
               {client.noteCount || 0} Notes
             </div>
-            <div className="px-2 py-0.5 rounded-full bg-secondary text-foreground">
+            <div className="px-2 py-1 rounded-sm bg-accent text-foreground border border-border">
               Active
             </div>
           </div>

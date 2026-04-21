@@ -89,7 +89,7 @@ export function Navbar() {
         {/* Add Client */}
         <Button
           size="sm"
-          className="hidden sm:flex items-center gap-2 bg-foreground text-background shadow-brand rounded-sm hover:bg-foreground/90 transition-transform font-mono uppercase text-xs tracking-wider"
+          className="hidden sm:flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-transform font-mono uppercase text-xs tracking-wider border border-transparent"
           onClick={() => setIsAddClientModalOpen(true)}
         >
           <Plus className="w-4 h-4" />

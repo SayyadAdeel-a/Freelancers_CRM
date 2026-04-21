@@ -57,11 +57,11 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px] glass border-none overflow-hidden p-0 shadow-2xl animate-in zoom-in-95 duration-200">
         <form onSubmit={handleSubmit}>
-          <div className="bg-gradient-brand h-1.5 w-full" />
+          <div className="bg-primary h-1 w-full" />
           <div className="p-6">
             <DialogHeader>
-              <DialogTitle className="text-3xl font-black tracking-tight text-gradient">Add New Client</DialogTitle>
-              <DialogDescription className="mt-2 text-muted-foreground/80 font-medium">
+              <DialogTitle className="text-3xl font-bold tracking-tight text-foreground font-sans">Add New Client</DialogTitle>
+              <DialogDescription className="mt-2 text-muted-foreground font-mono uppercase tracking-wider text-xs">
                 Enter the details of your new client. You can add notes and reminders later.
               </DialogDescription>
             </DialogHeader>
@@ -102,10 +102,10 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
               </div>
             </div>
             <DialogFooter className="gap-3 sm:gap-0 pt-2">
-              <Button type="button" variant="ghost" onClick={onClose} disabled={loading} className="rounded-xl font-bold h-11 px-6">
+              <Button type="button" variant="ghost" onClick={onClose} disabled={loading} className="rounded-sm font-mono tracking-wider h-11 px-6 uppercase text-xs">
                 Cancel
               </Button>
-              <Button type="submit" disabled={loading} className="bg-gradient-brand text-white shadow-brand rounded-xl font-black h-11 px-8 hover:scale-105 active:scale-95 transition-all">
+              <Button type="submit" disabled={loading} className="bg-primary text-primary-foreground rounded-sm font-mono tracking-wider uppercase text-xs h-11 px-8 hover:bg-primary/90 active:scale-95 transition-all">
                 {loading ? "Adding..." : "Add Client"}
               </Button>
             </DialogFooter>
