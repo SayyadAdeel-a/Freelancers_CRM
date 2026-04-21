@@ -65,10 +65,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left brand panel — full height, hidden on mobile */}
-      <div className="hidden lg:flex flex-col justify-between bg-[#1A1A1A] text-white p-12 relative overflow-hidden">
-        {/* Decorative orb */}
-        <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-[#FF4C00] opacity-20 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-[#FF4C00] opacity-10 blur-2xl pointer-events-none" />
+      <div className="hidden lg:flex flex-col justify-between bg-[#0A0A0A] text-white p-12 relative overflow-hidden border-r border-white/10">
+        {/* Grid texture */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+        {/* Red accent line top */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-primary" />
 
         {/* Logo */}
         <div className="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-500">
@@ -78,46 +79,46 @@ export default function LoginPage() {
 
         {/* Tagline */}
         <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-600" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
-          <h1 className="text-4xl font-bold leading-tight">
-            Your clients,<br />
-            <span className="text-[#FF4C00]">organized.</span>
-          </h1>
-          <p className="text-white/60 text-base leading-relaxed max-w-sm">
-            The dead-simple CRM for freelancers who hate complexity. No pipelines, no bloat — just clients and notes.
-          </p>
+            <h1 className="text-5xl font-bold leading-tight tracking-tight font-sans">
+              Your clients,<br />
+              <span className="text-primary">organized.</span>
+            </h1>
+            <p className="text-white/50 text-sm leading-relaxed max-w-sm font-mono uppercase tracking-wider">
+              The dead-simple CRM for freelancers who hate complexity. No pipelines. Just clients and notes.
+            </p>
 
-          {/* Feature list */}
-          <ul className="space-y-4 pt-2">
-            {features.map((feat, i) => (
-              <li
-                key={feat}
-                className="flex items-center gap-3 text-sm text-white/80 animate-in fade-in slide-in-from-left-2"
-                style={{ animationDelay: `${250 + i * 80}ms`, animationFillMode: "both" }}
-              >
-                <div className="w-5 h-5 rounded-full bg-[#FF4C00]/20 border border-[#FF4C00]/40 flex items-center justify-center shrink-0">
-                  <Check className="w-3 h-3 text-[#FF4C00]" />
-                </div>
-                {feat}
-              </li>
-            ))}
-          </ul>
+            {/* Feature list */}
+            <ul className="space-y-3 pt-2">
+              {features.map((feat, i) => (
+                <li
+                  key={feat}
+                  className="flex items-center gap-3 text-sm text-white/70 animate-in fade-in slide-in-from-left-2 font-mono"
+                  style={{ animationDelay: `${250 + i * 80}ms`, animationFillMode: "both" }}
+                >
+                  <div className="w-5 h-5 rounded-sm bg-primary/20 border border-primary/40 flex items-center justify-center shrink-0">
+                    <Check className="w-3 h-3 text-primary" />
+                  </div>
+                  {feat}
+                </li>
+              ))}
+            </ul>
         </div>
 
         {/* Testimonial */}
         <div
-          className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-sm animate-in fade-in slide-in-from-left-4"
+          className="bg-white/5 border border-white/10 rounded-sm p-5 animate-in fade-in slide-in-from-left-4"
           style={{ animationDelay: "520ms", animationFillMode: "both" }}
         >
-          <p className="text-white/70 text-sm italic leading-relaxed">
+          <p className="text-white/70 text-sm leading-relaxed font-mono text-xs">
             &ldquo;Finally, a CRM that doesn&rsquo;t make me feel like I need a manual to send an email.&rdquo;
           </p>
-          <div className="flex items-center gap-3 mt-3">
-            <div className="w-7 h-7 rounded-full bg-[#FF4C00]/30 flex items-center justify-center text-xs font-bold text-white">
+          <div className="flex items-center gap-3 mt-4">
+            <div className="w-7 h-7 rounded-sm bg-primary/30 border border-primary/40 flex items-center justify-center text-xs font-bold text-white font-mono">
               S
             </div>
             <div>
-              <p className="text-white text-xs font-semibold">Sarah Chen</p>
-              <p className="text-white/40 text-[11px]">Freelance Brand Designer</p>
+              <p className="text-white text-xs font-bold tracking-wide">Sarah Chen</p>
+              <p className="text-white/40 text-[10px] font-mono uppercase tracking-wider">Freelance Brand Designer</p>
             </div>
           </div>
         </div>
@@ -159,10 +160,10 @@ export default function LoginPage() {
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
                   required
-                  className="w-full px-4 py-2.5 text-sm bg-card border border-border rounded-xl outline-none transition-all duration-200 placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                  className="w-full px-4 py-3 text-sm bg-card border border-border rounded-sm outline-none transition-all duration-200 placeholder:text-muted-foreground/50 focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono"
                 />
                 {focusedField === "email" && email && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-green-500 animate-in fade-in" />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-sm bg-primary animate-in fade-in" />
                 )}
               </div>
             </div>
@@ -191,13 +192,13 @@ export default function LoginPage() {
                 onFocus={() => setFocusedField("password")}
                 onBlur={() => setFocusedField(null)}
                 required
-                className="w-full px-4 py-2.5 text-sm bg-card border border-border rounded-xl outline-none transition-all duration-200 placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                className="w-full px-4 py-3 text-sm bg-card border border-border rounded-sm outline-none transition-all duration-200 placeholder:text-muted-foreground/50 focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono"
               />
             </div>
 
             {error && (
               <p
-                className="text-sm text-destructive bg-destructive/5 border border-destructive/20 rounded-lg px-4 py-2.5 animate-in fade-in"
+                className="text-sm text-destructive bg-destructive/5 border border-destructive/20 rounded-sm px-4 py-2.5 animate-in fade-in font-mono text-xs"
                 style={{ animationDelay: "200ms" }}
               >
                 {error}
@@ -206,7 +207,7 @@ export default function LoginPage() {
 
             <Button
               type="submit"
-              className="w-full shadow-brand font-semibold h-11 rounded-xl text-sm animate-in fade-in slide-in-from-bottom-2"
+              className="w-full font-mono tracking-widest uppercase h-11 rounded-sm text-xs animate-in fade-in slide-in-from-bottom-2"
               style={{ animationDelay: "220ms", animationFillMode: "both" }}
               disabled={loading}
             >
@@ -242,7 +243,7 @@ export default function LoginPage() {
           {/* Google */}
           <Button
             variant="outline"
-            className="w-full h-11 rounded-xl text-sm font-medium transition-all hover:bg-secondary animate-in fade-in slide-in-from-bottom-2"
+            className="w-full h-11 rounded-sm text-xs font-mono tracking-wider uppercase transition-all hover:bg-accent animate-in fade-in slide-in-from-bottom-2"
             style={{ animationDelay: "340ms", animationFillMode: "both" }}
             onClick={handleGoogleLogin}
             disabled={loading}

@@ -94,12 +94,12 @@ export default function DashboardPage() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight text-gradient">Your Clients</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground font-sans">Your Clients</h1>
+          <p className="text-muted-foreground mt-1 font-mono text-xs uppercase tracking-wider">
             Manage your active projects and relationships.
           </p>
         </div>
-        <Button onClick={handleAddClick} className="bg-gradient-brand hover:opacity-90 transition-all shadow-brand w-full sm:w-auto">
+        <Button onClick={handleAddClick} className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all w-full sm:w-auto font-mono uppercase tracking-wider text-xs rounded-sm">
           <Plus className="w-4 h-4 mr-2" />
           Add Client
         </Button>
