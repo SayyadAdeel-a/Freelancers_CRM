@@ -55,3 +55,6 @@ Doc/
 /graphify-out/
 /.obsidian/
 /docs/
+
+# Sentry Config File
+.env.sentry-build-plugin
