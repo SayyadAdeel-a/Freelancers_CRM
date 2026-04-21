@@ -28,6 +28,7 @@ import { useUser } from "@/hooks/use-user";
 import { scheduleReminderAction } from "@/app/actions/reminders";
 import { addReminder } from "@/lib/firebase/firestore";
 import { toast } from "sonner";
+import posthog from "posthog-js";
 
 export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSuccess }: SetReminderModalProps) {
   const { user } = useUser();
@@ -55,6 +56,7 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
       });
 
       if (result.success) {
+        posthog.capture("reminder_set", { client_id: clientId });
         toast.success("Reminder scheduled successfully!");
         onSuccess();
         setDate(undefined);
@@ -64,6 +66,7 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
         toast.error(`Failed to schedule email: ${result.error}`);
       }
     } catch (error: any) {
+      posthog.captureException(error);
       console.error("Error adding reminder:", error);
       toast.error(`Error: ${error.message}`);
     } finally {

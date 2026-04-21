@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Check, Zap, Star, Infinity, Mail } from "lucide-react";
+import { toast } from "sonner";
+import posthog from "posthog-js";
 
 interface UpgradeModalProps {
   isOpen: boolean;
@@ -89,6 +91,7 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
             <Button
               className="w-full shadow-brand font-bold h-12 rounded-xl text-base bg-[#FF4C00] hover:bg-[#E04400]"
               onClick={() => {
+                posthog.capture("upgrade_cta_clicked", { plan: "pro", price_monthly: 9 });
                 toast.success("Pro coming soon!");
                 onClose();
               }}
@@ -110,5 +113,3 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
   );
 }
 
-// Need toast for the CTA
-import { toast } from "sonner";

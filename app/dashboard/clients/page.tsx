@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { ClientCardSkeleton } from "@/components/dashboard/Skeletons";
 import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
+import posthog from "posthog-js";
 
 export default function ClientsPage() {
   const { user, loading: authLoading } = useUser();
@@ -59,6 +60,7 @@ export default function ClientsPage() {
 
   const handleAddClick = () => {
     if (plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT) {
+      posthog.capture("upgrade_modal_viewed", { trigger: "client_limit", client_count: clients.length });
       setIsUpgradeModalOpen(true);
     } else {
       setIsAddModalOpen(true);
@@ -122,7 +124,12 @@ export default function ClientsPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              if (e.target.value.length >= 2) {
+                posthog.capture("client_search_performed", { query_length: e.target.value.length });
+              }
+            }}
             placeholder="Search clients…"
             className="w-full pl-9 pr-4 py-2.5 text-sm bg-secondary/50 rounded-xl border border-border outline-none focus:ring-2 focus:ring-primary/20 transition-all"
           />

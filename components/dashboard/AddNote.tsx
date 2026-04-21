@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { addNote } from "@/lib/firebase/firestore";
 import { toast } from "sonner";
+import posthog from "posthog-js";
 
 interface AddNoteProps {
   clientId: string;
@@ -22,10 +23,12 @@ export function AddNote({ clientId, onSuccess }: AddNoteProps) {
     setLoading(true);
     try {
       await addNote(clientId, content);
+      posthog.capture("note_added", { client_id: clientId, note_length: content.length });
       setContent("");
       onSuccess();
       toast.success("Note added successfully!");
     } catch (error) {
+      posthog.captureException(error);
       console.error("Error adding note:", error);
       toast.error("Failed to add note. Please try again.");
     } finally {

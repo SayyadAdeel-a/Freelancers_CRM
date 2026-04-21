@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { addClient } from "@/lib/firebase/firestore";
 import { useUser } from "@/hooks/use-user";
 import { toast } from "sonner";
+import posthog from "posthog-js";
 
 interface AddClientModalProps {
   isOpen: boolean;
@@ -38,11 +39,13 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     setLoading(true);
     try {
       await addClient(user.uid, formData);
+      posthog.capture("client_added", { has_company: !!formData.company });
       onSuccess();
       setFormData({ name: "", email: "", company: "" });
       onClose();
       toast.success("Client added successfully!");
     } catch (error) {
+      posthog.captureException(error);
       console.error("Error adding client:", error);
       toast.error("Failed to add client. Please try again.");
     } finally {

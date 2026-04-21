@@ -22,6 +22,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
+import posthog from "posthog-js";
 
 export default function ClientPage() {
   const { id } = useParams();
@@ -66,9 +67,11 @@ export default function ClientPage() {
     if (confirm("Are you sure you want to delete this client and all their data?")) {
       try {
         await deleteClient(id as string);
+        posthog.capture("client_deleted", { client_id: id });
         toast.success("Client deleted successfully");
         router.push("/dashboard");
       } catch (error) {
+        posthog.captureException(error);
         console.error("Error deleting client:", error);
         toast.error("Failed to delete client");
       }

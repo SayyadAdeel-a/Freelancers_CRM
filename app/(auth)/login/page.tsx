@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
+import posthog from "posthog-js";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -24,9 +25,12 @@ export default function LoginPage() {
     setError(null);
     try {
       await signInWithEmailAndPassword(email, password);
+      posthog.identify(email, { email });
+      posthog.capture("user_logged_in", { method: "email" });
       toast.success("Welcome back!");
       router.push("/dashboard");
     } catch (err: any) {
+      posthog.captureException(err);
       setError(err.message);
       toast.error("Invalid credentials. Please try again.");
     } finally {
@@ -39,9 +43,11 @@ export default function LoginPage() {
     setError(null);
     try {
       await signInWithGoogle();
+      posthog.capture("user_logged_in_google", { method: "google" });
       toast.success("Signed in with Google!");
       router.push("/dashboard");
     } catch (err: any) {
+      posthog.captureException(err);
       setError(err.message);
       toast.error("Google sign in failed.");
     } finally {

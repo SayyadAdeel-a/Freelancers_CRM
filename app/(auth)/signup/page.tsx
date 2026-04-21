@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
+import posthog from "posthog-js";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -23,9 +24,12 @@ export default function SignupPage() {
     setError(null);
     try {
       await createUserWithEmailAndPassword(email, password);
+      posthog.identify(email, { email });
+      posthog.capture("user_signed_up", { method: "email" });
       toast.success("Account created! Welcome to Nudge.");
       router.push("/dashboard");
     } catch (err: any) {
+      posthog.captureException(err);
       setError(err.message);
       toast.error("Signup failed. Please check your details.");
     } finally {
@@ -38,9 +42,11 @@ export default function SignupPage() {
     setError(null);
     try {
       await signInWithGoogle();
+      posthog.capture("user_signed_up_google", { method: "google" });
       toast.success("Signed in with Google!");
       router.push("/dashboard");
     } catch (err: any) {
+      posthog.captureException(err);
       setError(err.message);
       toast.error("Google sign in failed.");
     } finally {
