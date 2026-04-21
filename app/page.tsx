@@ -9,6 +9,7 @@ import {
   Zap, 
   X
 } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 
 export default function LandingPage() {
   return (
@@ -17,9 +18,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-[#FF4C00] rounded-xl flex items-center justify-center shadow-lg shadow-[#FF4C00]/20">
-              <span className="text-white font-bold text-2xl italic">N</span>
-            </div>
+            <Logo size="md" />
             <span className="font-bold text-2xl tracking-tight">Nudge</span>
           </div>
           
@@ -57,7 +56,7 @@ export default function LandingPage() {
                 Start for free <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <p className="text-sm text-muted-foreground">No credit card required • Up to 5 clients</p>
+            <p className="text-sm text-muted-foreground">No credit card required • Up to 25 clients</p>
           </div>
         </div>
       </section>
@@ -140,7 +139,7 @@ export default function LandingPage() {
                 <ul className="space-y-4">
                   <li className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-500" />
-                    <span>Up to 5 clients</span>
+                    <span>Up to 25 clients</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-500" />
@@ -218,7 +217,7 @@ export default function LandingPage() {
                 a: "Absolutely. Your data is stored with Firebase (Google Cloud) and protected with industry-standard encryption. We never sell or share your information."
               },
               {
-                q: "What happens when I hit 5 clients on the Free plan?",
+                q: "What happens when I hit 25 clients on the Free plan?",
                 a: "You'll need to upgrade to Pro to add more clients. Your existing clients and data remain accessible—you just can't add new ones until you upgrade."
               },
               {
@@ -243,9 +242,7 @@ export default function LandingPage() {
       <footer className="py-12 border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center space-y-6">
           <div className="flex items-center justify-center gap-2">
-            <div className="w-8 h-8 bg-[#FF4C00] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold italic">N</span>
-            </div>
+            <Logo size="sm" />
             <span className="font-bold tracking-tight">Nudge</span>
           </div>
           <p className="text-sm text-muted-foreground">

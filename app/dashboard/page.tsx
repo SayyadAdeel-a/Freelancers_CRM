@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useUser } from "@/hooks/use-user";
-import { useProfile } from "@/hooks/use-profile";
 import { useSearchParams } from "next/navigation";
 import { getClients, deleteClient, Client } from "@/lib/firebase/firestore";
+import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 import { ClientCard } from "@/components/dashboard/ClientCard";
 import { EmptyState } from "@/components/dashboard/EmptyState";
 import { UpgradeModal } from "@/components/dashboard/UpgradeModal";
@@ -17,13 +17,12 @@ import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 
 export default function DashboardPage() {
   const { user, loading: authLoading } = useUser();
-  const { profile } = useProfile();
+  const { profile, setIsAddClientModalOpen, setRefreshClients } = useDashboardContext();
   const searchParams = useSearchParams();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const plan = profile?.plan || "free";
-  const { setIsAddClientModalOpen, setRefreshClients } = useDashboardContext();
 
   const fetchClients = useCallback(async () => {
     if (!user) return;
@@ -55,7 +54,7 @@ export default function DashboardPage() {
   }, [searchParams]);
 
   const handleAddClick = () => {
-    if (plan === "free" && clients.length >= 25) {
+    if (plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT) {
       setIsUpgradeModalOpen(true);
     } else {
       setIsAddClientModalOpen(true);

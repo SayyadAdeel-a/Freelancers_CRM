@@ -14,7 +14,7 @@ const items = [
   { icon: LayoutGrid, label: "Home", href: "/dashboard" },
   { icon: Users, label: "Clients", href: "/dashboard/clients" },
   { icon: FileText, label: "Notes", href: "/dashboard/notes" },
-  { icon: Settings, label: "Settings", href: "/settings" },
+  { icon: Settings, label: "Settings", href: "/dashboard/settings" },
 ];
 
 export function MobileNav() {

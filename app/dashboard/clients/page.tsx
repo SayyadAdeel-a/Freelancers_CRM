@@ -12,15 +12,18 @@ import { Plus, Search, Users } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { ClientCardSkeleton } from "@/components/dashboard/Skeletons";
+import { useDashboardContext } from "@/components/dashboard/DashboardContext";
+import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 
 export default function ClientsPage() {
   const { user, loading: authLoading } = useUser();
+  const { profile } = useDashboardContext();
   const [clients, setClients] = useState<Client[]>([]);
   const [filteredClients, setFilteredClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
-  const [plan] = useState("free");
+  const plan = profile?.plan || "free";
   const [search, setSearch] = useState("");
 
   const fetchClients = useCallback(async () => {
@@ -55,7 +58,7 @@ export default function ClientsPage() {
   }, [search, clients]);
 
   const handleAddClick = () => {
-    if (plan === "free" && clients.length >= 5) {
+    if (plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT) {
       setIsUpgradeModalOpen(true);
     } else {
       setIsAddModalOpen(true);

@@ -10,20 +10,35 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+import { APP_CONFIG } from "@/lib/constants";
+
 export const metadata: Metadata = {
-  title: "Nudge CRM | Freelancer Client Management",
-  description: "The minimalist CRM for freelancers. Manage clients, track notes, and never miss a follow-up with smart reminders.",
+  title: `${APP_CONFIG.name} | Freelancer Client Management`,
+  description: APP_CONFIG.description,
   keywords: ["CRM", "freelancer", "client management", "productivity", "reminders"],
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: APP_CONFIG.name,
+  },
   openGraph: {
-    title: "Nudge CRM",
-    description: "Freelancer CRM - Manage clients without the 747 cockpit",
+    title: APP_CONFIG.name,
+    description: APP_CONFIG.description,
     type: "website",
     url: "https://freelancers-crm-one.vercel.app/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nudge CRM",
-    description: "The minimalist CRM for freelancers.",
+    title: APP_CONFIG.name,
+    description: APP_CONFIG.description,
   }
 };
 

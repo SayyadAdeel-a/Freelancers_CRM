@@ -15,24 +15,24 @@ import { Button } from "@/components/ui/button";
 import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/Logo";
 
 export function Navbar() {
   const { user } = useUser();
-  const { setIsAddClientModalOpen } = useDashboardContext();
+  const { setIsAddClientModalOpen, profile } = useDashboardContext();
   const { theme, setTheme } = useTheme();
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const pathname = usePathname();
 
-  // Derive client count from user for display
-  const displayName = user?.email?.split("@")[0] || "User";
+  // Use profile displayName if available
+  const displayName = profile?.displayName || user?.email?.split("@")[0] || "User";
 
   return (
     <header className="h-16 border-b border-border bg-card flex items-center justify-between px-4 sm:px-6 sticky top-0 z-10">
       <div className="flex lg:hidden items-center gap-2 mr-4">
-        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
-          <span className="text-white font-bold text-lg italic">N</span>
-        </div>
+        <Logo size="sm" />
+        <span className="font-bold text-xl tracking-tight">Nudge</span>
       </div>
 
       {/* Search */}
@@ -101,7 +101,7 @@ export function Navbar() {
         <div className="flex items-center gap-2.5">
           <div className="text-right hidden sm:block">
             <p className="text-xs font-semibold leading-none">{displayName}</p>
-            <p className="text-[10px] text-muted-foreground mt-0.5">Free Plan</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5 capitalize">{profile?.plan || 'Free'} Plan</p>
           </div>
           <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
             {user?.email?.[0].toUpperCase() || "U"}

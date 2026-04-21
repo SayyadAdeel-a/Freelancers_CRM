@@ -20,7 +20,7 @@ const features = [
   {
     icon: Infinity,
     label: "Unlimited Clients",
-    desc: "No more 5-client ceiling. Grow as big as you want.",
+    desc: "No more 25-client ceiling. Grow as big as you want.",
   },
   {
     icon: Mail,

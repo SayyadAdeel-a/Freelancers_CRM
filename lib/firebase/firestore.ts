@@ -43,6 +43,8 @@ export interface UserProfile {
   uid: string;
   plan: "free" | "pro";
   notifications: boolean;
+  displayName?: string;
+  companyName?: string;
   createdAt: any;
 }
 

@@ -17,11 +17,13 @@ import { logout } from "@/lib/firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { Logo } from "@/components/ui/Logo";
+
 const menuItems = [
   { icon: LayoutGrid, label: "Overview", href: "/dashboard" },
   { icon: Users, label: "Clients", href: "/dashboard/clients" },
   { icon: FileText, label: "Notes", href: "/dashboard/notes" },
-  { icon: Settings, label: "Settings", href: "/settings" },
+  { icon: Settings, label: "Settings", href: "/dashboard/settings" },
 ];
 
 export function Sidebar() {
@@ -44,15 +46,13 @@ export function Sidebar() {
       <div className="p-4 flex items-center justify-between">
         {!isCollapsed && (
           <div className="flex items-center gap-2 px-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl italic">N</span>
-            </div>
+            <Logo size="sm" />
             <span className="font-bold text-xl tracking-tight">Nudge</span>
           </div>
         )}
         {isCollapsed && (
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center mx-auto">
-            <span className="text-white font-bold text-xl italic">N</span>
+          <div className="mx-auto">
+            <Logo size="sm" />
           </div>
         )}
       </div>

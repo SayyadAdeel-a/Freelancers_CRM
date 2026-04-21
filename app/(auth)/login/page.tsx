@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -64,9 +65,7 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-500">
-          <div className="w-10 h-10 bg-[#FF4C00] rounded-xl flex items-center justify-center shadow-lg shadow-[#FF4C00]/30">
-            <span className="text-white font-bold text-2xl italic">N</span>
-          </div>
+          <Logo size="md" />
           <span className="font-bold text-2xl tracking-tight">Nudge</span>
         </div>
 
@@ -122,9 +121,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center justify-center gap-2.5 mb-4">
-            <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-xl italic">N</span>
-            </div>
+            <Logo size="md" />
             <span className="font-bold text-2xl tracking-tight">Nudge</span>
           </div>
 
