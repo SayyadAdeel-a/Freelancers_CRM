@@ -51,63 +51,72 @@
 
 :root {
   --background: #F9F9F9;
-  --foreground: #262626;
+  --foreground: #171717;
   --card: #FFFFFF;
-  --card-foreground: #262626;
+  --card-foreground: #171717;
   --popover: #FFFFFF;
-  --popover-foreground: #262626;
-  --primary: #F4511E;
+  --popover-foreground: #171717;
+  --primary: #6366F1;
   --primary-foreground: #FFFFFF;
-  --secondary: #EFEFEF;
-  --secondary-foreground: #262626;
-  --muted: #EFEFEF;
+  --secondary: #F5F5F7;
+  --secondary-foreground: #171717;
+  --muted: #F5F5F7;
   --muted-foreground: #737373;
-  --accent: #F4511E;
+  --accent: #6366F1;
   --accent-foreground: #FFFFFF;
-  --destructive: #E56565;
+  --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
-  --border: #E5E5E5;
+  --border: #E5E5E7;
   --input: transparent;
-  --ring: #F4511E;
-  --radius: 10px;
+  --ring: #6366F1;
+  --radius: 12px;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #262626;
-  --sidebar-primary: #F4511E;
+  --sidebar-foreground: #171717;
+  --sidebar-primary: #6366F1;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #EFEFEF;
-  --sidebar-accent-foreground: #262626;
-  --sidebar-border: #E5E5E5;
-  --sidebar-ring: #F4511E;
+  --sidebar-accent: #F5F5F7;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #E5E5E7;
+  --sidebar-ring: #6366F1;
+  
+  --vibrant-indigo: #6366F1;
+  --vibrant-purple: #A855F7;
+  --vibrant-pink: #EC4899;
+  --vibrant-blue: #3B82F6;
+  --vibrant-cyan: #06B6D4;
+  --vibrant-emerald: #10B981;
+  --vibrant-amber: #F59E0B;
+  --vibrant-rose: #F43F5E;
 }
 
 .dark {
-  --background: #1A1A1A;
+  --background: #0A0A0A;
   --foreground: #F9F9F9;
-  --card: #262626;
+  --card: #141414;
   --card-foreground: #F9F9F9;
-  --popover: #262626;
+  --popover: #141414;
   --popover-foreground: #F9F9F9;
-  --primary: #F4511E;
+  --primary: #818CF8;
   --primary-foreground: #FFFFFF;
-  --secondary: #333333;
+  --secondary: #1F1F1F;
   --secondary-foreground: #F9F9F9;
-  --muted: #333333;
+  --muted: #1F1F1F;
   --muted-foreground: #A3A3A3;
-  --accent: #F4511E;
+  --accent: #818CF8;
   --accent-foreground: #FFFFFF;
-  --destructive: #E56565;
+  --destructive: #F87171;
   --destructive-foreground: #FFFFFF;
-  --border: #333333;
+  --border: #262626;
   --input: transparent;
-  --ring: #F4511E;
-  --sidebar: #1A1A1A;
+  --ring: #818CF8;
+  --sidebar: #0A0A0A;
   --sidebar-foreground: #F9F9F9;
-  --sidebar-primary: #F4511E;
+  --sidebar-primary: #818CF8;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #333333;
+  --sidebar-accent: #1F1F1F;
   --sidebar-accent-foreground: #F9F9F9;
-  --sidebar-border: #333333;
-  --sidebar-ring: #F4511E;
+  --sidebar-border: #262626;
+  --sidebar-ring: #818CF8;
 }
 
 @layer base {
@@ -116,6 +125,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.05) 0px, transparent 50%);
   }
   html {
     @apply font-sans;
@@ -124,10 +136,29 @@
 
 @layer utilities {
   .shadow-brand {
-    box-shadow: color(display-p3 0.9804 0.1127 0.098 / 0.2) 0px -6px 12px 0px inset, color(display-p3 0.9804 0.3647 0.098 / 0.12) 0px 2px 4px 0px, color(display-p3 0.9804 0.3647 0.098 / 0.12) 0px 1px 1px 0px, color(display-p3 0.9804 0.3647 0.098 / 0.16) 0px 0.5px 0.5px 0px, color(display-p3 0.9804 0.3647 0.098 / 0.2) 0px 0.25px 0.25px 0px;
+    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
   }
   .bg-dots {
     background-image: radial-gradient(var(--border) 1px, transparent 1px);
     background-size: 24px 24px;
   }
+  .glass {
+    @apply bg-background/60 backdrop-blur-xl border border-white/10;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500;
+  }
+  .bg-gradient-brand {
+    @apply bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600;
+  }
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

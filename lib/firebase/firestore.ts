@@ -13,6 +13,10 @@ import {
   orderBy,
   limit,
   getCountFromServer,
+  Timestamp,
+  FieldValue,
+  DocumentData,
+  Query,
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -22,8 +26,8 @@ export interface Client {
   name: string;
   email: string;
   company: string;
-  createdAt: any;
-  lastContacted?: any;
+  createdAt: Timestamp | FieldValue;
+  lastContacted?: Timestamp | FieldValue;
   plan?: string;
   noteCount?: number;
   nextReminder?: Reminder | null;
@@ -33,10 +37,10 @@ export interface Reminder {
   id: string;
   clientId: string;
   userId: string;
-  remindAt: any;
+  remindAt: Timestamp | FieldValue;
   message: string;
   isSent: boolean;
-  createdAt: any;
+  createdAt: Timestamp | FieldValue;
 }
 
 export interface UserProfile {
@@ -45,7 +49,7 @@ export interface UserProfile {
   notifications: boolean;
   displayName?: string;
   companyName?: string;
-  createdAt: any;
+  createdAt: Timestamp | FieldValue;
 }
 
 export interface Note {
@@ -53,13 +57,13 @@ export interface Note {
   clientId: string;
   userId?: string;
   content: string;
-  createdAt: any;
+  createdAt: Timestamp | FieldValue;
 }
 
 export { query, collection, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, getDocs };
 export const getDocsFn = getDocs;
 
-export async function getDocsData(collectionRef: any) {
+export async function getDocsData(collectionRef: Query<DocumentData>) {
   const q = query(collectionRef);
   const querySnapshot = await getDocsFn(q);
   return querySnapshot.docs.map((d) => ({ ...(d.data() as object), id: d.id }));
@@ -189,5 +193,5 @@ export async function createUserProfile(uid: string, data: Partial<UserProfile> 
 }
 
 export async function updateUserProfile(uid: string, data: Partial<UserProfile>) {
-  await updateDoc(doc(db, "users", uid), data as any);
+  await updateDoc(doc(db, "users", uid), data as DocumentData);
 }

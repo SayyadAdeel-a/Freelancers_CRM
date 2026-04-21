@@ -65,10 +65,11 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
       } else {
         toast.error(`Failed to schedule email: ${result.error}`);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       posthog.captureException(error);
       console.error("Error adding reminder:", error);
-      toast.error(`Error: ${error.message}`);
+      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+      toast.error(`Error: ${errorMessage}`);
     } finally {
       setLoading(false);
     }

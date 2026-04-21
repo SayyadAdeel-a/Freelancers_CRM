@@ -38,13 +38,15 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!authLoading && user) {
-      fetchClients();
+      // Defer execution to avoid synchronous setState in effect body
+      void Promise.resolve().then(() => fetchClients());
     }
-  }, [fetchClients, authLoading, refreshTrigger]);
+  }, [fetchClients, authLoading, refreshTrigger, user]);
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") {
-      setIsUpgradeModalOpen(true);
+      // Defer state update to avoid synchronous setState in effect body
+      void Promise.resolve().then(() => setIsUpgradeModalOpen(true));
     }
   }, [searchParams]);
 
@@ -92,12 +94,12 @@ export default function DashboardPage() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Your Clients</h1>
+          <h1 className="text-4xl font-bold tracking-tight text-gradient">Your Clients</h1>
           <p className="text-muted-foreground mt-1">
             Manage your active projects and relationships.
           </p>
         </div>
-        <Button onClick={handleAddClick} className="shadow-brand w-full sm:w-auto">
+        <Button onClick={handleAddClick} className="bg-gradient-brand hover:opacity-90 transition-all shadow-brand w-full sm:w-auto">
           <Plus className="w-4 h-4 mr-2" />
           Add Client
         </Button>

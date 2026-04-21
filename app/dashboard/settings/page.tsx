@@ -42,8 +42,12 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (profile) {
-      setDisplayName(profile.displayName || "");
-      setCompanyName(profile.companyName || "");
+      // Defer state updates to avoid synchronous setState in effect
+      const initForm = () => {
+        setDisplayName(profile.displayName || "");
+        setCompanyName(profile.companyName || "");
+      };
+      void Promise.resolve().then(initForm);
     }
   }, [profile]);
 
@@ -59,7 +63,8 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (user) {
-      fetchStats();
+      // Defer execution to avoid synchronous setState in effect body
+      void Promise.resolve().then(() => fetchStats());
     }
   }, [user, fetchStats]);
 

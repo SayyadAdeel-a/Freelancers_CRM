@@ -66,10 +66,9 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold">Ditch the "Boeing 747" complexity.</h2>
+              <h2 className="text-4xl font-bold">Ditch the &quot;Boeing 747&quot; complexity.</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Most CRMs are built for sales teams with complex pipelines and lead scoring. 
-                You're a freelancer. You don't need a cockpit; you need a bicycle.
+                You&apos;re a freelancer. You don&apos;t need a cockpit; you need a bicycle.
               </p>
               
               <ul className="space-y-4 pt-4">

@@ -25,10 +25,10 @@ interface ClientCardProps {
 export function ClientCard({ client, onDelete }: ClientCardProps) {
   return (
     <Link href={`/dashboard/client/${client.id}`} className="block group">
-      <Card className="hover:border-primary/50 transition-all duration-300 hover:shadow-lg overflow-hidden relative">
+      <Card className="hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] overflow-hidden relative group-hover:translate-y-[-2px]">
         <CardHeader className="p-5 flex flex-row items-start justify-between space-y-0">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center font-bold text-lg text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-gradient-brand flex items-center justify-center font-bold text-lg text-white shadow-brand">
               {client.name[0].toUpperCase()}
             </div>
             <div>

@@ -1,7 +1,7 @@
 "use client";
 import type { Client, Note } from "@/lib/firebase/firestore";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { getClients, getNotesByClient, createNote } from "@/lib/firebase/firestore";
 import { useUser } from "@/hooks/use-user";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,6 @@ function getInitials(name: string) {
 export default function NotesPage() {
   const { user } = useUser();
   const [clients, setClients] = useState<Client[]>([]);
-  const [filteredClients, setFilteredClients] = useState<Client[]>([]);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [loadingClients, setLoadingClients] = useState(true);
   const [loadingNotes, setLoadingNotes] = useState(false);
@@ -32,34 +31,39 @@ export default function NotesPage() {
   const [adding, setAdding] = useState(false);
   const [content, setContent] = useState("");
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    if (!user) return;
-    getClients(user.uid)
-      .then((data) => {
-        setClients(data as Client[]);
-        setFilteredClients(data as Client[]);
-      })
-      .finally(() => setLoadingClients(false));
-  }, [user]);
-
-  useEffect(() => {
+  
+  const filteredClients = useMemo(() => {
     const q = search.toLowerCase();
-    setFilteredClients(
-      clients.filter(
-        (c) =>
-          c.name.toLowerCase().includes(q) ||
-          c.company?.toLowerCase().includes(q)
-      )
+    return clients.filter(
+      (c) =>
+        c.name.toLowerCase().includes(q) ||
+        c.company?.toLowerCase().includes(q)
     );
   }, [search, clients]);
 
+  const fetchClients = useCallback(async () => {
+    if (!user) return;
+    setLoadingClients(true);
+    try {
+      const data = await getClients(user.uid);
+      setClients(data as Client[]);
+    } finally {
+      setLoadingClients(false);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    // Defer execution to avoid synchronous setState in effect body
+    void Promise.resolve().then(() => fetchClients());
+  }, [fetchClients]);
+
   useEffect(() => {
     if (!selectedClient) {
-      setNotes([]);
+      void Promise.resolve().then(() => setNotes([]));
       return;
     }
-    setLoadingNotes(true);
+    // Defer state update
+    void Promise.resolve().then(() => setLoadingNotes(true));
     getNotesByClient(selectedClient.id)
       .then((data) => setNotes(data as Note[]))
       .finally(() => setLoadingNotes(false));

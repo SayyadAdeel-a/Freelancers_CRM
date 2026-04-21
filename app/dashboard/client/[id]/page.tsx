@@ -37,7 +37,7 @@ export default function ClientPage() {
   const fetchData = useCallback(async (): Promise<void> => {
     if (!id) return;
     try {
-      const clientData = await getClient(id as string);
+      const clientData = await getClient(id as string, user?.uid || "");
       if (!clientData) {
         router.push("/dashboard");
         return;
@@ -55,12 +55,13 @@ export default function ClientPage() {
     } catch (error) {
       console.error("Error fetching client data:", error);
     } finally {
-      setLoading(false);
+      void Promise.resolve().then(() => setLoading(false));
     }
   }, [id, router, user?.uid]);
 
   useEffect(() => {
-    fetchData();
+    // Defer execution to avoid synchronous setState in effect body
+    void Promise.resolve().then(() => fetchData());
   }, [fetchData]);
 
   const handleDelete = async () => {

@@ -40,6 +40,7 @@ export function Sidebar() {
     <aside 
       className={cn(
         "relative h-screen bg-sidebar border-r border-sidebar-border hidden lg:flex flex-col transition-all duration-300 ease-in-out z-20",
+        "bg-gradient-to-b from-sidebar to-sidebar/95 backdrop-blur-xl",
         isCollapsed ? "w-[70px]" : "w-[240px]"
       )}
     >
@@ -47,7 +48,7 @@ export function Sidebar() {
         {!isCollapsed && (
           <div className="flex items-center gap-2 px-2">
             <Logo size="sm" />
-            <span className="font-bold text-xl tracking-tight">Nudge</span>
+            <span className="font-bold text-xl tracking-tight text-gradient">Nudge</span>
           </div>
         )}
         {isCollapsed && (
@@ -65,14 +66,17 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group",
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group relative",
                 isActive 
-                  ? "bg-primary text-primary-foreground shadow-brand" 
-                  : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  ? "bg-gradient-brand text-white shadow-brand scale-[1.02]" 
+                  : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
               )}
             >
-              <item.icon className={cn("w-5 h-5 shrink-0", isActive ? "text-primary-foreground" : "group-hover:text-primary")} />
+              <item.icon className={cn("w-5 h-5 shrink-0 transition-colors", isActive ? "text-white" : "group-hover:text-primary")} />
               {!isCollapsed && <span className="font-medium">{item.label}</span>}
+              {isActive && (
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-white rounded-r-full" />
+              )}
             </Link>
           );
         })}

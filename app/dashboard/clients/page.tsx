@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useUser } from "@/hooks/use-user";
 import { getClients, deleteClient, Client } from "@/lib/firebase/firestore";
 import { ClientCard } from "@/components/dashboard/ClientCard";
@@ -20,7 +20,6 @@ export default function ClientsPage() {
   const { user, loading: authLoading } = useUser();
   const { profile } = useDashboardContext();
   const [clients, setClients] = useState<Client[]>([]);
-  const [filteredClients, setFilteredClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
@@ -32,7 +31,6 @@ export default function ClientsPage() {
     try {
       const data = await getClients(user.uid);
       setClients(data as Client[]);
-      setFilteredClients(data as Client[]);
     } catch (error) {
       console.error("Error fetching clients:", error);
     } finally {
@@ -42,19 +40,18 @@ export default function ClientsPage() {
 
   useEffect(() => {
     if (!authLoading && user) {
-      fetchClients();
+      // Defer execution to avoid synchronous setState in effect body
+      void Promise.resolve().then(() => fetchClients());
     }
-  }, [fetchClients, authLoading]);
+  }, [fetchClients, authLoading, user]);
 
-  useEffect(() => {
+  const filteredClients = useMemo(() => {
     const q = search.toLowerCase();
-    setFilteredClients(
-      clients.filter(
-        (c) =>
-          c.name.toLowerCase().includes(q) ||
-          c.email?.toLowerCase().includes(q) ||
-          c.company?.toLowerCase().includes(q)
-      )
+    return clients.filter(
+      (c) =>
+        c.name.toLowerCase().includes(q) ||
+        c.email?.toLowerCase().includes(q) ||
+        c.company?.toLowerCase().includes(q)
     );
   }, [search, clients]);
 

@@ -40,8 +40,9 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     triggerRefresh,
     profile,
     profileLoading,
-    refreshProfile
-  }), [isAddClientModalOpen, refreshTrigger, profile, profileLoading, refreshProfile]);
+    refreshProfile,
+    triggerRefresh
+  }), [isAddClientModalOpen, refreshTrigger, profile, profileLoading, refreshProfile, triggerRefresh]);
 
   return (
     <DashboardContext.Provider value={value}>
