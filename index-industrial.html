@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="nd-show-grid">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Brutalist Performance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Courier+Prime:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/globals-industrial.css">
+</head>
+<body>
+  <!-- Corner brackets -- Frame -->
+  <div class="nd-corner nd-corner--tl"></div>
+  <div class="nd-corner nd-corner--tr"></div>
+  <div class="nd-corner nd-corner--bl"></div>
+  <div class="nd-corner nd-corner--br"></div>
+
+  <!-- Main Frame -->
+  <div class="nd-frame">
+    <!-- Header / Command Panel -->
+    <header class="nd-header">
+      <div class="nd-header-title">
+        <span class="nd-card-led"></span>
+        SYSTEM_PERF
+      </div>
+      <div class="nd-header-status">
+        <span class="nd-status-led"></span>
+        <span>LIVE_STREAM</span>
+        <span>|</span>
+        <span class="nd-text-secondary">04:21:13</span>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="nd-page">
+      <!-- Primary Metrics Grid -->
+      <section class="nd-grid nd-grid--3up mb-32">
+        <!-- Card 1: Throughput -->
+        <article class="nd-card nd-card--glow">
+          <div class="nd-card-header">
+            <div class="nd-card-title">
+              <span class="nd-card-led"></span>
+              THROUGHPUT
+            </div>
+          </div>
+          <div class="nd-card-body">
+            <div class="nd-metric-display">
+              <span class="nd-text-type" id="metric1">0</span>
+              <span class="nd-metric-unit">GB/s</span>
+            </div>
+            <div class="nd-divider-wire"></div>
+            <div class="nd-metric-change up">+12.4% from baseline</div>
+          </div>
+        </article>
+
+        <!-- Card 2: Latency -->
+        <article class="nd-card nd-card--glow">
+          <div class="nd-card-header">
+            <div class="nd-card-title">
+              <span class="nd-card-led warning"></span>
+              LATENCY_P95
+            </div>
+          </div>
+          <div class="nd-card-body">
+            <div class="nd-metric-display">
+              <span class="nd-text-type">89</span>
+              <span class="nd-metric-unit">ms</span>
+            </div>
+            <div class="nd-divider-wire"></div>
+            <div class="nd-metric-change down">-3.2ms vs yesterday</div>
+          </div>
+        </article>
+
+        <!-- Card 3: Uptime -->
+        <article class="nd-card nd-card--glow">
+          <div class="nd-card-header">
+            <div class="nd-card-title">
+              <span class="nd-card-led"></span>
+              UPTIME
+            </div>
+          </div>
+          <div class="nd-card-body">
+            <div class="nd-metric-display">
+              <span class="nd-text-type">99.97</span>
+              <span class="nd-metric-unit">%</span>
+            </div>
+            <div class="nd-divider-wire"></div>
+            <div class="nd-metric-change up">SLA_COMPLIANT</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Secondary Metrics -->
+      <section class="nd-grid nd-grid--2up gap-32 mb-32">
+        <!-- System Load Column -->
+        <div>
+          <div class="nd-section-header">
+            <div class="nd-section-title">
+              <span class="nd-card-led"></span>
+              SYSTEM_LOAD
+            </div>
+            <div class="nd-section-count">6_METRICS</div>
+          </div>
+
+          <!-- CPU Progress -->
+          <div class="nd-progress">
+            <div class="nd-progress-label" data-value="65%">
+              CPU <span>65%</span>
+            </div>
+            <div class="nd-progress-track">
+              <div class="nd-progress-fill nd-progress-fill--excellent" style="width: 65%"></div>
+            </div>
+          </div>
+
+          <!-- Memory Progress -->
+          <div class="nd-progress">
+            <div class="nd-progress-label" data-value="42%">
+              MEMORY <span>42%</span>
+            </div>
+            <div class="nd-progress-track">
+              <div class="nd-progress-fill nd-progress-fill--good" style="width: 42%"></div>
+            </div>
+          </div>
+
+          <!-- Network Progress -->
+          <div class="nd-progress">
+            <div class="nd-progress-label" data-value="28%">
+              NETWORK <span>28%</span>
+            </div>
+            <div class="nd-progress-track">
+              <div class="nd-progress-fill nd-progress-fill--warning" style="width: 28%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Status Column -->
+        <div>
+          <div class="nd-section-header">
+            <div class="nd-section-title">
+              <span class="nd-card-led"></span>
+              DATA_STATUS
+            </div>
+          </div>
+
+          <div class="nd-list">
+            <div class="nd-list-row nd-list-row--active">
+              <span class="nd-list-label">STREAM_PIPE</span>
+              <span class="nd-list-value">4.2</span><span class="nd-list-unit">GB</span>
+              <span class="nd-list-status nd-list-status--active">ACTIVE</span>
+            </div>
+            <div class="nd-list-row">
+              <span class="nd-list-label">QUERY_CACHE</span>
+              <span class="nd-list-value">1.8</span><span class="nd-list-unit">GB</span>
+              <span class="nd-list-status nd-list-status--active">ACTIVE</span>
+            </div>
+            <div class="nd-list-row">
+              <span class="nd-list-label">BATCH_PROC</span>
+              <span class="nd-list-value">890</span><span class="nd-list-unit">MB</span>
+              <span class="nd-list-status nd-list-status--warning">DEGRADED</span>
+            </div>
+            <div class="nd-list-row">
+              <span class="nd-list-label">AUTH_GATE</span>
+              <span class="nd-list-value">2.1</span><span class="nd-list-unit">GB</span>
+              <span class="nd-list-status nd-list-status--active">ACTIVE</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stat Cards -->
+      <section class="nd-grid nd-grid--4up mb-32">
+        <article class="nd-card">
+          <div class="nd-card-body">
+            <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">TOTAL</div>
+            <div class="nd-metric-display">
+              <span class="nd-text-type">1.2</span>
+              <span class="nd-metric-unit">M</span>
+            </div>
+            <div class="nd-text-secondary text-xs mt-1">REQUESTS_PROCESSED</div>
+          </div>
+        </article>
+
+        <article class="nd-card">
+          <div class="nd-card-body">
+            <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">AVG</div>
+            <div class="nd-metric-display">
+              <span class="nd-text-type">1.8</span>
+              <span class="nd-metric-unit">ms</span>
+            </div>
+            <div class="nd-text-secondary text-xs mt-1">RESPONSE_TIME</div>
+          </div>
+        </article>
+
+        <article class="nd-card">
+          <div class="nd-card-body">
+            <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">PEAK</div>
+            <div class="nd-metric-display">
+              <span class="nd-text-type">42.7</span>
+              <span class="nd-metric-unit">GB/s</span>
+            </div>
+            <div class="nd-text-secondary text-xs mt-1">THROUGHPUT</div>
+          </div>
+        </article>
+
+        <article class="nd-card">
+          <div class="nd-card-body">
+            <div class="nd-label text-muted-foreground mb-2 uppercase tracking-wider">ERRORS</div>
+            <div class="nd-metric-display">
+              <span class="nd-text-type">0</span>
+              <span class="nd-metric-unit">CNT</span>
+            </div>
+            <div class="nd-text-secondary text-xs mt-1">CRITICAL_FAILURES</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="mb-32">
+        <div class="flex gap-16 flex-wrap">
+          <button class="nd-button nd-button--primary nd-button--ripple">
+            SAVE_CONFIG
+          </button>
+          <button class="nd-button nd-button--secondary nd-button--ripple">
+            CANCEL
+          </button>
+          <button class="nd-button nd-button--ghost nd-button--ripple">
+            RESET
+          </button>
+          <button class="nd-button nd-button--destructive nd-button--ripple">
+            ABORT_MISSION
+          </button>
+        </div>
+      </section>
+
+      <!-- Control Console Navigation -->
+      <nav class="nd-nav mb-32">
+        <div class="nd-nav__item nd-nav__item--active">DASHBOARD_CONSOLE</div>
+        <div class="nd-nav__item">REAL_TIME_METRICS</div>
+        <div class="nd-nav__item">ALERT_PROTOCOL</div>
+        <div class="nd-nav__divider"></div>
+        <div class="nd-nav__item">SYSTEM_CONFIG</div>
+        <div class="nd-nav__item">EVENT_LOGS</div>
+        <div class="nd-nav__item">DIAGNOSTIC_SUITE</div>
+      </nav>
+    </main>
+  </div>
+
+  <!-- Footer Status Bar -->
+  <footer class="nd-footer">
+    <div class="nd-footer-status">
+      <span>SYSTEM_ID:</span>
+      <span class="nd-text-type">SRV-007X</span>
+      <span class="nd-status-led warning"></span>
+      <span>WARNING_MODE</span>
+    </div>
+    <div class="nd-footer-status">
+      <span>CPU:</span>
+      <span>65%</span>
+      <span class="nd-status-led" style="background: var(--color-cyan); box-shadow: 0 0 6px var(--color-cyan);"></span>
+      <span>MEM:</span>
+      <span>42%</span>
+      <span class="nd-status-led" style="background: var(--color-green); box-shadow: 0 0 6px var(--color-green);"></span>
+    </div>
+  </footer>
+
+  <script>
+    // Animate metric counting
+    const animateValue = (id, start, end, duration) => {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    };
+
+    // Trigger animations on load
+    window.addEventListener('load', () => {
+      setTimeout(() => animateValue('metric1', 0, 142891, 2000), 500);
+    });
+  </script>
+</body>
+</html>
