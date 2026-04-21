@@ -251,8 +251,9 @@ export default function LandingPage() {
           <div className="flex justify-center gap-6 text-sm text-muted-foreground">
             <Link href="/login" className="hover:text-[#FF4C00]">Login</Link>
             <Link href="/signup" className="hover:text-[#FF4C00]">Signup</Link>
-            <a href="#" className="hover:text-[#FF4C00]">Terms</a>
-            <a href="#" className="hover:text-[#FF4C00]">Privacy</a>
+            <Link href="/terms" className="hover:text-[#FF4C00]">Terms</Link>
+            <Link href="/privacy" className="hover:text-[#FF4C00]">Privacy</Link>
+            <Link href="/cookies" className="hover:text-[#FF4C00]">Cookies</Link>
           </div>
         </div>
       </footer>
