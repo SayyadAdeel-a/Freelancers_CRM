@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/firebase/auth-context";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,23 +27,20 @@ export const metadata: Metadata = {
   }
 };
 
-import { Toaster } from "sonner";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-sans">
-        <AuthProvider>
-          {children}
-          <Toaster position="top-center" richColors />
-        </AuthProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col font-sans antialiased">
+        <ThemeProvider>
+          <AuthProvider>
+            {children}
+            <Toaster position="top-center" richColors />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
