@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FileText, Search, Send, Clock, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, formatRelativeTime } from "@/lib/utils";
 import { toast } from "sonner";
-import { formatDistanceToNow } from "date-fns";
 
 function getInitials(name: string) {
   return name
@@ -56,18 +55,17 @@ export default function NotesPage() {
     // Defer execution to avoid synchronous setState in effect body
     void Promise.resolve().then(() => fetchClients());
   }, [fetchClients]);
-
   useEffect(() => {
-    if (!selectedClient) {
+    if (!selectedClient || !user) {
       void Promise.resolve().then(() => setNotes([]));
       return;
     }
     // Defer state update
     void Promise.resolve().then(() => setLoadingNotes(true));
-    getNotesByClient(selectedClient.id)
+    getNotesByClient(selectedClient.id, user.uid)
       .then((data) => setNotes(data as Note[]))
       .finally(() => setLoadingNotes(false));
-  }, [selectedClient]);
+  }, [selectedClient, user]);
 
   const handleAddNote = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,7 +73,7 @@ export default function NotesPage() {
     setAdding(true);
     try {
       await createNote(selectedClient.id, user.uid, content.trim());
-      const updated = await getNotesByClient(selectedClient.id);
+      const updated = await getNotesByClient(selectedClient.id, user.uid);
       setNotes(updated as Note[]);
       setContent("");
       toast.success("Note added");
@@ -224,11 +222,7 @@ export default function NotesPage() {
                       </p>
                       <div className="flex items-center gap-1.5 mt-3 text-xs text-muted-foreground">
                         <Clock className="w-3.5 h-3.5" />
-                        {note.createdAt?.seconds
-                          ? formatDistanceToNow(new Date(note.createdAt.seconds * 1000), {
-                              addSuffix: true,
-                            })
-                          : "Just now"}
+                        {formatRelativeTime(note.createdAt)}
                       </div>
                     </div>
                   ))

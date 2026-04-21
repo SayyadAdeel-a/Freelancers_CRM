@@ -40,8 +40,7 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
     triggerRefresh,
     profile,
     profileLoading,
-    refreshProfile,
-    triggerRefresh
+    refreshProfile
   }), [isAddClientModalOpen, refreshTrigger, profile, profileLoading, refreshProfile, triggerRefresh]);
 
   return (

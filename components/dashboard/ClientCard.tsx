@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { formatDate } from "@/lib/utils";
 
 interface ClientCardProps {
   client: Client;
@@ -66,12 +67,12 @@ export function ClientCard({ client, onDelete }: ClientCardProps) {
             </div>
             <div className="flex items-center text-muted-foreground">
               <Calendar className="w-4 h-4 mr-2" />
-              Added {client.createdAt?.toDate?.()?.toLocaleDateString() || "Just now"}
+              Added {formatDate(client.createdAt)}
             </div>
             {client.nextReminder && (
               <div className="flex items-center text-primary font-medium">
                 <Calendar className="w-4 h-4 mr-2" />
-                Next Nudge: {client.nextReminder.remindAt?.toDate?.()?.toLocaleDateString()}
+                Next Nudge: {formatDate(client.nextReminder.remindAt)}
               </div>
             )}
           </div>

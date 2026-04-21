@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { formatDate } from "@/lib/utils";
 import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
 import posthog from "posthog-js";
 
@@ -181,7 +182,7 @@ export default function ClientPage() {
               <div className="flex justify-between items-center py-2 border-b border-border/50">
                 <span className="text-muted-foreground">Created</span>
                 <span className="font-medium text-foreground">
-                  {client.createdAt?.toDate?.()?.toLocaleDateString() || "Just now"}
+                  {formatDate(client.createdAt)}
                 </span>
               </div>
             </div>
@@ -204,7 +205,7 @@ export default function ClientPage() {
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-medium text-primary">Follow-up</span>
                         <span className="text-[10px] text-muted-foreground">
-                          {reminder.remindAt?.toDate?.()?.toLocaleDateString()}
+                          {formatDate(reminder.remindAt)}
                         </span>
                       </div>
                       <p className="text-xs text-muted-foreground line-clamp-2">{reminder.message}</p>
