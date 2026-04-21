@@ -23,7 +23,7 @@ export function Navbar() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost">
             Sign Out
           </Button>
         </div>
