@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, signInWithGoogle } from "@/lib/firebase
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import posthog from "posthog-js";
 
@@ -56,38 +56,38 @@ export default function SignupPage() {
   };
 
   const perks = [
-    { label: "Up to 5 clients free", sub: "No credit card needed" },
+    { label: "Up to 25 clients free", sub: "No credit card needed" },
     { label: "Notes & activity logs", sub: "Every interaction tracked" },
-    { label: "Email reminders", sub: "Pro feature, never miss a follow-up" },
+    { label: "Email reminders", sub: "Pro feature — never miss a follow-up" },
   ];
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left brand panel */}
-      <div className="hidden lg:flex flex-col justify-between bg-[#FF4C00] text-white p-12 relative overflow-hidden">
-        {/* Decorative shapes */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/10 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-black/10 blur-2xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+      <div className="hidden lg:flex flex-col justify-between bg-[#0A0A0A] text-white p-12 relative overflow-hidden border-r border-white/10">
+        {/* Grid texture */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+        {/* Red accent top rule */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-primary" />
 
         {/* Logo */}
-        <div className="flex items-center gap-3 animate-in fade-in slide-in-from-left-4 duration-500">
-          <Logo size="md" />
-          <span className="font-bold text-2xl tracking-tight text-white">Nudge</span>
+        <div className="flex items-center gap-2 animate-in fade-in slide-in-from-left-4 duration-500 relative">
+          <span className="w-3 h-3 rounded-sm bg-primary inline-block" />
+          <span className="font-bold text-xl tracking-tight">Nudge</span>
         </div>
 
         {/* CTA content */}
-        <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-600" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-white/90">
-              <Sparkles className="w-3 h-3" />
+        <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-600 relative" style={{ animationDelay: "150ms", animationFillMode: "both" }}>
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 px-3 py-1.5 rounded-sm text-[10px] font-bold text-primary font-mono uppercase tracking-widest">
               Free to start. No credit card.
             </div>
-            <h1 className="text-4xl font-bold leading-tight">
+            <h1 className="text-5xl font-bold leading-tight tracking-tight">
               Client management,<br />
-              <span className="text-white/80">finally simple.</span>
+              <span className="text-primary">finally simple.</span>
             </h1>
-            <p className="text-white/70 text-base leading-relaxed max-w-sm">
-              Join thousands of freelancers who dropped the bloat and started using a CRM that actually makes sense.
+            <p className="text-white/50 text-sm leading-relaxed max-w-sm font-mono uppercase tracking-wider">
+              Join freelancers who dropped the bloat and use a CRM that actually makes sense.
             </p>
           </div>
 
@@ -99,12 +99,12 @@ export default function SignupPage() {
                 className="flex items-start gap-3 animate-in fade-in slide-in-from-left-2"
                 style={{ animationDelay: `${250 + i * 80}ms`, animationFillMode: "both" }}
               >
-                <div className="w-5 h-5 rounded-full bg-white/20 border border-white/30 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 text-white" />
+                <div className="w-5 h-5 rounded-sm bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3 h-3 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{perk.label}</p>
-                  <p className="text-xs text-white/60">{perk.sub}</p>
+                  <p className="text-sm font-bold text-white">{perk.label}</p>
+                  <p className="text-[11px] text-white/50 font-mono uppercase tracking-wider">{perk.sub}</p>
                 </div>
               </div>
             ))}
@@ -113,22 +113,22 @@ export default function SignupPage() {
 
         {/* Social proof */}
         <div
-          className="flex items-center gap-4 animate-in fade-in slide-in-from-left-4"
+          className="flex items-center gap-4 animate-in fade-in slide-in-from-left-4 relative"
           style={{ animationDelay: "520ms", animationFillMode: "both" }}
         >
           <div className="flex -space-x-2">
             {["S", "M", "A", "R"].map((initial, i) => (
               <div
                 key={initial}
-                className="w-8 h-8 rounded-full border-2 border-[#FF4C00] bg-[#FF4C00]/30 flex items-center justify-center text-xs font-bold text-white"
+                className="w-8 h-8 rounded-sm border border-primary/40 bg-primary/20 flex items-center justify-center text-xs font-bold text-white font-mono"
                 style={{ zIndex: 4 - i }}
               >
                 {initial}
               </div>
             ))}
           </div>
-          <p className="text-white/70 text-xs">
-            <span className="font-semibold text-white">2,400+</span> freelancers already using Nudge
+          <p className="text-white/50 text-[11px] font-mono uppercase tracking-wider">
+            <span className="font-bold text-white">2,400+</span> freelancers using Nudge
           </p>
         </div>
       </div>
@@ -137,15 +137,15 @@ export default function SignupPage() {
       <div className="flex items-center justify-center p-6 lg:p-12 bg-background">
         <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
           {/* Mobile logo */}
-          <div className="lg:hidden flex items-center justify-center gap-2.5 mb-4">
-            <Logo size="md" />
-            <span className="font-bold text-2xl tracking-tight">Nudge</span>
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-4">
+            <span className="w-3 h-3 rounded-sm bg-primary inline-block" />
+            <span className="font-bold text-xl tracking-tight">Nudge</span>
           </div>
 
           {/* Header */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Create your account</h2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">
               Takes less than 2 minutes to get started
             </p>
           </div>
@@ -156,7 +156,7 @@ export default function SignupPage() {
               className="space-y-1.5 animate-in fade-in slide-in-from-bottom-2"
               style={{ animationDelay: "100ms", animationFillMode: "both" }}
             >
-              <label htmlFor="email" className="text-sm font-medium text-foreground">
+              <label htmlFor="email" className="text-[10px] font-bold text-muted-foreground font-mono uppercase tracking-widest">
                 Email address
               </label>
               <input
@@ -166,7 +166,7 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 text-sm bg-card border border-border rounded-xl outline-none transition-all duration-200 placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                className="w-full px-4 py-3 text-sm bg-card border border-border rounded-sm outline-none transition-all duration-200 placeholder:text-muted-foreground/50 focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono"
               />
             </div>
 
@@ -174,7 +174,7 @@ export default function SignupPage() {
               className="space-y-1.5 animate-in fade-in slide-in-from-bottom-2"
               style={{ animationDelay: "160ms", animationFillMode: "both" }}
             >
-              <label htmlFor="password" className="text-sm font-medium text-foreground">
+              <label htmlFor="password" className="text-[10px] font-bold text-muted-foreground font-mono uppercase tracking-widest">
                 Password
               </label>
               <input
@@ -185,13 +185,13 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 minLength={6}
                 required
-                className="w-full px-4 py-2.5 text-sm bg-card border border-border rounded-xl outline-none transition-all duration-200 placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                className="w-full px-4 py-3 text-sm bg-card border border-border rounded-sm outline-none transition-all duration-200 placeholder:text-muted-foreground/50 focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono"
               />
             </div>
 
             {error && (
               <p
-                className="text-sm text-destructive bg-destructive/5 border border-destructive/20 rounded-lg px-4 py-2.5 animate-in fade-in"
+                className="text-xs text-destructive bg-destructive/5 border border-destructive/20 rounded-sm px-4 py-2.5 animate-in fade-in font-mono"
                 style={{ animationDelay: "200ms" }}
               >
                 {error}
@@ -200,7 +200,7 @@ export default function SignupPage() {
 
             <Button
               type="submit"
-              className="w-full shadow-brand font-semibold h-11 rounded-xl text-sm animate-in fade-in slide-in-from-bottom-2"
+              className="w-full font-mono tracking-widest uppercase h-11 rounded-sm text-xs animate-in fade-in slide-in-from-bottom-2"
               style={{ animationDelay: "220ms", animationFillMode: "both" }}
               disabled={loading}
             >
@@ -219,15 +219,15 @@ export default function SignupPage() {
               )}
             </Button>
 
-            <p className="text-xs text-center text-muted-foreground">
+            <p className="text-[10px] text-center text-muted-foreground font-mono uppercase tracking-wider">
               By creating an account, you agree to our{" "}
-              <a href="#" className="underline underline-offset-2 hover:text-foreground">
-                Terms of Service
-              </a>{" "}
+              <Link href="/terms" className="underline underline-offset-2 hover:text-foreground">
+                Terms
+              </Link>{" "}
               and{" "}
-              <a href="#" className="underline underline-offset-2 hover:text-foreground">
+              <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
                 Privacy Policy
-              </a>
+              </Link>
             </p>
           </form>
 
@@ -240,14 +240,14 @@ export default function SignupPage() {
               <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-background px-4 text-xs text-muted-foreground">or continue with</span>
+              <span className="bg-background px-4 text-[10px] text-muted-foreground font-mono uppercase tracking-widest">or continue with</span>
             </div>
           </div>
 
           {/* Google */}
           <Button
             variant="outline"
-            className="w-full h-11 rounded-xl text-sm font-medium transition-all hover:bg-secondary animate-in fade-in slide-in-from-bottom-2"
+            className="w-full h-11 rounded-sm text-xs font-mono tracking-wider uppercase transition-all hover:bg-accent animate-in fade-in slide-in-from-bottom-2"
             style={{ animationDelay: "340ms", animationFillMode: "both" }}
             onClick={handleGoogleSignup}
             disabled={loading}
@@ -263,11 +263,11 @@ export default function SignupPage() {
 
           {/* Footer link */}
           <p
-            className="text-center text-sm text-muted-foreground animate-in fade-in"
+            className="text-center text-xs text-muted-foreground animate-in fade-in font-mono"
             style={{ animationDelay: "400ms", animationFillMode: "both" }}
           >
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-primary hover:underline underline-offset-4">
+            <Link href="/login" className="font-bold text-primary hover:underline underline-offset-4">
               Sign in
             </Link>
           </p>

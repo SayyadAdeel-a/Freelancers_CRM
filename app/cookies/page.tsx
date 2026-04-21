@@ -1,76 +1,96 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { Logo } from "@/components/ui/Logo";
+import { LegalPageLayout } from "@/components/LegalPageLayout";
 
 export default function CookiePolicyPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans py-20 px-4 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-dots opacity-[0.03] pointer-events-none" />
-      
-      <div className="max-w-3xl mx-auto space-y-12 relative z-10">
-        <Link 
-          href="/" 
-          className="inline-flex items-center text-sm font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-all group"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> 
-          Back to Home
-        </Link>
-        
-        <div className="space-y-6">
-          <div className="flex items-center gap-3">
-            <Logo size="md" />
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter">Cookies.</h1>
-          </div>
-          <p className="text-muted-foreground font-bold uppercase tracking-widest text-xs">
-            Last updated: April 21, 2026
-          </p>
-        </div>
-
-        <div className="space-y-12 text-lg leading-relaxed">
-          <section className="space-y-6">
-            <h2 className="text-2xl font-black tracking-tight border-l-4 border-primary pl-4">1. What Are Cookies?</h2>
-            <p className="text-muted-foreground font-medium">
-              Cookies are small text files that are placed on your device. They help us understand how you use Nudge CRM and keep your session secure.
-            </p>
-          </section>
-
-          <section className="space-y-6">
-            <h2 className="text-2xl font-black tracking-tight border-l-4 border-primary pl-4">2. How We Use Them</h2>
-            <ul className="grid gap-4 text-muted-foreground font-medium">
-              <li className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
-                <span><strong>Essential:</strong> Required for authentication and security.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
-                <span><strong>Analytics:</strong> We use PostHog to improve our features.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0" />
-                <span><strong>Performance:</strong> Sentry helps us catch and fix bugs.</span>
-              </li>
-            </ul>
-          </section>
-
-          <section className="space-y-6">
-            <h2 className="text-2xl font-black tracking-tight border-l-4 border-primary pl-4">3. Managing Preferences</h2>
-            <p className="text-muted-foreground font-medium">
-              You can control cookies through your browser settings. Note that disabling essential cookies will prevent you from logging in.
-            </p>
-          </section>
-
-          <section className="pt-10 border-t border-border/50 text-center">
-            <p className="text-muted-foreground font-medium mb-4">Questions about our tech stack?</p>
-            <a 
-              href="mailto:support@nudgecrm.com" 
-              className="inline-block px-8 py-3 rounded-2xl bg-primary text-primary-foreground font-black tracking-tight shadow-brand hover:scale-105 transition-transform"
-            >
-              Contact Support
-            </a>
-          </section>
-        </div>
-      </div>
-    </div>
+    <LegalPageLayout
+      title="Cookies."
+      lastUpdated="April 21, 2026"
+      intro="This Cookie Policy explains what cookies are, how Nudge CRM uses them, and how you can control your cookie preferences."
+      sections={[
+        {
+          title: "What Are Cookies",
+          content: [
+            "Cookies are small text files that are placed on your device when you visit a website. They are widely used to make websites work more efficiently and to provide information to website owners.",
+            "Cookies help us remember your preferences, understand how you use our service, and improve your overall experience.",
+          ],
+        },
+        {
+          title: "Types of Cookies We Use",
+          content: [
+            "We use the following categories of cookies:",
+            [
+              "Essential Cookies — Required for the service to function. These include authentication cookies that keep you logged in. Cannot be disabled.",
+              "Analytics Cookies — Used by PostHog to understand how users interact with Nudge. Helps us improve the product. Can be disabled.",
+              "Error Tracking — Used by Sentry to capture JavaScript errors and improve reliability. Can be disabled.",
+            ],
+          ],
+        },
+        {
+          title: "Essential Cookies (Always Active)",
+          content: [
+            "These cookies are strictly necessary for the operation of our service:",
+            [
+              "__session — Firebase authentication session token. Expires when you log out.",
+              "XSRF-TOKEN — Cross-site request forgery protection. Session-based.",
+            ],
+            "You cannot opt out of these cookies as they are required for the service to function.",
+          ],
+        },
+        {
+          title: "Analytics Cookies (Optional)",
+          content: [
+            "We use PostHog for product analytics. These cookies help us understand:",
+            [
+              "Which features are most used",
+              "Where users encounter friction",
+              "How to prioritize improvements",
+            ],
+            "PostHog cookies are prefixed with ph_ and are set on our domain. Data is anonymized where possible.",
+          ],
+        },
+        {
+          title: "Third-Party Cookies",
+          content: [
+            "When you authenticate with Google, Google may set its own cookies as part of the OAuth flow. We do not control these cookies — please refer to Google's Privacy Policy for more information.",
+            "If you upgrade to Pro, Lemon Squeezy (our payment processor) may set cookies during the checkout process.",
+          ],
+        },
+        {
+          title: "Managing Your Cookie Preferences",
+          content: [
+            "You can control cookies through:",
+            [
+              "Browser settings — Most browsers allow you to view, manage, and delete cookies. Check your browser's help documentation for instructions.",
+              "Opt-out tools — PostHog provides an opt-out mechanism at posthog.com/opt-out",
+              "Do Not Track — We respect the Do Not Track (DNT) browser setting. When DNT is enabled, we disable analytics cookies.",
+            ],
+            "Note: Disabling essential cookies will prevent you from using the service.",
+          ],
+        },
+        {
+          title: "Data Retention",
+          content: [
+            "Cookie data is retained for the following periods:",
+            [
+              "Session cookies — Deleted when you close your browser",
+              "Authentication cookies — Expire after 30 days of inactivity",
+              "Analytics cookies — Retained for 12 months",
+            ],
+          ],
+        },
+        {
+          title: "Changes to This Policy",
+          content: [
+            "We may update this Cookie Policy as our practices change. We will post the updated policy on this page with a new 'Last updated' date.",
+          ],
+        },
+        {
+          title: "Contact",
+          content: [
+            "Questions about our use of cookies? Email us at hello@nudgecrm.app.",
+          ],
+        },
+      ]}
+    />
   );
 }
