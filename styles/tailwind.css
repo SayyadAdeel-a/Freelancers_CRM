@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nothing Design overrides */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Remove default button styling */
+  button {
+    @apply border-none cursor-pointer font-medium transition-colors duration-150;
+  }
+
+  /* Remove default input styling */
+  input,
+  textarea {
+    @apply border-none outline-none font-mono;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-tertiary);
+    border-radius: 2px;
+  }
+
+  /* Remove focus outlines (handled via borders) */
+  :focus {
+    outline: none;
+  }
+}

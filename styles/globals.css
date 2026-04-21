@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* Typography */
+  --font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: 'Space Mono', monospace;
+  --font-hero: 'Doto', var(--font-primary);
+
+  /* Monochrome scale - Light mode */
+  --text-display: #111827;
+  --text-primary: #374151;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-disabled: #D1D5DB;
+
+  /* Surfaces - Light mode */
+  --bg-primary: #F9FAFB;
+  --bg-secondary: #111827;
+  --bg-card: #FFFFFF;
+  --bg-card-dark: #1F2937;
+
+  /* Borders */
+  --border-light: #E5E7EB;
+  --border-dark: #374151;
+
+  /* Data status colors (exempt from one-accent rule) */
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-error: #EF4444;
+
+  /* Spacing scale */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+
+  /* Component vars */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+}
+
+[data-theme="dark"] {
+  /* Monochrome scale - Dark mode */
+  --text-display: #F9FAFB;
+  --text-primary: #D1D5DB;
+  --text-secondary: #9CA3AF;
+  --text-tertiary: #6B7280;
+  --text-disabled: #4B5563;
+
+  /* Surfaces - Dark mode */
+  --bg-primary: #111827;
+  --bg-secondary: #F9FAFB;
+  --bg-card: #1F2937;
+  --bg-card-dark: #FFFFFF;
+
+  /* Borders */
+  --border-light: #374151;
+  --border-dark: #E5E7EB;
+}
+
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+.display {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.heading {
+  font-family: var(--font-primary);
+  font-weight: 500;
+}
+
+.body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+}
+
+.label {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+}
+
+/* Utility classes */
+.tight { gap: var(--space-8); }
+.medium { gap: var(--space-16); }
+.wide { gap: var(--space-32); }
+.vast { gap: var(--space-48); }
+
+.text-display { color: var(--text-display); font-size: 3rem; line-height: 1.1; }
+.text-heading { color: var(--text-primary); font-size: 1.5rem; }
+.text-body { color: var(--text-primary); font-size: 1rem; }
+.text-label { color: var(--text-secondary); font-size: 0.875rem; }
+.text-tertiary { color: var(--text-tertiary); }
+.text-disabled { color: var(--text-disabled); }
+
+.text-success { color: var(--status-success); }
+.text-warning { color: var(--status-warning); }
+.text-error { color: var(--status-error); }
+
+.font-mono { font-family: var(--font-secondary); }
+.font-body { font-family: var(--font-primary); }
+.font-hero { font-family: var(--font-hero); }
+
+.uppercase-label { text-transform: uppercase; }
+
+/* No visual noise */
+.no-shadow { box-shadow: none !important; }
+.border-none { border: none !important; }
+
+/* Responsive typography */
+@media (min-width: 768px) {
+  .text-display { font-size: 3.75rem; }
+  .text-heading { font-size: 1.875rem; }
+}
+
+@media (min-width: 1024px) {
+  .text-display { font-size: 4.5rem; }
+  .text-heading { font-size: 2.25rem; }
+}
