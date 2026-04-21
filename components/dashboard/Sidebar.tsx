@@ -39,21 +39,20 @@ export function Sidebar() {
   return (
     <aside 
       className={cn(
-        "relative h-screen bg-sidebar border-r border-sidebar-border hidden lg:flex flex-col transition-all duration-300 ease-in-out z-20",
-        "bg-gradient-to-b from-sidebar to-sidebar/95 backdrop-blur-xl",
+        "relative h-screen bg-sidebar border-r border-border hidden lg:flex flex-col transition-all duration-300 ease-in-out z-20 font-sans",
         isCollapsed ? "w-[70px]" : "w-[240px]"
       )}
     >
-      <div className="p-4 flex items-center justify-between">
+      <div className="p-4 flex items-center justify-between border-b border-border">
         {!isCollapsed && (
           <div className="flex items-center gap-2 px-2">
-            <Logo size="sm" />
-            <span className="font-bold text-xl tracking-tight text-gradient">Nudge</span>
+            <span className="w-3 h-3 rounded-sm bg-primary inline-block"></span>
+            <span className="font-bold text-xl tracking-tight text-foreground">Nudge</span>
           </div>
         )}
         {isCollapsed && (
           <div className="mx-auto">
-            <Logo size="sm" />
+            <span className="w-3 h-3 rounded-sm bg-primary inline-block"></span>
           </div>
         )}
       </div>
@@ -66,28 +65,28 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group relative",
+                "flex items-center gap-3 px-3 py-2.5 rounded-sm transition-all group relative border",
                 isActive 
-                  ? "bg-gradient-brand text-white shadow-brand scale-[1.02]" 
-                  : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                  ? "bg-foreground text-background border-foreground shadow-brand" 
+                  : "text-muted-foreground border-transparent hover:bg-accent hover:text-foreground hover:border-border"
               )}
             >
-              <item.icon className={cn("w-5 h-5 shrink-0 transition-colors", isActive ? "text-white" : "group-hover:text-primary")} />
-              {!isCollapsed && <span className="font-medium">{item.label}</span>}
+              <item.icon className={cn("w-5 h-5 shrink-0 transition-colors", isActive ? "text-background" : "group-hover:text-primary")} />
+              {!isCollapsed && <span className="font-medium tracking-wide uppercase text-xs">{item.label}</span>}
               {isActive && (
-                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-white rounded-r-full" />
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary" />
               )}
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-3 border-t border-sidebar-border">
+      <div className="p-3 border-t border-border">
         <Button
           variant="ghost"
           onClick={handleLogout}
           className={cn(
-            "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all",
+            "w-full flex items-center gap-3 px-3 py-2.5 rounded-sm text-muted-foreground hover:bg-destructive hover:text-destructive-foreground transition-all border border-transparent hover:border-destructive uppercase tracking-wide text-xs",
             isCollapsed ? "justify-center" : "justify-start"
           )}
         >
@@ -98,7 +97,7 @@ export function Sidebar() {
 
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute -right-3 top-20 w-6 h-6 bg-white border border-sidebar-border rounded-full flex items-center justify-center shadow-sm hover:bg-sidebar-accent transition-colors z-30"
+        className="absolute -right-3 top-20 w-6 h-6 bg-background border border-border rounded-sm flex items-center justify-center hover:bg-accent hover:text-primary transition-colors z-30"
       >
         {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
       </button>
