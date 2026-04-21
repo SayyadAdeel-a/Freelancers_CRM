@@ -3,13 +3,11 @@
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
+
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Check, Zap, Star, Infinity, Mail } from "lucide-react";
+import { Sparkles, Zap, Star, Infinity, Mail } from "lucide-react";
 import { toast } from "sonner";
 import posthog from "posthog-js";
 
@@ -61,7 +59,7 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
         {/* Features */}
         <div className="px-8 py-8 space-y-4">
           <div className="grid gap-4">
-            {features.map((feat, i) => (
+            {features.map((feat) => (
               <div
                 key={feat.label}
                 className="flex items-start gap-4 p-4 rounded-2xl bg-secondary/30 hover:bg-secondary/60 transition-all duration-300 border border-border/20 group"

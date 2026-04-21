@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword, signInWithGoogle } from "@/lib/firebase/auth";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
@@ -29,9 +28,10 @@ export default function LoginPage() {
       posthog.capture("user_logged_in", { method: "email" });
       toast.success("Welcome back!");
       router.push("/dashboard");
-    } catch (err: any) {
-      posthog.captureException(err);
-      setError(err.message);
+    } catch (error: unknown) {
+      posthog.captureException(error);
+      const message = error instanceof Error ? error.message : "An unexpected error occurred";
+      setError(message);
       toast.error("Invalid credentials. Please try again.");
     } finally {
       setLoading(false);
@@ -46,9 +46,10 @@ export default function LoginPage() {
       posthog.capture("user_logged_in_google", { method: "google" });
       toast.success("Signed in with Google!");
       router.push("/dashboard");
-    } catch (err: any) {
-      posthog.captureException(err);
-      setError(err.message);
+    } catch (error: unknown) {
+      posthog.captureException(error);
+      const message = error instanceof Error ? error.message : "An unexpected error occurred";
+      setError(message);
       toast.error("Google sign in failed.");
     } finally {
       setLoading(false);

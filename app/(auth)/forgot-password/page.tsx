@@ -23,9 +23,10 @@ export default function ForgotPasswordPage() {
       await sendPasswordResetEmail(email);
       setMessage("Check your email for the password reset link.");
       toast.success("Reset link sent! Check your inbox.");
-    } catch (err: any) {
-      setError(err.message);
-      toast.error("Failed to send reset link.");
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "An unexpected error occurred";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }

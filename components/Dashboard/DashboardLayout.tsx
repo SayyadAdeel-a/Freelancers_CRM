@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+
 import { Navbar } from "@/components/Navbar";
 import { ClientList } from "./ClientList";
 
 export function DashboardLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+
 
   return (
     <div className="flex h-screen">

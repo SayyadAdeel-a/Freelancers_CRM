@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle } from "@/components/Card";
 import { Alert } from "@/components/Alert";
 
 export function Settings() {
-  const [user, setUser] = useState({
+  const [user] = useState({
     email: "user@example.com",
     plan: "Free",
   });

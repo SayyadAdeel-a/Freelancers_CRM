@@ -6,7 +6,7 @@ import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 import { logout } from "@/lib/firebase/auth";
 import { updateUserProfile, getClients } from "@/lib/firebase/firestore";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,6 @@ import {
   Building2,
   Save,
   Loader2,
-  ShieldCheck,
   AlertTriangle,
   Zap,
 } from "lucide-react";
@@ -76,7 +75,7 @@ export default function SettingsPage() {
       await updateUserProfile(user.uid, { notifications: newVal });
       await refreshProfile();
       toast.success(newVal ? "Reminders enabled" : "Reminders disabled");
-    } catch (error) {
+    } catch {
       toast.error("Failed to update preferences");
     } finally {
       setSavingPreferences(false);

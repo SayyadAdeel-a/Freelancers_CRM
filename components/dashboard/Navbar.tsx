@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+
 import { useUser } from "@/hooks/use-user";
 import {
   Bell,
@@ -24,7 +23,7 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const pathname = usePathname();
+
 
   useEffect(() => {
     // Avoid synchronous setState in effect

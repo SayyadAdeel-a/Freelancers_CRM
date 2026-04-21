@@ -1,7 +1,6 @@
 "use server";
 
 import { qstashClient } from "@/lib/qstash";
-import { addReminder } from "@/lib/firebase/firestore";
 
 interface ScheduleReminderParams {
   clientId: string;
@@ -13,7 +12,7 @@ interface ScheduleReminderParams {
 }
 
 export async function scheduleReminderAction(params: ScheduleReminderParams) {
-  const { clientId, userId, userEmail, clientName, remindAt, message } = params;
+  const { userEmail, clientName, remindAt, message } = params;
   
   // 0. Robust URL detection
   let baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
@@ -44,8 +43,9 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
 
     console.log(`[QStash] Success! Message ID: ${result.messageId}`);
     return { success: true };
-  } catch (error: any) {
-    console.error("[QStash] Error:", error.message);
-    return { success: false, error: error.message };
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An unexpected error occurred";
+    console.error("[QStash] Error:", message);
+    return { success: false, error: message };
   }
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -21,10 +22,12 @@ export function Logo({ className, size = "md" }: LogoProps) {
     )}>
       {/* Background Glow */}
       <div className="absolute inset-0 bg-primary/20 blur-lg animate-pulse" />
-      <img 
+      <Image 
         src="/logo.svg" 
         alt="Nudge CRM Logo" 
-        className="relative w-full h-full object-contain" 
+        fill
+        className="relative object-contain" 
+        priority
       />
     </div>
   );

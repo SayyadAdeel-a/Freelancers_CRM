@@ -2,6 +2,7 @@
 
 import { Users, Plus, MessageSquare, Bell, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface EmptyStateProps {
   onAddClick: () => void;
@@ -10,19 +11,22 @@ interface EmptyStateProps {
 export function EmptyState({ onAddClick }: EmptyStateProps) {
   const steps = [
     {
-      icon: <Plus className="w-4 h-4 text-primary" />,
+      icon: <Plus className="w-4 h-4 text-orange-500" />,
       label: "Add your first client",
       desc: "Name, email, and company — done in 5 seconds.",
+      color: "bg-orange-500/10",
     },
     {
-      icon: <MessageSquare className="w-4 h-4 text-primary" />,
+      icon: <MessageSquare className="w-4 h-4 text-pink-500" />,
       label: "Log notes after calls",
       desc: "Keep a running history of every conversation.",
+      color: "bg-pink-500/10",
     },
     {
-      icon: <Bell className="w-4 h-4 text-primary" />,
+      icon: <Bell className="w-4 h-4 text-indigo-500" />,
       label: "Set reminders",
       desc: "Never forget to follow up with a lead.",
+      color: "bg-indigo-500/10",
     },
   ];
 
@@ -60,7 +64,7 @@ export function EmptyState({ onAddClick }: EmptyStateProps) {
             className="group glass border border-border/40 rounded-2xl p-5 text-center hover:border-primary/50 hover:shadow-brand transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
             style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-brand/10 flex items-center justify-center mx-auto mb-3.5 group-hover:scale-110 transition-transform">
+            <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3.5 group-hover:scale-110 transition-transform", step.color)}>
               {step.icon}
             </div>
             <p className="text-sm font-black mb-1.5">{step.label}</p>

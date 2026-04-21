@@ -13,13 +13,11 @@ import {
   Mail,
   Building,
   Trash2,
-  ExternalLink,
   MessageSquare,
   Calendar,
   Plus
 } from "lucide-react";
 import Link from "next/link";
-import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
 import posthog from "posthog-js";
@@ -57,7 +55,7 @@ export default function ClientPage() {
     } finally {
       void Promise.resolve().then(() => setLoading(false));
     }
-  }, [id, router, user?.uid]);
+  }, [id, router, user]);
 
   useEffect(() => {
     // Defer execution to avoid synchronous setState in effect body

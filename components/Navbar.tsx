@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+
 import { Button } from "@/components/Button";
 
 export function Navbar() {
-  const [isClientMenuOpen, setIsClientMenuOpen] = useState(false);
+
 
   return (
     <nav className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">

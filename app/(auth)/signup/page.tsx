@@ -15,7 +15,6 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
   const router = useRouter();
 
   const handleEmailSignup = async (e: React.FormEvent) => {
@@ -28,9 +27,10 @@ export default function SignupPage() {
       posthog.capture("user_signed_up", { method: "email" });
       toast.success("Account created! Welcome to Nudge.");
       router.push("/dashboard");
-    } catch (err: any) {
-      posthog.captureException(err);
-      setError(err.message);
+    } catch (error: unknown) {
+      posthog.captureException(error);
+      const message = error instanceof Error ? error.message : "An unexpected error occurred";
+      setError(message);
       toast.error("Signup failed. Please check your details.");
     } finally {
       setLoading(false);
@@ -45,9 +45,10 @@ export default function SignupPage() {
       posthog.capture("user_signed_up_google", { method: "google" });
       toast.success("Signed in with Google!");
       router.push("/dashboard");
-    } catch (err: any) {
-      posthog.captureException(err);
-      setError(err.message);
+    } catch (error: unknown) {
+      posthog.captureException(error);
+      const message = error instanceof Error ? error.message : "An unexpected error occurred";
+      setError(message);
       toast.error("Google sign in failed.");
     } finally {
       setLoading(false);
@@ -164,8 +165,6 @@ export default function SignupPage() {
                 placeholder="alex@company.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                onFocus={() => setFocusedField("email")}
-                onBlur={() => setFocusedField(null)}
                 required
                 className="w-full px-4 py-2.5 text-sm bg-card border border-border rounded-xl outline-none transition-all duration-200 placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-primary/20 focus:border-primary"
               />
@@ -184,8 +183,6 @@ export default function SignupPage() {
                 placeholder="At least 6 characters"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                onFocus={() => setFocusedField("password")}
-                onBlur={() => setFocusedField(null)}
                 minLength={6}
                 required
                 className="w-full px-4 py-2.5 text-sm bg-card border border-border rounded-xl outline-none transition-all duration-200 placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-primary/20 focus:border-primary"

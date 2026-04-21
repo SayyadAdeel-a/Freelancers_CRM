@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/Button";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/Card";
+import { Card } from "@/components/Card";
 import { Input } from "@/components/Input";
 import { EmptyState } from "@/components/EmptyState";
 import { Modal } from "@/components/Modal";
