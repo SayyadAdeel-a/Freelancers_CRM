@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 interface LegalSection {
   title: string;
@@ -33,6 +34,7 @@ export function LegalPageLayout({ title, lastUpdated, intro, sections }: LegalPa
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
             Back to Home
           </Link>
+          <ThemeToggle />
         </div>
       </nav>
 

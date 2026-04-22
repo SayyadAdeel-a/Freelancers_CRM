@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import posthog from "posthog-js";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -127,10 +128,17 @@ export default function LoginPage() {
       {/* Right form panel */}
       <div className="flex items-center justify-center p-6 lg:p-12 bg-background">
         <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
-          {/* Mobile logo */}
-          <div className="lg:hidden flex items-center justify-center gap-2.5 mb-4">
-            <Logo size="md" />
-            <span className="font-bold text-2xl tracking-tight">Nudge</span>
+          {/* Mobile logo + theme toggle */}
+          <div className="lg:hidden flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-sm bg-primary inline-block" />
+              <span className="font-bold text-lg tracking-tight">Nudge</span>
+            </div>
+            <ThemeToggle />
+          </div>
+          {/* Desktop theme toggle */}
+          <div className="hidden lg:flex justify-end -mt-4 mb-0">
+            <ThemeToggle />
           </div>
 
           {/* Header */}

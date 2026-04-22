@@ -10,6 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function LandingPage() {
   return (
@@ -26,12 +27,21 @@ export default function LandingPage() {
             <span className="font-bold text-xl tracking-tight">Nudge</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             <a href="#features" className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors">Features</a>
             <a href="#pricing" className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors">Pricing</a>
             <Link href="/login" className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Log In</Link>
+            <ThemeToggle />
             <Link href="/signup">
               <Button className="rounded-sm font-mono uppercase tracking-wider text-xs h-9 px-5">Get Started</Button>
+            </Link>
+          </div>
+
+          {/* Mobile: just the toggle + CTA */}
+          <div className="flex md:hidden items-center gap-3">
+            <ThemeToggle />
+            <Link href="/signup">
+              <Button className="rounded-sm font-mono uppercase tracking-wider text-xs h-9 px-4">Sign Up</Button>
             </Link>
           </div>
         </div>

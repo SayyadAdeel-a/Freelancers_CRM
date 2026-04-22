@@ -1,37 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
+import { useState } from "react";
 import { useUser } from "@/hooks/use-user";
-import {
-  Bell,
-  Search,
-  Plus,
-  Moon,
-  Sun,
-} from "lucide-react";
+import { Bell, Search, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDashboardContext } from "@/components/dashboard/DashboardContext";
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Navbar() {
   const { user } = useUser();
   const { setIsAddClientModalOpen, profile } = useDashboardContext();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-
-  useEffect(() => {
-    // Avoid synchronous setState in effect
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Use profile displayName if available
   const displayName = profile?.displayName || user?.email?.split("@")[0] || "User";
 
   return (
@@ -73,18 +56,7 @@ export function Navbar() {
 
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Theme toggle */}
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="p-2 text-muted-foreground hover:bg-accent hover:text-foreground rounded-sm transition-all duration-300"
-          aria-label="Toggle theme"
-        >
-          {mounted && (theme === "dark" ? (
-            <Sun className="w-4 h-4" />
-          ) : (
-            <Moon className="w-4 h-4" />
-          ))}
-          {!mounted && <div className="w-4 h-4" />}
-        </button>
+        <ThemeToggle />
 
         {/* Add Client */}
         <Button
