@@ -109,7 +109,7 @@ export default function ClientsPage() {
               : `${clients.length} client${clients.length !== 1 ? "s" : ""} total`}
           </p>
         </div>
-        <Button onClick={handleAddClick} className="shadow-brand w-full sm:w-auto">
+        <Button onClick={handleAddClick} className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all w-full sm:w-auto font-mono uppercase tracking-wider text-xs rounded-sm h-11 px-8">
           <Plus className="w-4 h-4 mr-2" />
           Add Client
         </Button>
@@ -128,7 +128,7 @@ export default function ClientsPage() {
               }
             }}
             placeholder="Search clients…"
-            className="w-full pl-9 pr-4 py-2.5 text-sm bg-secondary/50 rounded-xl border border-border outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            className="w-full pl-9 pr-4 py-2.5 text-sm bg-secondary/50 rounded-sm border border-border outline-none focus:ring-4 focus:ring-primary/10 transition-all font-mono"
           />
         </div>
       )}

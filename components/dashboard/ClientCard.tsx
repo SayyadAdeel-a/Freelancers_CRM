@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
+import { PayerRatingBadge } from "./PayerRatingBadge";
 
 interface ClientCardProps {
   client: Client;
@@ -82,6 +83,11 @@ export function ClientCard({ client, onDelete }: ClientCardProps) {
               <MessageSquare className="w-3.5 h-3.5" />
               {client.noteCount || 0} Notes
             </div>
+            
+            {client.payerRating && (
+              <PayerRatingBadge rating={client.payerRating} />
+            )}
+
             <div className="px-2 py-1 rounded-sm bg-accent text-foreground border border-border">
               Active
             </div>

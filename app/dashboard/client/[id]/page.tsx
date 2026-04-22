@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useUser } from "@/hooks/use-user";
-import { getClient, getNotes, getReminders, deleteClient, Client, Note, Reminder } from "@/lib/firebase/firestore";
+import { getClient, getNotes, getReminders, getInvoices, deleteClient, Client, Note, Reminder, Invoice } from "@/lib/firebase/firestore";
 import { AddNote } from "@/components/dashboard/AddNote";
 import { NoteCard } from "@/components/dashboard/NoteCard";
 import { SetReminderModal } from "@/components/dashboard/SetReminderModal";
+import { NewInvoiceModal } from "@/components/dashboard/NewInvoiceModal";
+import { InvoiceList } from "@/components/dashboard/InvoiceList";
 import { Button } from "@/components/ui/button";
 import {
   ChevronLeft,
@@ -15,12 +17,14 @@ import {
   Trash2,
   MessageSquare,
   Calendar,
-  Plus
+  Plus,
+  FileText
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { formatDate } from "@/lib/utils";
 import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
+import { PayerRatingBadge } from "@/components/dashboard/PayerRatingBadge";
 import posthog from "posthog-js";
 
 export default function ClientPage() {
@@ -30,8 +34,10 @@ export default function ClientPage() {
   const [client, setClient] = useState<Client | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [reminders, setReminders] = useState<Reminder[]>([]);
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
+  const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState(false);
 
   const fetchData = useCallback(async (): Promise<void> => {
     if (!id) return;
@@ -43,14 +49,16 @@ export default function ClientPage() {
       }
       setClient(clientData);
       
-      // Fetch notes and reminders in parallel
-      const [notesData, remindersData] = await Promise.all([
+      // Fetch notes, reminders, and invoices in parallel
+      const [notesData, remindersData, invoicesData] = await Promise.all([
         getNotes(id as string, user?.uid || ""),
-        getReminders(id as string, user?.uid || "")
+        getReminders(id as string, user?.uid || ""),
+        getInvoices(id as string, user?.uid || "")
       ]);
       
       setNotes(notesData);
       setReminders(remindersData);
+      setInvoices(invoicesData);
     } catch (error) {
       console.error("Error fetching client data:", error);
     } finally {
@@ -109,13 +117,18 @@ export default function ClientPage() {
 
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-border pb-8">
         <div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-foreground">{client.name}</h1>
+          <div className="flex flex-wrap items-center gap-3 mb-2">
+            <h1 className="text-4xl font-extrabold tracking-tight text-foreground">{client.name}</h1>
+            {client.payerRating && (
+              <PayerRatingBadge rating={client.payerRating} size="md" className="mt-1" />
+            )}
+          </div>
           <div className="flex flex-wrap items-center gap-4 mt-3">
-            <div className="flex items-center text-muted-foreground bg-secondary/50 px-3 py-1.5 rounded-full text-sm font-medium">
+            <div className="flex items-center text-muted-foreground bg-secondary/50 px-3 py-1.5 rounded-sm text-sm font-mono uppercase tracking-tight border border-border/50">
               <Building className="w-4 h-4 mr-2" />
               {client.company}
             </div>
-            <div className="flex items-center text-muted-foreground bg-secondary/50 px-3 py-1.5 rounded-full text-sm font-medium">
+            <div className="flex items-center text-muted-foreground bg-secondary/50 px-3 py-1.5 rounded-sm text-sm font-mono uppercase tracking-tight border border-border/50">
               <Mail className="w-4 h-4 mr-2" />
               {client.email}
             </div>
@@ -136,9 +149,31 @@ export default function ClientPage() {
           </section>
 
           <section className="space-y-6">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <FileText className="w-5 h-5 text-primary" />
+                Invoices
+                <span className="text-sm font-medium text-muted-foreground bg-secondary px-2 py-0.5 rounded-sm ml-1 font-mono">
+                  {invoices.length}
+                </span>
+              </h2>
+              <Button onClick={() => setIsInvoiceModalOpen(true)} size="sm" className="font-mono text-[10px] uppercase tracking-wider rounded-sm h-8">
+                <Plus className="w-3.5 h-3.5 mr-1.5" />
+                New Invoice
+              </Button>
+            </div>
+            
+            <InvoiceList 
+              clientId={client.id} 
+              invoices={invoices} 
+              onUpdate={fetchData} 
+            />
+          </section>
+
+          <section className="space-y-6">
             <h2 className="text-xl font-bold flex items-center gap-2 border-b border-border pb-4">
               History
-              <span className="text-sm font-medium text-muted-foreground bg-secondary px-2 py-0.5 rounded-full ml-1">
+              <span className="text-sm font-medium text-muted-foreground bg-secondary px-2 py-0.5 rounded-sm ml-1 font-mono">
                 {notes.length}
               </span>
             </h2>
@@ -226,6 +261,13 @@ export default function ClientPage() {
         onSuccess={() => {
           fetchData();
         }}
+      />
+      <NewInvoiceModal
+        clientId={client.id}
+        clientName={client.name}
+        isOpen={isInvoiceModalOpen}
+        onClose={() => setIsInvoiceModalOpen(false)}
+        onSuccess={fetchData}
       />
     </div>
   );

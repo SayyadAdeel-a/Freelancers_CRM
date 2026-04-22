@@ -17,6 +17,7 @@ import {
   FieldValue,
   DocumentData,
   Query,
+  collectionGroup,
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -31,6 +32,7 @@ export interface Client {
   plan?: string;
   noteCount?: number;
   nextReminder?: Reminder | null;
+  payerRating?: "fast" | "average" | "slow" | "difficult" | null;
 }
 
 export interface Reminder {
@@ -60,7 +62,24 @@ export interface Note {
   createdAt: Timestamp | FieldValue;
 }
 
-export { query, collection, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, getDocs };
+export interface Invoice {
+  id: string;
+  invoiceNumber: string;
+  clientId: string;
+  clientName: string;
+  userId: string;
+  issueDate: Timestamp | FieldValue;
+  dueDate: Timestamp | FieldValue;
+  lineItems: { description: string; amount: number }[];
+  total: number;
+  status: "draft" | "sent" | "paid" | "overdue";
+  notes?: string;
+  createdAt: Timestamp | FieldValue;
+  sentAt?: Timestamp | FieldValue | null;
+  paidAt?: Timestamp | FieldValue | null;
+}
+
+export { query, collection, collectionGroup, where, orderBy, limit, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, getDocs };
 export const getDocsFn = getDocs;
 
 export async function getDocsData(collectionRef: Query<DocumentData>) {
@@ -194,4 +213,38 @@ export async function createUserProfile(uid: string, data: Partial<UserProfile> 
 
 export async function updateUserProfile(uid: string, data: Partial<UserProfile>) {
   await updateDoc(doc(db, "users", uid), data as DocumentData);
+}
+
+// Invoicing functions
+export async function getInvoices(clientId: string, userId: string) {
+  const q = query(
+    collection(db, "clients", clientId, "invoices"),
+    where("userId", "==", userId),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocsFn(q);
+  return querySnapshot.docs.map((d) => ({ ...d.data(), id: d.id })) as Invoice[];
+}
+
+export async function getAllUserInvoices(userId: string) {
+  const q = query(
+    collectionGroup(db, "invoices"),
+    where("userId", "==", userId),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocsFn(q);
+  return querySnapshot.docs.map((d) => ({ ...d.data(), id: d.id })) as Invoice[];
+}
+
+export async function addInvoice(clientId: string, userId: string, invoiceData: Omit<Invoice, "id" | "clientId" | "userId" | "createdAt">) {
+  return addDoc(collection(db, "clients", clientId, "invoices"), {
+    ...invoiceData,
+    clientId,
+    userId,
+    createdAt: serverTimestamp()
+  });
+}
+
+export async function updateInvoice(clientId: string, invoiceId: string, data: Partial<Invoice>) {
+  return updateDoc(doc(db, "clients", clientId, "invoices", invoiceId), data);
 }

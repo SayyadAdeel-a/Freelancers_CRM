@@ -18,7 +18,7 @@ export function Navbar() {
   const displayName = profile?.displayName || user?.email?.split("@")[0] || "User";
 
   return (
-    <header className="h-16 border-b border-border/40 glass flex items-center justify-between px-4 sm:px-6 sticky top-0 z-10 backdrop-blur-md bg-card/70">
+    <header className="h-16 border-b border-border flex items-center justify-between px-4 sm:px-6 sticky top-0 z-10 bg-background">
       <div className="flex lg:hidden items-center gap-2 mr-4">
         <span className="w-3 h-3 rounded-sm bg-primary inline-block"></span>
         <span className="font-bold text-xl tracking-tight text-foreground font-sans">Nudge</span>
@@ -61,7 +61,7 @@ export function Navbar() {
         {/* Add Client */}
         <Button
           size="sm"
-          className="hidden sm:flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-transform font-mono uppercase text-xs tracking-wider border border-transparent"
+          className="hidden sm:flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-mono uppercase text-xs tracking-wider border border-border rounded-sm shadow-sm"
           onClick={() => setIsAddClientModalOpen(true)}
         >
           <Plus className="w-4 h-4" />

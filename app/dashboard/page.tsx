@@ -3,13 +3,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { useUser } from "@/hooks/use-user";
 import { useSearchParams } from "next/navigation";
-import { getClients, deleteClient, Client } from "@/lib/firebase/firestore";
+import { getClients, deleteClient, getAllUserInvoices, Client, Invoice } from "@/lib/firebase/firestore";
 import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 import { ClientCard } from "@/components/dashboard/ClientCard";
 import { EmptyState } from "@/components/dashboard/EmptyState";
 import { UpgradeModal } from "@/components/dashboard/UpgradeModal";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Wallet, FileCheck, AlertTriangle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { ClientCardSkeleton } from "@/components/dashboard/Skeletons";
@@ -20,17 +20,22 @@ export default function DashboardPage() {
   const { profile, setIsAddClientModalOpen, refreshTrigger } = useDashboardContext();
   const searchParams = useSearchParams();
   const [clients, setClients] = useState<Client[]>([]);
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const plan = profile?.plan || "free";
 
-  const fetchClients = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     if (!user) return;
     try {
-      const data = await getClients(user.uid);
-      setClients(data as Client[]);
+      const [clientsData, invoicesData] = await Promise.all([
+        getClients(user.uid),
+        getAllUserInvoices(user.uid)
+      ]);
+      setClients(clientsData as Client[]);
+      setInvoices(invoicesData as Invoice[]);
     } catch (error) {
-      console.error("Error fetching clients:", error);
+      console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
@@ -39,9 +44,9 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!authLoading && user) {
       // Defer execution to avoid synchronous setState in effect body
-      void Promise.resolve().then(() => fetchClients());
+      void Promise.resolve().then(() => fetchData());
     }
-  }, [fetchClients, authLoading, refreshTrigger, user]);
+  }, [fetchData, authLoading, refreshTrigger, user]);
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") {
@@ -101,8 +106,41 @@ export default function DashboardPage() {
         </div>
         <Button onClick={handleAddClick} className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all w-full sm:w-auto font-mono uppercase tracking-wider text-xs rounded-sm">
           <Plus className="w-4 h-4 mr-2" />
-          Add Client
         </Button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          { 
+            label: "Outstanding", 
+            value: invoices.filter(i => i.status === "sent" || i.status === "overdue").reduce((acc, i) => acc + i.total, 0),
+            icon: Wallet,
+            color: "text-foreground"
+          },
+          { 
+            label: "Paid Total", 
+            value: invoices.filter(i => i.status === "paid").reduce((acc, i) => acc + i.total, 0),
+            icon: FileCheck,
+            color: "text-green-600 dark:text-green-400"
+          },
+          { 
+            label: "Overdue", 
+            value: invoices.filter(i => i.status === "sent" && (i.dueDate as any).toDate() < new Date()).length,
+            icon: AlertTriangle,
+            isCount: true,
+            color: "text-red-600 dark:text-red-400"
+          }
+        ].map((stat, i) => (
+          <div key={i} className="p-4 rounded-sm border border-border bg-card flex items-center justify-between">
+            <div>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">{stat.label}</p>
+              <h3 className={`text-xl font-black font-sans tracking-tight ${stat.color}`}>
+                {stat.isCount ? stat.value : `$${stat.value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
+              </h3>
+            </div>
+            <stat.icon className={`w-5 h-5 opacity-20 ${stat.color}`} />
+          </div>
+        ))}
       </div>
 
       {clients.length === 0 ? (

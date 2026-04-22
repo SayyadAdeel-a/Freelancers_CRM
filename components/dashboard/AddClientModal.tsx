@@ -29,7 +29,8 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: ""
+    company: "",
+    payerRating: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,10 +39,13 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     
     setLoading(true);
     try {
-      await addClient(user.uid, formData);
-      posthog.capture("client_added", { has_company: !!formData.company });
+      await addClient(user.uid, {
+        ...formData,
+        payerRating: (formData.payerRating || null) as any
+      });
+      posthog.capture("client_added", { has_company: !!formData.company, payer_rating: formData.payerRating });
       onSuccess();
-      setFormData({ name: "", email: "", company: "" });
+      setFormData({ name: "", email: "", company: "", payerRating: "" });
       onClose();
       toast.success("Client added successfully!");
     } catch (error) {
@@ -55,7 +59,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] glass border-none overflow-hidden p-0 shadow-2xl animate-in zoom-in-95 duration-200">
+      <DialogContent className="sm:max-w-[425px] bg-background border border-border overflow-hidden p-0 animate-in zoom-in-95 duration-200 rounded-sm">
         <form onSubmit={handleSubmit}>
           <div className="bg-primary h-1 w-full" />
           <div className="p-6">
@@ -74,7 +78,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-secondary/40 border-border/40 focus:ring-4 focus:ring-primary/10 rounded-xl h-11 transition-all"
+                  className="bg-secondary/40 border-border/40 focus:ring-4 focus:ring-primary/10 rounded-sm h-11 transition-all"
                 />
               </div>
               <div className="grid gap-2.5">
@@ -86,7 +90,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
                   placeholder="john@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-secondary/40 border-border/40 focus:ring-4 focus:ring-primary/10 rounded-xl h-11 transition-all"
+                  className="bg-secondary/40 border-border/40 focus:ring-4 focus:ring-primary/10 rounded-sm h-11 transition-all"
                 />
               </div>
               <div className="grid gap-2.5">
@@ -97,8 +101,23 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
                   placeholder="Acme Inc."
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="bg-secondary/40 border-border/40 focus:ring-4 focus:ring-primary/10 rounded-xl h-11 transition-all"
+                  className="bg-secondary/40 border-border/40 focus:ring-4 focus:ring-primary/10 rounded-sm h-11 transition-all"
                 />
+              </div>
+              <div className="grid gap-2.5">
+                <Label htmlFor="payerRating" className="text-xs font-black uppercase tracking-wider text-muted-foreground ml-1">Payer Rating</Label>
+                <select
+                  id="payerRating"
+                  value={formData.payerRating}
+                  onChange={(e) => setFormData({ ...formData, payerRating: e.target.value })}
+                  className="flex h-11 w-full rounded-sm border border-border/40 bg-secondary/40 px-3 py-2 text-sm font-mono focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all appearance-none cursor-pointer"
+                >
+                  <option value="">— Not set —</option>
+                  <option value="fast">⚡ Fast Payer — within a week</option>
+                  <option value="average">✅ Average Payer — 2-3 weeks</option>
+                  <option value="slow">🐢 Slow Payer — takes a month+</option>
+                  <option value="difficult">⚠️ Difficult — disputes/delays</option>
+                </select>
               </div>
             </div>
             <DialogFooter className="gap-3 sm:gap-0 pt-2">
