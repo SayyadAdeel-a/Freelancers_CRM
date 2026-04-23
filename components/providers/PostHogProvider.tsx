@@ -23,7 +23,6 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         disable_session_recording: process.env.NODE_ENV === "development",
         advanced_disable_decide: false, // Keep decide for feature flags if needed
         // Stop fetching these explicitly if causing noise
-        disable_web_vitals: true,
       });
     }
   }, []);
