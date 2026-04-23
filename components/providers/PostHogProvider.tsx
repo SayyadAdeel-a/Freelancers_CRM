@@ -17,7 +17,13 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         api_host: "/ingest",
         ui_host: "https://us.posthog.com",
         capture_exceptions: true,
-        debug: process.env.NODE_ENV === "development",
+        debug: false, // Reduced noise
+        // Disable features causing 401s if token is not properly scoped
+        disable_surveys: true,
+        disable_session_recording: process.env.NODE_ENV === "development",
+        advanced_disable_decide: false, // Keep decide for feature flags if needed
+        // Stop fetching these explicitly if causing noise
+        disable_web_vitals: true,
       });
     }
   }, []);
