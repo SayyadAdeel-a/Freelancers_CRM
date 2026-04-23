@@ -138,7 +138,16 @@ export default function DashboardPage() {
           },
           { 
             label: "Overdue", 
-            value: invoices.filter(i => i.status === "sent" && (i.dueDate as any).toDate() < new Date()).length,
+            value: invoices.filter(i => {
+              if (i.status !== "sent" || !i.dueDate) return false;
+              try {
+                // Handle both Firestore Timestamps and ISO strings
+                const dueDate = (i.dueDate as any)?.toDate ? (i.dueDate as any).toDate() : new Date(i.dueDate);
+                return dueDate < new Date();
+              } catch (e) {
+                return false;
+              }
+            }).length,
             icon: AlertTriangle,
             isCount: true,
             color: "text-red-600 dark:text-red-400"
