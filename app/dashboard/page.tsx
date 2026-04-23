@@ -141,8 +141,12 @@ export default function DashboardPage() {
             value: invoices.filter(i => {
               if (i.status !== "sent" || !i.dueDate) return false;
               try {
-                // Handle both Firestore Timestamps and ISO strings
-                const dueDate = (i.dueDate as any)?.toDate ? (i.dueDate as any).toDate() : new Date(i.dueDate);
+                // Handle Firestore Timestamps, Date objects, or ISO strings safely
+                const dueDate = (i.dueDate as any)?.toDate 
+                  ? (i.dueDate as any).toDate() 
+                  : (i.dueDate instanceof Date)
+                    ? i.dueDate
+                    : new Date(i.dueDate as any);
                 return dueDate < new Date();
               } catch (e) {
                 return false;
