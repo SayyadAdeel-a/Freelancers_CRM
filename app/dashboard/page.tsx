@@ -27,15 +27,28 @@ export default function DashboardPage() {
 
   const fetchData = useCallback(async () => {
     if (!user) return;
+    setLoading(true);
+    
+    // Fetch clients
     try {
-      const [clientsData, invoicesData] = await Promise.all([
-        getClients(user.uid),
-        getAllUserInvoices(user.uid)
-      ]);
+      const clientsData = await getClients(user.uid);
       setClients(clientsData as Client[]);
-      setInvoices(invoicesData as Invoice[]);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching clients:", error);
+      toast.error("Failed to load clients");
+    }
+
+    // Fetch invoices (might fail if index is missing)
+    try {
+      const invoicesData = await getAllUserInvoices(user.uid);
+      setInvoices(invoicesData as Invoice[]);
+    } catch (error: any) {
+      console.error("Error fetching invoices:", error);
+      // Don't show a toast for invoices index error as it's common during initial setup
+      // but log it clearly
+      if (error?.message?.includes("index")) {
+        console.warn("Firestore index for invoices subcollection is missing. Check the link in the console above.");
+      }
     } finally {
       setLoading(false);
     }
