@@ -71,6 +71,7 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
 
   const handleSendViaGmail = async (invoice: Invoice) => {
     const subject = encodeURIComponent(`Invoice ${invoice.invoiceNumber} from ${user?.displayName || "Nudge CRM User"}`);
+    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoice.id}`;
     
     // Format line items for plain text
     const itemsText = invoice.lineItems.map(item => `- ${item.description}: $${item.amount.toLocaleString()}`).join('\n');
@@ -83,7 +84,11 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
       `${itemsText}\n\n` +
       `Total Balance Due: $${invoice.total.toLocaleString()}\n` +
       `Due Date: ${formatDate(invoice.dueDate)}\n\n` +
-      `Please let me know if you have any questions or when the payment has been processed.\n\n` +
+      `--- STUNNING VERSION ---\n` +
+      `You can view the full professional breakdown and pay online here:\n` +
+      `${publicUrl}\n` +
+      `------------------------\n\n` +
+      `Please let me know if you have any questions.\n\n` +
       `Best regards,\n${user?.displayName || "Nudge CRM User"}`
     );
     
