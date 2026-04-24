@@ -249,3 +249,12 @@ export async function addInvoice(clientId: string, userId: string, invoiceData: 
 export async function updateInvoice(clientId: string, invoiceId: string, data: Partial<Invoice>) {
   return updateDoc(doc(db, "clients", clientId, "invoices", invoiceId), data);
 }
+
+export async function getInvoiceById(invoiceId: string) {
+  // Use collectionGroup to find the invoice since we might not have the clientId in the URL
+  const q = query(collectionGroup(db, "invoices"), where("__name__", "==", invoiceId));
+  const querySnapshot = await getDocsFn(q);
+  if (querySnapshot.empty) return null;
+  const d = querySnapshot.docs[0];
+  return { ...d.data(), id: d.id } as Invoice;
+}

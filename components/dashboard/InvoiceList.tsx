@@ -69,11 +69,28 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
     }
   };
 
+  const handleSendViaGmail = (invoice: Invoice) => {
+    const subject = encodeURIComponent(`Invoice ${invoice.invoiceNumber} from ${user?.displayName || "Nudge CRM User"}`);
+    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoice.id}`;
+    const body = encodeURIComponent(
+      `Hi ${invoice.clientName},\n\n` +
+      `I hope you're having a great day.\n\n` +
+      `Please find my invoice (${invoice.invoiceNumber}) for professional services rendered below.\n\n` +
+      `Invoice Details:\n` +
+      `- Amount: $${invoice.total.toLocaleString()}\n` +
+      `- Due Date: ${formatDate(invoice.dueDate)}\n\n` +
+      `You can view the full breakdown and pay online here:\n${publicUrl}\n\n` +
+      `Best regards,\n${user?.displayName || "Nudge CRM User"}`
+    );
+    
+    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${invoice.clientEmail}&su=${subject}&body=${body}`, '_blank');
+  };
+
   const handleSendInvoice = async (invoice: Invoice) => {
     if (!user?.email) return;
     setUpdating(invoice.id);
     try {
-      // 1. Send Email
+      // 1. Send Email via Resend (Automated)
       const response = await fetch("/api/invoices/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,7 +110,7 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
         sentAt: Timestamp.now()
       });
       
-      toast.success("Invoice sent successfully");
+      toast.success("Invoice sent successfully via Resend");
       onUpdate();
     } catch (error) {
       console.error("Error sending invoice:", error);
@@ -148,17 +165,22 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="rounded-sm font-mono text-[10px] uppercase tracking-wider">
                       {invoice.status === "draft" && (
-                        <DropdownMenuItem onClick={() => handleSendInvoice(invoice)}>
-                          <Send className="w-3.5 h-3.5 mr-2" /> Send Invoice
-                        </DropdownMenuItem>
+                        <>
+                          <DropdownMenuItem onClick={() => handleSendInvoice(invoice)}>
+                            <Send className="w-3.5 h-3.5 mr-2" /> Send via Resend (Auto)
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleSendViaGmail(invoice)}>
+                            <Mail className="w-3.5 h-3.5 mr-2" /> Send via Gmail (Personal)
+                          </DropdownMenuItem>
+                        </>
                       )}
                       {invoice.status !== "paid" && (
                         <DropdownMenuItem onClick={() => handleMarkAsPaid(invoice.id)}>
                           <CheckCircle2 className="w-3.5 h-3.5 mr-2 text-green-500" /> Mark as Paid
                         </DropdownMenuItem>
                       )}
-                      <DropdownMenuItem className="text-muted-foreground opacity-50 cursor-not-allowed">
-                        <FileText className="w-3.5 h-3.5 mr-2" /> View Details
+                      <DropdownMenuItem onClick={() => window.open(`/invoice/${invoice.id}`, '_blank')}>
+                        <FileText className="w-3.5 h-3.5 mr-2" /> View Public Page
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
