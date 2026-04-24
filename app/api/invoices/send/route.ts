@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     const { error } = await resend.emails.send({
       from: `${userName} via Nudge <invoices@mail.adeelsayyad.tech>`,
       to: [recipientEmail],
-      reply_to: userEmail,
+      replyTo: userEmail,
       subject: `Invoice ${invoiceNumber} from ${userName}`,
       html: `
         <div style="background-color: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 650px; margin: 0 auto; border: 1px solid #e5e5e5; padding: 0;">
