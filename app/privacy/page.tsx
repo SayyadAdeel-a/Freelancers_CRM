@@ -4,84 +4,80 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalPageLayout
       title="Privacy."
-      lastUpdated="April 21, 2026"
-      intro="At Nudge CRM, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our application."
+      lastUpdated="April 2026"
+      intro="At Nudge CRM, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our simple CRM for freelancers at app.adeelsayyad.tech."
       sections={[
         {
-          title: "Information We Collect",
+          title: "What data we collect",
           content: [
-            "We collect information that you provide directly to us when you register for an account, use the application, or communicate with us.",
+            "We collect information that you provide directly to us when you register for an account or use the service:",
             [
-              "Personal identification information (Name, email address)",
-              "Authentication data provided by third-party identity providers (e.g., Google)",
-              "Client data you enter into the application (client names, emails, companies, notes)",
-              "Usage data and analytics to improve the service",
+              "Basic Account Information: Name and email address.",
+              "Service Data: Client names, emails, company details, notes, and payment statuses that you enter into the application.",
+              "Payment Information: When you subscribe to a Pro plan, payment details are processed by Lemon Squeezy. We do not store your credit card information on our servers.",
+              "Authentication Data: Data provided by Google if you choose to sign in using their services.",
             ],
           ],
         },
         {
-          title: "How We Use Your Information",
+          title: "How we use your data",
           content: [
-            "We use the information we collect to:",
+            "We use the data we collect solely to provide and improve the Nudge service:",
             [
-              "Provide, operate, and maintain our application",
-              "Process transactions and send related information",
-              "Send administrative information, such as updates, security alerts, and support messages",
-              "Respond to comments, questions, and requests",
-              "Monitor and analyze trends, usage, and activities in connection with our services",
+              "To maintain your account and provide access to the CRM features.",
+              "To process your subscription payments via Lemon Squeezy.",
+              "To send essential service-related emails (e.g., password resets or payment notifications).",
+              "To improve the application by analyzing usage patterns (anonymized where possible).",
             ],
+            "We do not sell your data to third parties.",
           ],
         },
         {
           title: "Data Storage & Security",
           content: [
-            "Your data is stored securely using Firebase (Google Cloud Platform). We implement appropriate technical and organizational security measures to protect your personal information against accidental or unlawful destruction, loss, alteration, unauthorized disclosure, or access.",
-            "While we strive to use commercially acceptable means to protect your personal data, no method of transmission over the Internet or method of electronic storage is 100% secure.",
+            "Your data is stored and secured using industry-standard providers:",
+            [
+              "Database: Your client data is stored in Firebase Firestore (Google Cloud), which provides robust encryption at rest and in transit.",
+              "Authentication: User authentication is handled via Firebase Auth.",
+              "Backups: Regular backups are performed to ensure data integrity.",
+            ],
           ],
         },
         {
           title: "Third-Party Services",
           content: [
-            "We use the following third-party services:",
+            "Nudge utilizes the following third-party services to function:",
             [
-              "Firebase (Google) — Authentication and database storage",
-              "PostHog — Product analytics and error tracking",
-              "Sentry — Error monitoring",
-              "Lemon Squeezy — Payment processing for Pro subscriptions",
+              "Firebase (Google): Infrastructure, database, and authentication.",
+              "Lemon Squeezy: Payment processing and subscription management.",
+              "Resend: Sending transactional emails (notifications, resets).",
+              "PostHog: Product analytics to understand how users interact with Nudge.",
+              "Sentry: Error monitoring to help us fix bugs quickly.",
             ],
-            "Each of these services has their own privacy policy and data handling practices. We recommend reviewing their policies.",
           ],
         },
         {
-          title: "Your Rights",
+          title: "User Rights",
           content: [
-            "You have the right to:",
+            "As a user of Nudge, you have the following rights regarding your data:",
             [
-              "Access the personal information we hold about you",
-              "Request correction of inaccurate data",
-              "Request deletion of your account and associated data",
-              "Object to processing of your personal data",
-              "Request restriction of processing",
+              "Access: You can view all the client data you've entered at any time.",
+              "Deletion: You can request account deletion by emailing us, which will remove all your data from our systems.",
+              "Export: You can request an export of your client data in a machine-readable format.",
             ],
-            "To exercise any of these rights, contact us at hello@nudgecrm.app.",
+            "To exercise these rights, please contact us at the email provided below.",
           ],
         },
         {
-          title: "Cookies",
+          title: "Cookies Policy",
           content: [
-            "We use cookies and similar tracking technologies to track activity on our service. See our Cookie Policy for more details.",
+            "We use essential cookies to keep you signed in and remember your preferences. These are necessary for the application to function. We may also use analytical cookies via PostHog to help us improve the service.",
           ],
         },
         {
-          title: "Changes to This Policy",
+          title: "Contact Information",
           content: [
-            "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'Last updated' date.",
-          ],
-        },
-        {
-          title: "Contact Us",
-          content: [
-            "If you have any questions about this Privacy Policy, please contact us at hello@nudgecrm.app.",
+            "If you have any questions regarding this Privacy Policy or your data, please contact Sayyad Adeel at hello@nudgecrm.app.",
           ],
         },
       ]}

@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { addClient } from "@/lib/firebase/firestore";
+import { PayerRating } from "./PayerRatingBadge";
 import { useUser } from "@/hooks/use-user";
 import { toast } from "sonner";
 import posthog from "posthog-js";
@@ -41,7 +42,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     try {
       await addClient(user.uid, {
         ...formData,
-        payerRating: (formData.payerRating || null) as any
+        payerRating: (formData.payerRating || null) as PayerRating
       });
       posthog.capture("client_added", { has_company: !!formData.company, payer_rating: formData.payerRating });
       onSuccess();

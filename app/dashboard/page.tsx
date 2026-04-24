@@ -56,15 +56,13 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!authLoading && user) {
-      // Defer execution to avoid synchronous setState in effect body
-      void Promise.resolve().then(() => fetchData());
+      fetchData();
     }
   }, [fetchData, authLoading, refreshTrigger, user]);
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") {
-      // Defer state update to avoid synchronous setState in effect body
-      void Promise.resolve().then(() => setIsUpgradeModalOpen(true));
+      setIsUpgradeModalOpen(true);
     }
   }, [searchParams]);
 
@@ -110,63 +108,67 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground font-sans">Your Clients</h1>
-          <p className="text-muted-foreground mt-1 font-mono text-xs uppercase tracking-wider">
-            Manage your active projects and relationships.
-          </p>
-        </div>
-        <Button onClick={handleAddClick} className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all w-full sm:w-auto font-mono uppercase tracking-wider text-xs rounded-sm">
-          <Plus className="w-4 h-4 mr-2" />
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[
-          { 
-            label: "Outstanding", 
-            value: invoices.filter(i => i.status === "sent" || i.status === "overdue").reduce((acc, i) => acc + i.total, 0),
-            icon: Wallet,
-            color: "text-foreground"
-          },
-          { 
-            label: "Paid Total", 
-            value: invoices.filter(i => i.status === "paid").reduce((acc, i) => acc + i.total, 0),
-            icon: FileCheck,
-            color: "text-green-600 dark:text-green-400"
-          },
-          { 
-            label: "Overdue", 
-            value: invoices.filter(i => {
-              if (i.status !== "sent" || !i.dueDate) return false;
-              try {
-                // Handle Firestore Timestamps, Date objects, or ISO strings safely
-                const dueDate = (i.dueDate as any)?.toDate 
-                  ? (i.dueDate as any).toDate() 
-                  : (i.dueDate instanceof Date)
-                    ? i.dueDate
-                    : new Date(i.dueDate as any);
-                return dueDate < new Date();
-              } catch (e) {
-                return false;
-              }
-            }).length,
-            icon: AlertTriangle,
-            isCount: true,
-            color: "text-red-600 dark:text-red-400"
-          }
-        ].map((stat, i) => (
-          <div key={i} className="p-4 rounded-sm border border-border bg-card flex items-center justify-between">
+      <div className="relative p-8 border border-border bg-card rounded-sm overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
+        
+        <div className="relative z-10 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">{stat.label}</p>
-              <h3 className={`text-xl font-black font-sans tracking-tight ${stat.color}`}>
-                {stat.isCount ? stat.value : `$${stat.value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
-              </h3>
+              <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">Command Center</h1>
+              <p className="text-xs font-mono text-muted-foreground uppercase tracking-[0.2em] mt-1">Operational Overview & Asset Tracking</p>
             </div>
-            <stat.icon className={`w-5 h-5 opacity-20 ${stat.color}`} />
+            <Button onClick={handleAddClick} className="bg-primary text-primary-foreground font-mono text-xs uppercase tracking-widest rounded-sm h-11 px-6 shadow-brand">
+              <Plus className="w-4 h-4 mr-2" />
+              Initialize Client
+            </Button>
           </div>
-        ))}
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { 
+                label: "Accounts Receivable", 
+                value: invoices.filter(i => i.status === "sent" || i.status === "overdue").reduce((acc, i) => acc + i.total, 0),
+                icon: Wallet,
+                color: "text-foreground"
+              },
+              { 
+                label: "Settled Revenue", 
+                value: invoices.filter(i => i.status === "paid").reduce((acc, i) => acc + i.total, 0),
+                icon: FileCheck,
+                color: "text-primary"
+              },
+              { 
+                label: "Critical Delays", 
+                value: invoices.filter(i => {
+                  if (i.status !== "sent" || !i.dueDate) return false;
+                  try {
+                    const dueDate = (i.dueDate as any)?.toDate 
+                      ? (i.dueDate as any).toDate() 
+                      : (i.dueDate instanceof Date)
+                        ? i.dueDate
+                        : new Date(i.dueDate as any);
+                    return dueDate < new Date();
+                  } catch (e) {
+                    return false;
+                  }
+                }).length,
+                icon: AlertTriangle,
+                isCount: true,
+                color: "text-primary"
+              }
+            ].map((stat, i) => (
+              <div key={i} className="p-5 rounded-sm border border-border/60 bg-background/50 backdrop-blur-sm flex flex-col justify-between group hover:border-primary/30 transition-colors">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">{stat.label}</p>
+                  <stat.icon className={`w-4 h-4 opacity-40 ${stat.color}`} />
+                </div>
+                <h3 className={`text-3xl font-black font-sans tracking-tight ${stat.color}`}>
+                  {stat.isCount ? stat.value : `$${stat.value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {clients.length === 0 ? (

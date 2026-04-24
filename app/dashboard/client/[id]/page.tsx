@@ -62,13 +62,12 @@ export default function ClientPage() {
     } catch (error) {
       console.error("Error fetching client data:", error);
     } finally {
-      void Promise.resolve().then(() => setLoading(false));
+      setLoading(false);
     }
   }, [id, router, user]);
 
   useEffect(() => {
-    // Defer execution to avoid synchronous setState in effect body
-    void Promise.resolve().then(() => fetchData());
+    fetchData();
   }, [fetchData]);
 
   const handleDelete = async () => {

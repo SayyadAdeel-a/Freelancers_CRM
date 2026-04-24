@@ -37,39 +37,37 @@ const features = [
 export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[460px] overflow-hidden p-0 border-none glass shadow-2xl">
+      <DialogContent className="sm:max-w-[460px] overflow-hidden p-0 border border-border bg-background rounded-sm animate-in zoom-in-95 duration-200">
         {/* Header banner */}
-        <div className="bg-gradient-brand p-8 pb-10 text-white text-center relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-white/10 -translate-y-1/2 translate-x-1/4 blur-2xl animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-amber-400/20 translate-y-1/2 -translate-x-1/4 blur-xl" />
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-white/40 animate-ping" />
-
+        <div className="bg-primary p-10 text-primary-foreground text-left relative overflow-hidden">
+          {/* Industrial patterns */}
+          <div className="absolute top-0 right-0 w-full h-full opacity-10 bg-grid-pattern pointer-events-none" />
+          
           <div className="relative">
-            <div className="w-16 h-16 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center mx-auto mb-5 shadow-xl backdrop-blur-md transform hover:rotate-6 transition-transform">
-              <Sparkles className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 rounded-sm bg-background flex items-center justify-center mb-6 border border-primary-foreground/20">
+              <Zap className="w-6 h-6 text-primary" />
             </div>
-            <h2 className="text-4xl font-black tracking-tight mb-2">Go Pro</h2>
-            <p className="text-white/90 text-sm font-medium max-w-[280px] mx-auto leading-relaxed">
-              Unlock the full power of Nudge and take your freelance business to the next level.
+            <h2 className="text-4xl font-black tracking-tighter mb-2 font-sans uppercase">Pro Access</h2>
+            <p className="text-primary-foreground/80 text-xs font-mono uppercase tracking-widest leading-relaxed">
+              Scale your business beyond the basic limits.
             </p>
           </div>
         </div>
 
         {/* Features */}
-        <div className="px-8 py-8 space-y-4">
-          <div className="grid gap-4">
+        <div className="px-8 py-8 space-y-4 font-mono">
+          <div className="grid gap-3">
             {features.map((feat) => (
               <div
                 key={feat.label}
-                className="flex items-start gap-4 p-4 rounded-2xl bg-secondary/30 hover:bg-secondary/60 transition-all duration-300 border border-border/20 group"
+                className="flex items-start gap-4 p-4 rounded-sm bg-secondary/20 hover:bg-secondary/40 transition-all border border-border/50 group"
               >
-                <div className="w-11 h-11 rounded-xl bg-gradient-brand/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <feat.icon className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20">
+                  <feat.icon className="w-4 h-4 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-black">{feat.label}</p>
-                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{feat.desc}</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider">{feat.label}</p>
+                  <p className="text-[10px] text-muted-foreground mt-1 leading-tight uppercase tracking-tight">{feat.desc}</p>
                 </div>
               </div>
             ))}
@@ -77,37 +75,36 @@ export function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
         </div>
 
         {/* Pricing footer */}
-        <div className="px-8 pb-4">
-          <div className="rounded-3xl bg-primary/5 border border-primary/20 p-6 text-center mb-6 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-brand opacity-0 group-hover:opacity-5 transition-opacity" />
-            <div className="flex items-baseline justify-center gap-1.5 mb-1.5">
-              <span className="text-sm font-bold text-muted-foreground">$</span>
-              <span className="text-5xl font-black text-primary tracking-tighter">9</span>
-              <span className="text-sm text-muted-foreground font-bold">/month</span>
+        <div className="px-8 pb-8">
+          <div className="rounded-sm bg-secondary/10 border border-border p-6 text-center mb-6">
+            <div className="flex items-baseline justify-center gap-1.5 mb-1">
+              <span className="text-sm font-bold text-muted-foreground font-mono">$</span>
+              <span className="text-5xl font-black text-foreground tracking-tighter font-sans">9</span>
+              <span className="text-xs text-muted-foreground font-mono uppercase tracking-widest">/mo</span>
             </div>
-            <p className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">Cancel anytime • No commitments</p>
+            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Billed monthly • Cancel anytime</p>
           </div>
 
-          <DialogFooter className="flex-col gap-3 sm:flex-col pb-8 px-0">
+          <div className="flex flex-col gap-3">
             <Button
-              className="w-full bg-gradient-brand text-white shadow-brand font-black h-14 rounded-2xl text-lg hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="w-full bg-primary text-primary-foreground font-black h-12 rounded-sm text-sm uppercase tracking-widest hover:bg-primary/90 active:scale-95 transition-all shadow-brand font-mono"
               onClick={() => {
                 posthog.capture("upgrade_cta_clicked", { plan: "pro", price_monthly: 9 });
                 toast.success("Pro coming soon!");
                 onClose();
               }}
             >
-              <Zap className="w-5 h-5 mr-2 fill-current" />
-              Get Pro Now
+              <Zap className="w-4 h-4 mr-2" />
+              Activate Subscription
             </Button>
             <Button
               variant="ghost"
               onClick={onClose}
-              className="w-full text-muted-foreground hover:text-foreground text-sm font-bold rounded-xl"
+              className="w-full text-muted-foreground hover:text-foreground text-[10px] font-bold uppercase tracking-widest rounded-sm h-10 font-mono"
             >
-              Maybe later
+              Dismiss
             </Button>
-          </DialogFooter>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

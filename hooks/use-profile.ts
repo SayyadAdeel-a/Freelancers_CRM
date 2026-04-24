@@ -31,10 +31,9 @@ export function useProfile() {
 
   useEffect(() => {
     if (!authLoading) {
-      // Defer execution to avoid synchronous setState in effect body
-      void Promise.resolve().then(() => fetchProfile());
+      fetchProfile();
     }
-  }, [user, authLoading, fetchProfile]);
+  }, [authLoading, fetchProfile]);
 
   return { profile, loading, refreshProfile: fetchProfile };
 }

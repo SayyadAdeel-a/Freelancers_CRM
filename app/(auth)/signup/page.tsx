@@ -57,7 +57,7 @@ export default function SignupPage() {
   };
 
   const perks = [
-    { label: "Up to 25 clients free", sub: "No credit card needed" },
+    { label: "Up to 5 clients free", sub: "No credit card needed" },
     { label: "Notes & activity logs", sub: "Every interaction tracked" },
     { label: "Email reminders", sub: "Pro feature — never miss a follow-up" },
   ];
@@ -279,6 +279,13 @@ export default function SignupPage() {
               Sign in
             </Link>
           </p>
+
+          {/* Legal footer */}
+          <div className="pt-8 border-t border-border flex justify-center gap-4 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms</Link>
+            <Link href="/refund" className="hover:text-primary transition-colors">Refunds</Link>
+          </div>
         </div>
       </div>
     </div>

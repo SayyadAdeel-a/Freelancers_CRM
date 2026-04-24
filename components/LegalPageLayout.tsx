@@ -98,6 +98,7 @@ export function LegalPageLayout({ title, lastUpdated, intro, sections }: LegalPa
           <div className="flex gap-4 text-[10px] font-mono uppercase tracking-widest">
             <Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
             <Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms</Link>
+            <Link href="/refund" className="text-muted-foreground hover:text-primary transition-colors">Refunds</Link>
             <Link href="/cookies" className="text-muted-foreground hover:text-primary transition-colors">Cookies</Link>
           </div>
         </div>

@@ -4,7 +4,7 @@ export default function CookiePolicyPage() {
   return (
     <LegalPageLayout
       title="Cookies."
-      lastUpdated="April 21, 2026"
+      lastUpdated="April 2026"
       intro="This Cookie Policy explains what cookies are, how Nudge CRM uses them, and how you can control your cookie preferences."
       sections={[
         {

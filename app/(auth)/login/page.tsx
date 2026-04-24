@@ -275,6 +275,13 @@ export default function LoginPage() {
               Create one free
             </Link>
           </p>
+
+          {/* Legal footer */}
+          <div className="pt-8 border-t border-border flex justify-center gap-4 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms</Link>
+            <Link href="/refund" className="hover:text-primary transition-colors">Refunds</Link>
+          </div>
         </div>
       </div>
     </div>
