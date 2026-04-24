@@ -67,6 +67,7 @@ export interface Invoice {
   invoiceNumber: string;
   clientId: string;
   clientName: string;
+  clientEmail: string;
   userId: string;
   issueDate: Timestamp | FieldValue;
   dueDate: Timestamp | FieldValue;

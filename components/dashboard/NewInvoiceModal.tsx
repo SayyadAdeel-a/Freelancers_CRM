@@ -21,12 +21,13 @@ import { Timestamp } from "firebase/firestore";
 interface NewInvoiceModalProps {
   clientId: string;
   clientName: string;
+  clientEmail: string;
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
 }
 
-export function NewInvoiceModal({ clientId, clientName, isOpen, onClose, onSuccess }: NewInvoiceModalProps) {
+export function NewInvoiceModal({ clientId, clientName, clientEmail, isOpen, onClose, onSuccess }: NewInvoiceModalProps) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
   const [invoiceNumber, setInvoiceNumber] = useState("");
@@ -74,6 +75,7 @@ export function NewInvoiceModal({ clientId, clientName, isOpen, onClose, onSucce
       await addInvoice(clientId, user.uid, {
         invoiceNumber,
         clientName,
+        clientEmail,
         issueDate: Timestamp.fromDate(issueDate),
         dueDate: Timestamp.fromDate(due),
         lineItems,

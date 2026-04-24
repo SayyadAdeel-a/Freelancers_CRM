@@ -10,74 +10,103 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
-    const { invoice, userEmail } = await req.json();
+    const { invoice, userEmail, userName } = await req.json();
 
     if (!invoice || !userEmail) {
       return NextResponse.json({ error: "Missing required data" }, { status: 400 });
     }
 
-    const { invoiceNumber, clientName, total, lineItems, dueDate, notes } = invoice;
+    const { invoiceNumber, clientName, clientEmail, total, lineItems, dueDate, notes } = invoice;
+    const recipientEmail = clientEmail || userEmail; // Fallback to user for old invoices
 
     // Format currency
     const formatCurrency = (amt: number) => 
       new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amt);
 
     const itemsHtml = lineItems.map((item: any) => `
-      <tr style="border-bottom: 1px solid #eee;">
-        <td style="padding: 12px 0; font-family: monospace;">${item.description}</td>
-        <td style="padding: 12px 0; text-align: right; font-family: monospace;">${formatCurrency(item.amount)}</td>
+      <tr style="border-bottom: 1px solid #e5e5e5;">
+        <td style="padding: 16px 0; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a;">${item.description}</td>
+        <td style="padding: 16px 0; text-align: right; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a; font-weight: 600;">${formatCurrency(item.amount)}</td>
       </tr>
     `).join("");
 
     const { error } = await resend.emails.send({
-      from: "Nudge CRM <invoices@mail.adeelsayyad.tech>",
-      to: [userEmail], // In real app, this should be clientEmail, but for demo we send to user
-      subject: `Invoice ${invoiceNumber} from Nudge CRM`,
+      from: `${userName} via Nudge <invoices@mail.adeelsayyad.tech>`,
+      to: [recipientEmail],
+      reply_to: userEmail,
+      subject: `Invoice ${invoiceNumber} from ${userName}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #000; padding: 40px; color: #000;">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
-            <div>
-              <h1 style="margin: 0; font-size: 24px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">INVOICE</h1>
-              <p style="margin: 5px 0 0; font-family: monospace; font-size: 12px; color: #666;">${invoiceNumber}</p>
+        <div style="background-color: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 650px; margin: 0 auto; border: 1px solid #e5e5e5; padding: 0;">
+          <!-- Top Accent -->
+          <div style="height: 4px; background-color: #ff0000;"></div>
+          
+          <div style="padding: 48px;">
+            <!-- Header -->
+            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #000000; padding-bottom: 24px; margin-bottom: 48px;">
+              <div style="flex: 1;">
+                <h1 style="margin: 0; font-size: 42px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; line-height: 1;">INVOICE</h1>
+                <p style="margin: 8px 0 0; font-family: ui-monospace, monospace; font-size: 14px; color: #666666; font-weight: 500;">${invoiceNumber}</p>
+              </div>
+              <div style="text-align: right; flex: 1;">
+                <p style="margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Date Issued</p>
+                <p style="margin: 4px 0 0; font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600;">${new Date().toLocaleDateString()}</p>
+              </div>
             </div>
-            <div style="text-align: right;">
-              <p style="margin: 0; font-weight: 700;">Nudge CRM</p>
-              <p style="margin: 0; font-size: 12px; color: #666;">Freelancer Tool</p>
+
+            <!-- Details Grid -->
+            <div style="display: flex; gap: 40px; margin-bottom: 48px;">
+              <div style="flex: 1;">
+                <p style="margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666; margin-bottom: 12px;">Bill To</p>
+                <p style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;">${clientName}</p>
+                <p style="margin: 4px 0 0; font-family: ui-monospace, monospace; font-size: 13px; color: #666666;">${clientEmail || ""}</p>
+              </div>
+              <div style="flex: 1; text-align: right;">
+                <p style="margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666; margin-bottom: 12px;">Payment Due</p>
+                <p style="margin: 0; font-size: 20px; font-weight: 800; color: #ff0000;">${new Date(dueDate.seconds * 1000).toLocaleDateString()}</p>
+              </div>
             </div>
-          </div>
 
-          <div style="margin-bottom: 40px;">
-            <p style="margin: 0; font-size: 10px; font-weight: 900; color: #666; text-transform: uppercase; letter-spacing: 2px;">Bill To</p>
-            <p style="margin: 5px 0 0; font-size: 18px; font-weight: 700;">${clientName}</p>
-          </div>
+            <!-- Items Table -->
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
+              <thead>
+                <tr style="border-bottom: 1px solid #000000;">
+                  <th style="text-align: left; padding: 12px 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Description</th>
+                  <th style="text-align: right; padding: 12px 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${itemsHtml}
+              </tbody>
+            </table>
 
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px;">
-            <thead>
-              <tr style="border-bottom: 2px solid #000;">
-                <th style="text-align: left; padding: 10px 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666;">Description</th>
-                <th style="text-align: right; padding: 10px 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666;">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${itemsHtml}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td style="padding: 20px 0 0; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Total</td>
-                <td style="padding: 20px 0 0; text-align: right; font-size: 24px; font-weight: 900;">${formatCurrency(total)}</td>
-              </tr>
-            </tfoot>
-          </table>
-
-          ${notes ? `
-            <div style="margin-bottom: 40px; padding: 20px; background: #f9f9f9; border-left: 4px solid #000;">
-              <p style="margin: 0 0 5px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #666;">Notes</p>
-              <p style="margin: 0; font-size: 14px;">${notes}</p>
+            <!-- Summary -->
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 48px;">
+              <div style="width: 240px; background-color: #f8f8f8; padding: 24px; border: 1px solid #e5e5e5;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #666666;">Total Amount</span>
+                  <span style="font-size: 24px; font-weight: 900; letter-spacing: -1px;">${formatCurrency(total)}</span>
+                </div>
+              </div>
             </div>
-          ` : ""}
 
-          <div style="border-top: 1px solid #eee; padding-top: 20px; font-size: 10px; color: #999; font-family: monospace; text-transform: uppercase; letter-spacing: 1px;">
-            Please pay by ${new Date(dueDate.seconds * 1000).toLocaleDateString()}. Thank you.
+            <!-- Notes -->
+            ${notes ? `
+              <div style="margin-bottom: 64px; padding: 24px; border: 1px dashed #e5e5e5; border-radius: 4px;">
+                <p style="margin: 0 0 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Additional Notes</p>
+                <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #333333;">${notes}</p>
+              </div>
+            ` : ""}
+
+            <!-- Footer -->
+            <div style="border-top: 1px solid #e5e5e5; padding-top: 32px; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="margin: 0; font-size: 12px; font-weight: 700; color: #000000;">${userName}</p>
+                <p style="margin: 2px 0 0; font-size: 11px; color: #666666; font-family: ui-monospace, monospace;">via Nudge CRM</p>
+              </div>
+              <div style="text-align: right;">
+                <img src="https://app.adeelsayyad.tech/logo.svg" alt="Nudge Logo" style="height: 24px; width: auto; opacity: 0.8;" />
+              </div>
+            </div>
           </div>
         </div>
       `,

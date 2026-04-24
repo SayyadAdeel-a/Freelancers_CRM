@@ -79,7 +79,8 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           invoice,
-          userEmail: user.email 
+          userEmail: user.email,
+          userName: user.displayName || "Nudge CRM User"
         }),
       });
 

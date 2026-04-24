@@ -264,6 +264,7 @@ export default function ClientPage() {
       <NewInvoiceModal
         clientId={client.id}
         clientName={client.name}
+        clientEmail={client.email}
         isOpen={isInvoiceModalOpen}
         onClose={() => setIsInvoiceModalOpen(false)}
         onSuccess={fetchData}
