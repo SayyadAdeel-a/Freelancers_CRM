@@ -19,27 +19,31 @@ const spaceMono = Space_Mono({
 import { APP_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `${APP_CONFIG.name} | Freelancer Client Management`,
-  description: APP_CONFIG.description,
-  keywords: ["CRM", "freelancer", "client management", "productivity", "reminders"],
+  title: "Nudge CRM | Premium Invoicing & Client Management for Freelancers",
+  description: "The industrial-grade CRM for modern freelancers. Manage clients, send stunning invoices, and track projects with a high-performance, Nothing-inspired interface.",
+  keywords: ["Freelancer CRM", "Free Invoicing Software", "Client Management", "Professional Invoices", "Freelance Productivity", "Nudge CRM"],
+  authors: [{ name: "Adeel Sayyad" }],
+  metadataBase: new URL("https://app.adeelsayyad.tech"),
   icons: {
     icon: '/logo.svg',
     apple: '/logo.svg',
   },
   manifest: '/site.webmanifest',
   appleWebApp: {
-    title: APP_CONFIG.name,
+    title: "Nudge CRM",
+    statusBarStyle: "black-translucent",
   },
   openGraph: {
-    title: APP_CONFIG.name,
-    description: APP_CONFIG.description,
+    title: "Nudge CRM | Premium Invoicing for Freelancers",
+    description: "Industrial-grade client management and invoicing. Built for speed, designed for impact.",
     type: "website",
-    url: "https://freelancers-crm-one.vercel.app/",
+    url: "https://app.adeelsayyad.tech",
+    siteName: "Nudge CRM",
   },
   twitter: {
     card: "summary_large_image",
-    title: APP_CONFIG.name,
-    description: APP_CONFIG.description,
+    title: "Nudge CRM | Premium Invoicing",
+    description: "Manage your freelance business with an industrial-grade interface.",
   }
 };
 

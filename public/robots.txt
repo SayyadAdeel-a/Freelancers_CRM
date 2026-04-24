@@ -1,0 +1,14 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /api/og
+
+# Disallow sensitive directories
+Disallow: /dashboard/
+Disallow: /settings/
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+
+# Host-specific sitemap
+Sitemap: https://app.adeelsayyad.tech/sitemap.xml

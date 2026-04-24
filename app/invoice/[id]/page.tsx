@@ -3,6 +3,16 @@ import { formatDate } from "@/lib/utils";
 import { FileText, Printer, ShieldCheck, Mail, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Invoice Viewer | Nudge CRM",
+  description: "Secure invoice viewing and verification node.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 interface PageProps {
   params: {
