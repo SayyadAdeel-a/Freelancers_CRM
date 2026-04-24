@@ -80,6 +80,7 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
         body: JSON.stringify({ 
           invoice,
           userEmail: user.email,
+          userId: user.uid,
           userName: user.displayName || "Nudge CRM User"
         }),
       });

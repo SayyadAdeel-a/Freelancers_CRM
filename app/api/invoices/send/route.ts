@@ -10,14 +10,29 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
-    const { invoice, userEmail, userName } = await req.json();
+    const { invoice, userEmail, userId, userName } = await req.json();
 
     if (!invoice || !userEmail) {
       return NextResponse.json({ error: "Missing required data" }, { status: 400 });
     }
 
-    const { invoiceNumber, clientName, clientEmail, total, lineItems, dueDate, notes } = invoice;
-    const recipientEmail = clientEmail || userEmail; // Fallback to user for old invoices
+    let { invoiceNumber, clientName, clientEmail, clientId, total, lineItems, dueDate, notes } = invoice;
+    const senderName = userName || "Nudge CRM User";
+    
+    // If clientEmail is missing (legacy invoice), try to fetch it from Firestore
+    if (!clientEmail && clientId && userId) {
+      try {
+        const { getClient } = await import("@/lib/firebase/firestore");
+        const client = await getClient(clientId, userId);
+        if (client && client.email) {
+          clientEmail = client.email;
+        }
+      } catch (err) {
+        console.error("Failed to fetch client email:", err);
+      }
+    }
+
+    const recipientEmail = clientEmail || userEmail; 
 
     // Format currency
     const formatCurrency = (amt: number) => 
@@ -25,53 +40,56 @@ export async function POST(req: NextRequest) {
 
     const itemsHtml = lineItems.map((item: any) => `
       <tr style="border-bottom: 1px solid #e5e5e5;">
-        <td style="padding: 16px 0; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a;">${item.description}</td>
-        <td style="padding: 16px 0; text-align: right; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a; font-weight: 600;">${formatCurrency(item.amount)}</td>
+        <td style="padding: 12px 0; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a;">${item.description}</td>
+        <td align="right" style="padding: 12px 0; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a; font-weight: 600;">${formatCurrency(item.amount)}</td>
       </tr>
     `).join("");
 
     const { error } = await resend.emails.send({
-      from: `${userName} via Nudge <invoices@mail.adeelsayyad.tech>`,
+      from: `${senderName} via Nudge <invoices@mail.adeelsayyad.tech>`,
       to: [recipientEmail],
       replyTo: userEmail,
-      subject: `Invoice ${invoiceNumber} from ${userName}`,
+      subject: `Invoice ${invoiceNumber} from ${senderName}`,
       html: `
-        <div style="background-color: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 650px; margin: 0 auto; border: 1px solid #e5e5e5; padding: 0;">
-          <!-- Top Accent -->
+        <div style="background-color: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e5e5; padding: 0;">
           <div style="height: 4px; background-color: #ff0000;"></div>
           
-          <div style="padding: 48px;">
+          <div style="padding: 40px;">
             <!-- Header -->
-            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #000000; padding-bottom: 24px; margin-bottom: 48px;">
-              <div style="flex: 1;">
-                <h1 style="margin: 0; font-size: 42px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; line-height: 1;">INVOICE</h1>
-                <p style="margin: 8px 0 0; font-family: ui-monospace, monospace; font-size: 14px; color: #666666; font-weight: 500;">${invoiceNumber}</p>
-              </div>
-              <div style="text-align: right; flex: 1;">
-                <p style="margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Date Issued</p>
-                <p style="margin: 4px 0 0; font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600;">${new Date().toLocaleDateString()}</p>
-              </div>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 40px; border-bottom: 2px solid #000000;">
+              <tr>
+                <td align="left" style="padding-bottom: 20px;">
+                  <h1 style="margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">INVOICE</h1>
+                  <p style="margin: 4px 0 0; font-family: ui-monospace, monospace; font-size: 12px; color: #666666;">${invoiceNumber}</p>
+                </td>
+                <td align="right" style="padding-bottom: 20px;">
+                  <p style="margin: 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999;">Date Issued</p>
+                  <p style="margin: 2px 0 0; font-family: ui-monospace, monospace; font-size: 13px; font-weight: 600;">${new Date().toLocaleDateString()}</p>
+                </td>
+              </tr>
+            </table>
 
-            <!-- Details Grid -->
-            <div style="display: flex; gap: 40px; margin-bottom: 48px;">
-              <div style="flex: 1;">
-                <p style="margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666; margin-bottom: 12px;">Bill To</p>
-                <p style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;">${clientName}</p>
-                <p style="margin: 4px 0 0; font-family: ui-monospace, monospace; font-size: 13px; color: #666666;">${clientEmail || ""}</p>
-              </div>
-              <div style="flex: 1; text-align: right;">
-                <p style="margin: 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666; margin-bottom: 12px;">Payment Due</p>
-                <p style="margin: 0; font-size: 20px; font-weight: 800; color: #ff0000;">${new Date(dueDate.seconds * 1000).toLocaleDateString()}</p>
-              </div>
-            </div>
+            <!-- Details -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 40px;">
+              <tr>
+                <td width="50%" align="left" valign="top">
+                  <p style="margin: 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999; margin-bottom: 8px;">Bill To</p>
+                  <p style="margin: 0; font-size: 18px; font-weight: 800;">${clientName}</p>
+                  <p style="margin: 2px 0 0; font-family: ui-monospace, monospace; font-size: 12px; color: #666666;">${clientEmail || ""}</p>
+                </td>
+                <td width="50%" align="right" valign="top">
+                  <p style="margin: 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999; margin-bottom: 8px;">Payment Due</p>
+                  <p style="margin: 0; font-size: 18px; font-weight: 800; color: #ff0000;">${new Date(dueDate.seconds * 1000).toLocaleDateString()}</p>
+                </td>
+              </tr>
+            </table>
 
-            <!-- Items Table -->
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px;">
+            <!-- Items -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
               <thead>
                 <tr style="border-bottom: 1px solid #000000;">
-                  <th style="text-align: left; padding: 12px 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Description</th>
-                  <th style="text-align: right; padding: 12px 0; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Amount</th>
+                  <th align="left" style="padding: 10px 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999;">Description</th>
+                  <th align="right" style="padding: 10px 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999;">Amount</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,33 +98,49 @@ export async function POST(req: NextRequest) {
             </table>
 
             <!-- Summary -->
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 48px;">
-              <div style="width: 240px; background-color: #f8f8f8; padding: 24px; border: 1px solid #e5e5e5;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span style="font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #666666;">Total Amount</span>
-                  <span style="font-size: 24px; font-weight: 900; letter-spacing: -1px;">${formatCurrency(total)}</span>
-                </div>
-              </div>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 40px;">
+              <tr>
+                <td align="right">
+                  <table cellpadding="0" cellspacing="0" style="width: 200px; background-color: #fcfcfc; border: 1px solid #eeeeee;">
+                    <tr>
+                      <td style="padding: 20px;">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="left" style="font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #999999;">Total</td>
+                            <td align="right" style="font-size: 20px; font-weight: 900; letter-spacing: -0.5px;">${formatCurrency(total)}</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
 
             <!-- Notes -->
             ${notes ? `
-              <div style="margin-bottom: 64px; padding: 24px; border: 1px dashed #e5e5e5; border-radius: 4px;">
-                <p style="margin: 0 0 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #666666;">Additional Notes</p>
-                <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #333333;">${notes}</p>
-              </div>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 40px;">
+                <tr>
+                  <td style="padding: 20px; border: 1px dashed #eeeeee; border-radius: 4px;">
+                    <p style="margin: 0 0 5px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999;">Notes</p>
+                    <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #333333;">${notes}</p>
+                  </td>
+                </tr>
+              </table>
             ` : ""}
 
             <!-- Footer -->
-            <div style="border-top: 1px solid #e5e5e5; padding-top: 32px; display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <p style="margin: 0; font-size: 12px; font-weight: 700; color: #000000;">${userName}</p>
-                <p style="margin: 2px 0 0; font-size: 11px; color: #666666; font-family: ui-monospace, monospace;">via Nudge CRM</p>
-              </div>
-              <div style="text-align: right;">
-                <img src="https://app.adeelsayyad.tech/logo.svg" alt="Nudge Logo" style="height: 24px; width: auto; opacity: 0.8;" />
-              </div>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-top: 1px solid #eeeeee; padding-top: 30px;">
+              <tr>
+                <td align="left">
+                  <p style="margin: 0; font-size: 13px; font-weight: 700; color: #000000;">${senderName}</p>
+                  <p style="margin: 2px 0 0; font-size: 11px; color: #999999; font-family: ui-monospace, monospace;">via Nudge CRM</p>
+                </td>
+                <td align="right">
+                  <img src="https://app.adeelsayyad.tech/logo.svg" alt="Nudge Logo" width="60" style="display: block; opacity: 0.6;" />
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
       `,
