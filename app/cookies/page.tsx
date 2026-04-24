@@ -87,7 +87,7 @@ export default function CookiePolicyPage() {
         {
           title: "Contact",
           content: [
-            "Questions about our use of cookies? Email us at hello@nudgecrm.app.",
+            "Questions about our use of cookies? Email us at hello@mail.adeelsayyad.tech.",
           ],
         },
       ]}

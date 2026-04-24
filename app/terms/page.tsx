@@ -77,7 +77,7 @@ export default function TermsOfServicePage() {
         {
           title: "Contact Information",
           content: [
-            "For any questions regarding these Terms, please contact us at hello@nudgecrm.app.",
+            "For any questions regarding these Terms, please contact us at hello@mail.adeelsayyad.tech.",
           ],
         },
       ]}

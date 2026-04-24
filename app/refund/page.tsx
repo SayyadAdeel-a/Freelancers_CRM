@@ -29,7 +29,7 @@ export default function RefundPolicyPage() {
         {
           title: "How to Request a Refund",
           content: [
-            "To request a refund, please email hello@nudgecrm.app from the email address associated with your account. Please include your transaction ID from the Lemon Squeezy receipt to help us process your request faster.",
+            "To request a refund, please email hello@mail.adeelsayyad.tech from the email address associated with your account. Please include your transaction ID from the Lemon Squeezy receipt to help us process your request faster.",
           ],
         },
         {
@@ -41,7 +41,7 @@ export default function RefundPolicyPage() {
         {
           title: "Contact Information",
           content: [
-            "If you have any questions regarding our refund policy, please reach out to us at hello@nudgecrm.app.",
+            "If you have any questions regarding our refund policy, please reach out to us at hello@mail.adeelsayyad.tech.",
           ],
         },
       ]}

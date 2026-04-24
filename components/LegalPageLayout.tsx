@@ -90,8 +90,8 @@ export function LegalPageLayout({ title, lastUpdated, intro, sections }: LegalPa
             </p>
             <p className="text-xs font-mono text-muted-foreground">
               Contact us at{" "}
-              <a href="mailto:hello@nudgecrm.app" className="text-primary hover:underline">
-                hello@nudgecrm.app
+              <a href="mailto:hello@mail.adeelsayyad.tech" className="text-primary hover:underline">
+                hello@mail.adeelsayyad.tech
               </a>
             </p>
           </div>

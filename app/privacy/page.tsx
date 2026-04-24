@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
         {
           title: "Contact Information",
           content: [
-            "If you have any questions regarding this Privacy Policy or your data, please contact Sayyad Adeel at hello@nudgecrm.app.",
+            "If you have any questions regarding this Privacy Policy or your data, please contact Sayyad Adeel at hello@mail.adeelsayyad.tech.",
           ],
         },
       ]}
