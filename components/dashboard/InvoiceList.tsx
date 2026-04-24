@@ -69,52 +69,39 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
     }
   };
 
-  const handleSendViaGmail = (invoice: Invoice) => {
+  const handleSendViaGmail = async (invoice: Invoice) => {
     const subject = encodeURIComponent(`Invoice ${invoice.invoiceNumber} from ${user?.displayName || "Nudge CRM User"}`);
-    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoice.id}`;
+    
+    // Format line items for plain text
+    const itemsText = invoice.lineItems.map(item => `- ${item.description}: $${item.amount.toLocaleString()}`).join('\n');
+    
     const body = encodeURIComponent(
       `Hi ${invoice.clientName},\n\n` +
       `I hope you're having a great day.\n\n` +
-      `Please find my invoice (${invoice.invoiceNumber}) for professional services rendered below.\n\n` +
-      `Invoice Details:\n` +
-      `- Amount: $${invoice.total.toLocaleString()}\n` +
-      `- Due Date: ${formatDate(invoice.dueDate)}\n\n` +
-      `You can view the full breakdown and pay online here:\n${publicUrl}\n\n` +
+      `Please find the details for invoice ${invoice.invoiceNumber} below.\n\n` +
+      `Invoice Summary:\n` +
+      `${itemsText}\n\n` +
+      `Total Balance Due: $${invoice.total.toLocaleString()}\n` +
+      `Due Date: ${formatDate(invoice.dueDate)}\n\n` +
+      `Please let me know if you have any questions or when the payment has been processed.\n\n` +
       `Best regards,\n${user?.displayName || "Nudge CRM User"}`
     );
     
-    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${invoice.clientEmail}&su=${subject}&body=${body}`, '_blank');
-  };
-
-  const handleSendInvoice = async (invoice: Invoice) => {
-    if (!user?.email) return;
+    // 1. Update status to 'sent'
     setUpdating(invoice.id);
     try {
-      // 1. Send Email via Resend (Automated)
-      const response = await fetch("/api/invoices/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          invoice,
-          userEmail: user.email,
-          userId: user.uid,
-          userName: user.displayName || "Nudge CRM User"
-        }),
-      });
-
-      if (!response.ok) throw new Error("Failed to send email");
-
-      // 2. Update Firestore
       await updateInvoice(clientId, invoice.id, { 
         status: "sent",
         sentAt: Timestamp.now()
       });
-      
-      toast.success("Invoice sent successfully via Resend");
       onUpdate();
+      
+      // 2. Open Gmail
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${invoice.clientEmail}&su=${subject}&body=${body}`, '_blank');
+      toast.success("Opening Gmail and marked as sent");
     } catch (error) {
-      console.error("Error sending invoice:", error);
-      toast.error("Failed to send invoice email");
+      console.error("Error updating invoice status:", error);
+      toast.error("Failed to update invoice status");
     } finally {
       setUpdating(null);
     }
@@ -166,9 +153,6 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
                     <DropdownMenuContent align="end" className="rounded-sm font-mono text-[10px] uppercase tracking-wider">
                       {invoice.status === "draft" && (
                         <>
-                          <DropdownMenuItem onClick={() => handleSendInvoice(invoice)}>
-                            <Send className="w-3.5 h-3.5 mr-2" /> Send via Resend (Auto)
-                          </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleSendViaGmail(invoice)}>
                             <Mail className="w-3.5 h-3.5 mr-2" /> Send via Gmail (Personal)
                           </DropdownMenuItem>
@@ -179,9 +163,6 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
                           <CheckCircle2 className="w-3.5 h-3.5 mr-2 text-green-500" /> Mark as Paid
                         </DropdownMenuItem>
                       )}
-                      <DropdownMenuItem onClick={() => window.open(`/invoice/${invoice.id}`, '_blank')}>
-                        <FileText className="w-3.5 h-3.5 mr-2" /> View Public Page
-                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </td>
