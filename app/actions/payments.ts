@@ -20,9 +20,14 @@ export async function createProCheckout(userId: string, userEmail: string) {
       baseUrl = "http://localhost:3000";
     }
 
+    // Clean trailing slash
+    baseUrl = baseUrl.replace(/\/$/, "");
+
     console.log("--- Payment Action Debug ---");
     console.log("User ID:", userId);
     console.log("Base URL:", baseUrl);
+    console.log("Store ID:", storeId);
+    console.log("Variant ID:", variantId);
     console.log("Has API Key:", !!apiKey);
 
     if (!apiKey || !storeId || !variantId) {
