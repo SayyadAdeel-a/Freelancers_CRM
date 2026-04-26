@@ -10,13 +10,11 @@ export async function createProCheckout(userId: string, userEmail: string) {
     const storeId = process.env.LEMON_SQUEEZY_STORE_ID?.trim();
     const variantId = process.env.LEMON_SQUEEZY_VARIANT_ID?.trim();
 
-    // Detect base URL (Vercel provides VERCEL_URL, but we prefer NEXT_PUBLIC_APP_URL if set)
-    let baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-    if (!baseUrl && process.env.VERCEL_URL) {
-      baseUrl = `https://${process.env.VERCEL_URL}`;
-    }
-    // Fallback for local dev if both are missing
-    if (!baseUrl) {
+    // Detect base URL
+    let baseUrl = "https://app.adeelsayyad.tech";
+    
+    // Allow localhost for development
+    if (process.env.NODE_ENV === "development") {
       baseUrl = "http://localhost:3000";
     }
 
