@@ -6,7 +6,7 @@ import { getClients, deleteClient, Client } from "@/lib/firebase/firestore";
 import { ClientCard } from "@/components/dashboard/ClientCard";
 import { EmptyState } from "@/components/dashboard/EmptyState";
 import { AddClientModal } from "@/components/dashboard/AddClientModal";
-import { UpgradeModal } from "@/components/dashboard/UpgradeModal";
+import { PricingModal } from "@/components/dashboard/PricingModal";
 import { Button } from "@/components/ui/button";
 import { Plus, Search, Users } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,11 +18,10 @@ import posthog from "posthog-js";
 
 export default function ClientsPage() {
   const { user, loading: authLoading } = useUser();
-  const { profile } = useDashboardContext();
+  const { profile, setIsPricingModalOpen } = useDashboardContext();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const plan = profile?.plan || "free";
   const [search, setSearch] = useState("");
 
@@ -58,7 +57,7 @@ export default function ClientsPage() {
   const handleAddClick = () => {
     if (plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT) {
       posthog.capture("upgrade_modal_viewed", { trigger: "client_limit", client_count: clients.length });
-      setIsUpgradeModalOpen(true);
+      setIsPricingModalOpen(true);
     } else {
       setIsAddModalOpen(true);
     }
@@ -167,11 +166,6 @@ export default function ClientsPage() {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onSuccess={fetchClients}
-      />
-
-      <UpgradeModal
-        isOpen={isUpgradeModalOpen}
-        onClose={() => setIsUpgradeModalOpen(false)}
       />
     </div>
   );
