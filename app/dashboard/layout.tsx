@@ -6,6 +6,9 @@ import { MobileNav } from "@/components/dashboard/MobileNav";
 import { AddClientModal } from "@/components/dashboard/AddClientModal";
 import { PricingModal } from "@/components/dashboard/PricingModal";
 import { DashboardProvider, useDashboardContext } from "@/components/dashboard/DashboardContext";
+import { useEffect } from "react";
+import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 
 function DashboardShell({ children }: { children: React.ReactNode }) {
   const { 
@@ -13,6 +16,19 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
     isPricingModalOpen, setIsPricingModalOpen,
     triggerRefresh 
   } = useDashboardContext();
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams?.get("payment") === "success") {
+      toast.success("Welcome to Pro!", {
+        description: "Your account has been successfully upgraded.",
+      });
+      triggerRefresh();
+      // Clean the URL
+      window.history.replaceState({}, "", "/dashboard");
+    }
+  }, [searchParams, triggerRefresh]);
 
   return (
     <>

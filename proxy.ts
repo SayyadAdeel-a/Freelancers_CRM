@@ -6,9 +6,11 @@ export function proxy(request: NextRequest) {
 
   const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/forgot-password';
   const isDashboardPage = pathname.startsWith('/dashboard') || pathname.startsWith('/settings');
+  const isPaymentSuccess = request.nextUrl.searchParams.get('payment') === 'success';
 
-  // 1. If trying to access dashboard/settings WITHOUT a session, redirect to login
-  if (isDashboardPage && !session) {
+  // 1. If trying to access dashboard/settings WITHOUT a session
+  // ALLOW if it's a payment success return (gives Firebase time to re-auth)
+  if (isDashboardPage && !session && !isPaymentSuccess) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
