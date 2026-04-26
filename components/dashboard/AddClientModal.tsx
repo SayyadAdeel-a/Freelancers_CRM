@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { addClient, getClientCount } from "@/lib/firebase/firestore";
+import { getClientCount } from "@/lib/firebase/firestore";
 import { PayerRating } from "./PayerRatingBadge";
 import { useUser } from "@/hooks/use-user";
 import { useDashboardContext } from "./DashboardContext";
@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import posthog from "posthog-js";
 import { Sparkles } from "lucide-react";
 import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
+import { addClientAction } from "@/app/actions/clients";
 
 interface AddClientModalProps {
   isOpen: boolean;
@@ -38,11 +39,6 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     payerRating: ""
   });
 
-  const isLimitReached = async () => {
-    if (profile?.plan === 'pro') return false;
-    const count = await getClientCount(user?.uid || "");
-    return count >= FREE_PLAN_CLIENT_LIMIT;
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,17 +46,21 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     
     setLoading(true);
     try {
-      if (await isLimitReached()) {
-        toast.error(`Limit reached: You can only have ${FREE_PLAN_CLIENT_LIMIT} clients on the free plan.`);
-        setIsPricingModalOpen(true);
-        onClose();
-        return;
-      }
-
-      await addClient(user.uid, {
+      const idToken = await user.getIdToken();
+      const result = await addClientAction(idToken, {
         ...formData,
         payerRating: (formData.payerRating || null) as PayerRating
       });
+
+      if (!result.success) {
+        toast.error(result.error);
+        if (result.error?.includes("Limit reached")) {
+          setIsPricingModalOpen(true);
+          onClose();
+        }
+        return;
+      }
+
       posthog.capture("client_added", { has_company: !!formData.company, payer_rating: formData.payerRating });
       onSuccess();
       setFormData({ name: "", email: "", company: "", payerRating: "" });

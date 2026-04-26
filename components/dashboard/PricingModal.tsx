@@ -31,7 +31,8 @@ export function PricingModal({ isOpen, onClose }: PricingModalProps) {
 
     setLoading(true);
     try {
-      const response = await createProCheckout(user.uid, user.email);
+      const idToken = await user.getIdToken();
+      const response = await createProCheckout(idToken);
       
       if (response.error) {
         toast.error(`Checkout Failed: ${response.error}`);

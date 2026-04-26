@@ -1,11 +1,21 @@
 "use server";
 
+import { verifySession } from "@/lib/firebase/server-auth";
+
 /**
  * Creates a Lemon Squeezy checkout for the Pro plan using direct API calls.
  * This avoids Node.js version conflicts with the official SDK.
  */
-export async function createProCheckout(userId: string, userEmail: string) {
+export async function createProCheckout(token: string) {
   try {
+    // 1. Authenticate the user
+    const decodedToken = await verifySession(token);
+    const userId = decodedToken.uid;
+    const userEmail = decodedToken.email;
+
+    if (!userEmail) {
+      throw new Error("User email not found in session.");
+    }
     const apiKey = process.env.LEMON_SQUEEZY_API_KEY?.trim();
     const storeId = process.env.LEMON_SQUEEZY_STORE_ID?.trim();
     const variantId = process.env.LEMON_SQUEEZY_VARIANT_ID?.trim();

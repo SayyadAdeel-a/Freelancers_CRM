@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { verifySession } from "@/lib/firebase/server-auth";
+import { adminDb } from "@/lib/firebase/admin";
 
 export async function POST(req: NextRequest) {
   if (!process.env.RESEND_API_KEY) {
@@ -10,28 +12,38 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
-    const { invoice, userEmail, userId, userName } = await req.json();
-
-    if (!invoice || !userEmail) {
-      return NextResponse.json({ error: "Missing required data" }, { status: 400 });
+    // 1. Authenticate the user
+    let decodedToken;
+    try {
+      decodedToken = await verifySession();
+    } catch (err) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    let { invoiceNumber, clientName, clientEmail, clientId, total, lineItems, dueDate, notes } = invoice;
+    const { invoiceId, userEmail, userName } = await req.json();
+
+    if (!invoiceId || !userEmail) {
+      return NextResponse.json({ error: "Missing required data (invoiceId and userEmail)" }, { status: 400 });
+    }
+
+    // 2. Fetch the invoice from Firestore using Admin SDK (Collection Group)
+    const invoiceQuery = await adminDb.collectionGroup("invoices")
+      .where("userId", "==", decodedToken.uid)
+      .where("__name__", "==", invoiceId)
+      .limit(1)
+      .get();
+
+    if (invoiceQuery.empty) {
+      return NextResponse.json({ error: "Invoice not found or unauthorized" }, { status: 404 });
+    }
+
+    const invoiceDoc = invoiceQuery.docs[0];
+    const invoice = invoiceDoc.data();
+    
+    // 3. Extract verified data
+    let { invoiceNumber, clientName, clientEmail, total, lineItems, dueDate, notes } = invoice;
     const senderName = userName || "Nudge CRM User";
     
-    // If clientEmail is missing (legacy invoice), try to fetch it from Firestore
-    if (!clientEmail && clientId && userId) {
-      try {
-        const { getClient } = await import("@/lib/firebase/firestore");
-        const client = await getClient(clientId, userId);
-        if (client && client.email) {
-          clientEmail = client.email;
-        }
-      } catch (err) {
-        console.error("Failed to fetch client email:", err);
-      }
-    }
-
     const recipientEmail = clientEmail || userEmail; 
 
     // Format currency
@@ -45,8 +57,9 @@ export async function POST(req: NextRequest) {
       </tr>
     `).join("");
 
-    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoice.id}`;
+    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoiceDoc.id}`;
     
+    // 4. Send verified email
     const { error } = await resend.emails.send({
       from: `${senderName} via Nudge <invoices@mail.adeelsayyad.tech>`,
       to: [recipientEmail],
@@ -64,17 +77,12 @@ export async function POST(req: NextRequest) {
           <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #fafafa; padding: 40px 20px;">
             <tr>
               <td align="center">
-                <!-- Outer Container -->
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                  <!-- Red Accent Bar -->
                   <tr>
                     <td height="4" style="background-color: #ff0000; line-height: 4px; font-size: 4px;">&nbsp;</td>
                   </tr>
-                  
-                  <!-- Main Content Area -->
                   <tr>
                     <td style="padding: 40px;">
-                      <!-- Logo & Header -->
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
                         <tr>
                           <td align="left">
@@ -88,7 +96,6 @@ export async function POST(req: NextRequest) {
                         </tr>
                       </table>
 
-                      <!-- Details Grid -->
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
                         <tr>
                           <td width="50%" align="left" valign="top" style="padding-right: 20px;">
@@ -98,12 +105,11 @@ export async function POST(req: NextRequest) {
                           </td>
                           <td width="50%" align="right" valign="top">
                             <p style="margin: 0; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; color: #999999; margin-bottom: 8px;">Due Date</p>
-                            <p style="margin: 0; font-size: 18px; font-weight: 800; color: #ff0000;">${new Date(dueDate.seconds * 1000).toLocaleDateString()}</p>
+                            <p style="margin: 0; font-size: 18px; font-weight: 800; color: #ff0000;">${dueDate?.toDate ? dueDate.toDate().toLocaleDateString() : new Date(dueDate?.seconds * 1000).toLocaleDateString()}</p>
                           </td>
                         </tr>
                       </table>
 
-                      <!-- CTA Button -->
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
                         <tr>
                           <td align="center">
@@ -112,7 +118,6 @@ export async function POST(req: NextRequest) {
                         </tr>
                       </table>
 
-                      <!-- Line Items -->
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 30px; border-top: 2px solid #000000;">
                         <thead>
                           <tr>
@@ -125,7 +130,6 @@ export async function POST(req: NextRequest) {
                         </tbody>
                       </table>
 
-                      <!-- Total -->
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
                         <tr>
                           <td align="right">
@@ -145,7 +149,6 @@ export async function POST(req: NextRequest) {
                         </tr>
                       </table>
 
-                      <!-- Notes Section -->
                       ${notes ? `
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px; background-color: #fcfcfc; border: 1px dashed #e5e5e5; border-radius: 4px;">
                           <tr>
@@ -157,7 +160,6 @@ export async function POST(req: NextRequest) {
                         </table>
                       ` : ""}
 
-                      <!-- Footer Area -->
                       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-top: 1px solid #eeeeee; padding-top: 30px;">
                         <tr>
                           <td align="left">
@@ -173,7 +175,6 @@ export async function POST(req: NextRequest) {
                   </tr>
                 </table>
 
-                <!-- Unsubscribe / Platform Link -->
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; margin-top: 20px;">
                   <tr>
                     <td align="center">

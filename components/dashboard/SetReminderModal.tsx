@@ -39,14 +39,15 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
     
     setLoading(true);
     try {
+      const idToken = await user.getIdToken();
+
       // 1. Save to Firestore from CLIENT (where auth works!)
       await addReminder(clientId, user.uid, date, message.trim());
 
       // 2. Schedule the email from SERVER
       const result = await scheduleReminderAction({
+        token: idToken,
         clientId,
-        userId: user.uid,
-        userEmail: user.email!,
         clientName,
         remindAt: date.toISOString(),
         message: message.trim()
