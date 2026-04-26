@@ -6,9 +6,9 @@
  */
 export async function createProCheckout(userId: string, userEmail: string) {
   try {
-    const apiKey = process.env.LEMON_SQUEEZY_API_KEY;
-    const storeId = process.env.LEMON_SQUEEZY_STORE_ID;
-    const variantId = process.env.LEMON_SQUEEZY_VARIANT_ID;
+    const apiKey = process.env.LEMON_SQUEEZY_API_KEY?.trim();
+    const storeId = process.env.LEMON_SQUEEZY_STORE_ID?.trim();
+    const variantId = process.env.LEMON_SQUEEZY_VARIANT_ID?.trim();
 
     // Detect base URL (Vercel provides VERCEL_URL, but we prefer NEXT_PUBLIC_APP_URL if set)
     let baseUrl = process.env.NEXT_PUBLIC_APP_URL;
@@ -40,6 +40,7 @@ export async function createProCheckout(userId: string, userEmail: string) {
         data: {
           type: "checkouts",
           attributes: {
+            test_mode: process.env.LEMON_SQUEEZY_TEST_MODE === "true",
             checkout_data: {
               email: userEmail,
               custom: {
