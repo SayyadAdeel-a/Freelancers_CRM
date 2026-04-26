@@ -55,7 +55,9 @@ export default function ClientsPage() {
   }, [search, clients]);
 
   const handleAddClick = () => {
-    if (plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT) {
+    const isOverLimit = plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT;
+    
+    if (isOverLimit) {
       posthog.capture("upgrade_modal_viewed", { trigger: "client_limit", client_count: clients.length });
       setIsPricingModalOpen(true);
     } else {

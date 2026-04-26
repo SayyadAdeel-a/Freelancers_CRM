@@ -19,6 +19,7 @@ import { useDashboardContext } from "./DashboardContext";
 import { toast } from "sonner";
 import posthog from "posthog-js";
 import { Sparkles } from "lucide-react";
+import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 
 interface AddClientModalProps {
   isOpen: boolean;
@@ -40,7 +41,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
   const isLimitReached = async () => {
     if (profile?.plan === 'pro') return false;
     const count = await getClientCount(user?.uid || "");
-    return count >= 5;
+    return count >= FREE_PLAN_CLIENT_LIMIT;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,7 +51,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     setLoading(true);
     try {
       if (await isLimitReached()) {
-        toast.error("Limit reached: You can only have 5 clients on the free plan.");
+        toast.error(`Limit reached: You can only have ${FREE_PLAN_CLIENT_LIMIT} clients on the free plan.`);
         setIsPricingModalOpen(true);
         onClose();
         return;
@@ -86,7 +87,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
               </DialogTitle>
               <DialogDescription className="mt-2 text-muted-foreground font-mono uppercase tracking-wider text-xs">
                 {profile?.plan === 'free' 
-                  ? "Free plan limit: 5 clients. Keep growing."
+                  ? `Free plan limit: ${FREE_PLAN_CLIENT_LIMIT} clients. Keep growing.`
                   : "Enter the details of your new client. You can add notes and reminders later."}
               </DialogDescription>
             </DialogHeader>
