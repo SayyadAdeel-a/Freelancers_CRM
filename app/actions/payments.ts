@@ -10,8 +10,23 @@ export async function createProCheckout(userId: string, userEmail: string) {
     const storeId = process.env.LEMON_SQUEEZY_STORE_ID;
     const variantId = process.env.LEMON_SQUEEZY_VARIANT_ID;
 
+    // Detect base URL (Vercel provides VERCEL_URL, but we prefer NEXT_PUBLIC_APP_URL if set)
+    let baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+    if (!baseUrl && process.env.VERCEL_URL) {
+      baseUrl = `https://${process.env.VERCEL_URL}`;
+    }
+    // Fallback for local dev if both are missing
+    if (!baseUrl) {
+      baseUrl = "http://localhost:3000";
+    }
+
+    console.log("--- Payment Action Debug ---");
+    console.log("User ID:", userId);
+    console.log("Base URL:", baseUrl);
+    console.log("Has API Key:", !!apiKey);
+
     if (!apiKey || !storeId || !variantId) {
-      throw new Error("Missing Lemon Squeezy configuration (API Key, Store ID, or Variant ID)");
+      throw new Error(`Config Missing: API:${!!apiKey} Store:${!!storeId} Var:${!!variantId}`);
     }
 
     const response = await fetch("https://api.lemonsqueezy.com/v1/checkouts", {
@@ -32,7 +47,7 @@ export async function createProCheckout(userId: string, userEmail: string) {
               },
             },
             product_options: {
-              redirect_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?payment=success`,
+              redirect_url: `${baseUrl}/dashboard?payment=success`,
               receipt_button_text: "Go to Dashboard",
             },
           },
@@ -55,15 +70,19 @@ export async function createProCheckout(userId: string, userEmail: string) {
     });
 
     const result = await response.json();
+    console.log("Lemon Squeezy API Status:", response.status);
 
     if (!response.ok) {
-      console.error("Lemon Squeezy API Error:", result);
-      throw new Error(result.errors?.[0]?.detail || "Failed to create checkout");
+      console.error("Lemon Squeezy API Detail:", JSON.stringify(result, null, 2));
+      const detail = result.errors?.[0]?.detail || "Lemon Squeezy API rejected the request";
+      throw new Error(detail);
     }
 
     return { url: result.data.attributes.url };
   } catch (err: any) {
-    console.error("Checkout creation error:", err);
-    throw new Error(err.message || "Internal server error");
+    console.error("--- Payment Action Failure ---");
+    console.error(err);
+    // Throwing here triggers the 500. We'll return an object instead to catch it in the UI.
+    return { error: err.message || "Internal server error" };
   }
 }

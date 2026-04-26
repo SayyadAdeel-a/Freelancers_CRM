@@ -31,9 +31,15 @@ export function PricingModal({ isOpen, onClose }: PricingModalProps) {
 
     setLoading(true);
     try {
-      const { url } = await createProCheckout(user.uid, user.email);
-      if (url) {
-        window.location.href = url;
+      const response = await createProCheckout(user.uid, user.email);
+      
+      if (response.error) {
+        toast.error(`Checkout Failed: ${response.error}`);
+        return;
+      }
+
+      if (response.url) {
+        window.location.href = response.url;
       } else {
         throw new Error("No checkout URL returned");
       }
