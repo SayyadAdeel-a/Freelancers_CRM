@@ -5,16 +5,17 @@ const nextConfig: NextConfig = {
   async headers() {
     const cspHeader = `
       default-src 'self';
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://us.i.posthog.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://us.i.posthog.com https://vercel.live;
       style-src 'self' 'unsafe-inline';
-      img-src 'self' blob: data: https://us-assets.i.posthog.com https://lh3.googleusercontent.com;
+      img-src 'self' blob: data: https://us-assets.i.posthog.com https://lh3.googleusercontent.com https://vercel.com;
       font-src 'self' data:;
       object-src 'none';
       base-uri 'self';
       form-action 'self';
       frame-ancestors 'none';
-      frame-src 'self' https://freelancers-crm-2f0fd.firebaseapp.com https://checkout.lemonsqueezy.com;
-      connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://us.i.posthog.com https://*.sentry.io;
+      frame-src 'self' https://freelancers-crm-2f0fd.firebaseapp.com https://checkout.lemonsqueezy.com https://vercel.live;
+      connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://us.i.posthog.com https://*.sentry.io https://vercel.live;
+      worker-src 'self' blob:;
       upgrade-insecure-requests;
     `.replace(/\s{2,}/g, ' ').trim();
 

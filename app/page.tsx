@@ -17,125 +17,161 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background text-foreground font-sans">
 
       {/* Top accent rule */}
-      <div className="fixed top-0 left-0 right-0 h-px bg-primary z-50" />
-
+      <div className="fixed top-0 left-0 right-0 h-px bg-primary z-50 opacity-50" />
+ 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 bg-background/95 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-sm bg-primary inline-block" />
-            <span className="font-bold text-xl tracking-tight">Nudge</span>
+      <nav className="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-xl border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="w-6 h-6 bg-primary flex items-center justify-center rounded-none relative overflow-hidden group-hover:scale-105 transition-transform">
+               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)] bg-[size:3px_3px]" />
+            </div>
+            <span className="font-black text-2xl tracking-tighter uppercase italic">Nudge</span>
           </div>
-
-          <div className="hidden md:flex items-center gap-6">
-            <a href="#features" className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors">Features</a>
-            <a href="#pricing" className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors">Pricing</a>
-            <Link href="/login" className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Log In</Link>
+ 
+          <div className="hidden md:flex items-center gap-10">
+            <a href="#features" className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors">
+              // Features
+            </a>
+            <a href="#pricing" className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors">
+              // Pricing
+            </a>
+            <Link href="/login" className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors">
+              Log In
+            </Link>
             <ThemeToggle />
             <Link href="/signup">
-              <Button className="rounded-sm font-mono uppercase tracking-wider text-xs h-9 px-5">Get Started</Button>
+              <Button className="rounded-none font-black font-mono uppercase tracking-widest text-[10px] h-10 px-6 italic shadow-[4px_4px_0_0_rgba(255,0,0,0.2)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                Get Started
+              </Button>
             </Link>
           </div>
-
-          {/* Mobile: just the toggle + CTA */}
-          <div className="flex md:hidden items-center gap-3">
+ 
+          <div className="flex md:hidden items-center gap-4">
             <ThemeToggle />
             <Link href="/signup">
-              <Button className="rounded-sm font-mono uppercase tracking-wider text-xs h-9 px-4">Sign Up</Button>
+              <Button size="sm" className="rounded-none font-black font-mono uppercase tracking-widest text-[10px] h-9 px-4 italic">
+                Sign Up
+              </Button>
             </Link>
           </div>
         </div>
       </nav>
-
+ 
       {/* Hero Section */}
-      <section className="pt-40 pb-24 px-4 bg-dot-pattern border-b border-border">
-        <div className="max-w-4xl mx-auto text-center space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-primary/10 border border-primary/20 text-primary text-xs font-bold font-mono uppercase tracking-wider">
-            <Zap className="w-3.5 h-3.5 fill-current" />
-            <span>Built for solo freelancers</span>
-          </div>
-
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tight leading-[1.05]">
-            The CRM for people<br />
-            <span className="text-primary">who hate CRMs.</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-mono">
-            Manage clients without the 747 cockpit. Track leads, log notes, never forget a follow-up.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link href="/signup" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto h-12 px-8 rounded-sm font-mono uppercase tracking-widest text-xs shadow-brand">
-                Start for free <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-            <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">No credit card · Up to 10 clients free</p>
+      <section className="relative pt-40 pb-20 border-b border-border overflow-hidden">
+        {/* Technical Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,0,0,0.05),transparent_70%)] pointer-events-none" />
+ 
+        <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
+          <div className="animate-in fade-in slide-in-from-top-8 duration-700">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-primary/5 border border-primary/20 text-primary text-[10px] font-black font-mono uppercase tracking-[0.3em] mb-12">
+              <Zap className="w-3 h-3 fill-primary" />
+              Built for solo freelancers
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic leading-[0.85] mb-8">
+              The CRM for people <br />
+              <span className="text-primary relative inline-block">
+                who hate CRMs.
+                <div className="absolute -bottom-2 left-0 right-0 h-1 bg-primary/20" />
+              </span>
+            </h1>
+ 
+            <p className="max-w-2xl mx-auto text-muted-foreground text-sm md:text-base font-mono uppercase tracking-tight leading-relaxed mb-12 opacity-80">
+              Manage clients without the &quot;747 cockpit&quot; complexity. <br className="hidden md:block" />
+              Track leads, log notes, never forget a follow-up.
+            </p>
+ 
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <Link href="/signup">
+                <Button size="lg" className="rounded-none font-black font-mono uppercase tracking-[0.2em] text-xs h-14 px-10 italic shadow-[8px_8px_0_0_rgba(255,0,0,0.2)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all flex items-center gap-3">
+                  Start for free <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+              <div className="flex items-center gap-3 text-[10px] font-black font-mono uppercase tracking-widest text-muted-foreground bg-secondary/30 px-4 py-2 border border-border/50">
+                <Check className="w-3 h-3 text-primary" />
+                No credit card - up to 10 clients free
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
       {/* Features Section */}
-      <section id="features" className="py-24 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-20 items-start">
+      <section id="features" className="py-24 border-b border-border relative overflow-hidden">
+        {/* Subtle background grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="space-y-8">
-              <div>
-                <p className="text-[10px] font-bold font-mono uppercase tracking-widest text-primary mb-4">Why Nudge</p>
-                <h2 className="text-4xl font-bold tracking-tight">Ditch the &quot;Boeing 747&quot; complexity.</h2>
-                <p className="text-muted-foreground leading-relaxed mt-4 font-mono text-sm">
-                  You&apos;re a freelancer. You don&apos;t need a cockpit; you need a bicycle.
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold font-mono uppercase tracking-widest">
+                  // Core Infrastructure
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic leading-none">
+                  Ditch the &quot;747&quot; complexity.
+                </h2>
+                <p className="text-muted-foreground leading-relaxed font-mono text-sm max-w-md">
+                  You&apos;re a freelancer. You don&apos;t need a cockpit; you need a high-performance bicycle.
                 </p>
               </div>
-
-              <ul className="space-y-3">
+ 
+              <ul className="space-y-4">
                 {[
                   "Add a client in under 5 seconds",
                   "Log quick notes after every call",
                   "Get email reminders to follow up",
                   "Minimalist, zero-friction interface",
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
+                  <li key={item} className="flex items-center gap-4 group">
+                    <div className="w-6 h-6 rounded-none border border-primary/30 flex items-center justify-center bg-primary/5 group-hover:bg-primary/10 transition-colors">
+                      <Check className="w-3.5 h-3.5 text-primary" />
                     </div>
-                    <span className="text-sm font-mono">{item}</span>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            <div className="grid grid-cols-2 gap-4 relative">
-              <div className="absolute -inset-4 bg-primary/5 blur-3xl rounded-full z-0 opacity-50" />
-              <div className="col-span-2 mb-8 relative z-10 border border-border/50 rounded-sm overflow-hidden shadow-2xl animate-in zoom-in-95 duration-700">
+ 
+            <div className="relative group">
+              {/* Image Glow */}
+              <div className="absolute -inset-10 bg-primary/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              
+              <div className="relative z-10 border border-border/50 rounded-none overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.1)] bg-background/50 backdrop-blur-sm p-2 animate-in zoom-in-95 duration-1000">
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
                 <img 
-                  src="/og-image.png" 
-                  alt="Nudge CRM Industrial Dashboard - Client Management & Invoicing Interface" 
-                  className="w-full h-auto grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
+                  src="/dashboard-preview.png" 
+                  alt="Nudge CRM Command Center - Industrial Operational Overview" 
+                  className="w-full h-auto transition-all duration-700"
                 />
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               </div>
-              {[
-                { icon: Users, title: "Client Directory", desc: "All your contacts in one clean, scannable list.", delay: "200ms" },
-                { icon: FileText, title: "Activity Notes", desc: "Chronological logs of every interaction.", delay: "300ms" },
-                { icon: Bell, title: "Reminders", desc: "Never drop a lead with smart email follow-ups.", delay: "400ms" },
-                { icon: Check, title: "Simplicity", desc: "No pipelines. No dashboards. No noise.", delay: "500ms" },
-              ].map(({ icon: Icon, title, desc, delay }, i) => (
-                <div
-                  key={title}
-                  className={`bg-card border border-border rounded-sm p-6 space-y-3 hover:border-foreground transition-all animate-in fade-in slide-in-from-bottom-4 ${i % 2 === 0 ? "mt-8" : ""}`}
-                  style={{ animationDelay: delay, animationFillMode: "both" }}
-                >
-                  <Icon className="w-8 h-8 text-primary" />
-                  <h3 className="font-bold text-sm tracking-tight">{title}</h3>
-                  <p className="text-xs text-muted-foreground font-mono leading-relaxed">{desc}</p>
-                </div>
-              ))}
+ 
+              <div className="grid grid-cols-2 gap-4 mt-8 relative z-10">
+                {[
+                  { icon: Users, title: "Client Directory", desc: "All your contacts in one clean list.", delay: "200ms" },
+                  { icon: FileText, title: "Activity Notes", desc: "Chronological logs of interactions.", delay: "300ms" },
+                  { icon: Bell, title: "Reminders", desc: "Smart email follow-ups.", delay: "400ms" },
+                  { icon: Check, title: "Simplicity", desc: "No dashboards. No noise.", delay: "500ms" },
+                ].map(({ icon: Icon, title, desc, delay }, i) => (
+                  <div
+                    key={title}
+                    className={`bg-card/50 backdrop-blur-sm border border-border/50 rounded-none p-4 space-y-2 hover:border-primary/50 transition-all animate-in fade-in slide-in-from-bottom-4`}
+                    style={{ animationDelay: delay, animationFillMode: "both" }}
+                  >
+                    <Icon className="w-5 h-5 text-primary" />
+                    <h3 className="font-black text-[10px] uppercase tracking-widest leading-none">{title}</h3>
+                    <p className="text-[10px] text-muted-foreground font-mono leading-tight uppercase tracking-tight">{desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Pricing Section */}
       <section id="pricing" className="py-24 border-b border-border bg-card/30">
