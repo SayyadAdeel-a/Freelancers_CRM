@@ -30,10 +30,10 @@ export default function TermsOfServicePage() {
           title: "Plans & Pricing",
           content: [
             [
-              "Free Plan: Includes client management for up to 5 clients at no cost.",
+              "Free Plan: Includes client management for up to 10 clients at no cost.",
               "Pro Plan: Priced at $9/month, providing unlimited clients and advanced features.",
               "Payments: All payments are processed securely via Lemon Squeezy.",
-              "Upgrades/Downgrades: You can upgrade to Pro at any time. If you downgrade to Free, access to clients beyond the 5-client limit may be restricted.",
+              "Upgrades/Downgrades: You can upgrade to Pro at any time. If you downgrade to Free, access to clients beyond the 10-client limit may be restricted.",
             ],
           ],
         },

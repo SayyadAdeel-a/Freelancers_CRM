@@ -10,7 +10,7 @@ export default function RefundPolicyPage() {
         {
           title: "Try Before You Buy",
           content: [
-            "Nudge offers a robust Free plan that allows you to manage up to 5 clients with no time limit. We encourage all users to use the Free plan to ensure Nudge meets their needs before upgrading to a Pro subscription.",
+            "Nudge offers a robust Free plan that allows you to manage up to 10 clients with no time limit. We encourage all users to use the Free plan to ensure Nudge meets their needs before upgrading to a Pro subscription.",
           ],
         },
         {

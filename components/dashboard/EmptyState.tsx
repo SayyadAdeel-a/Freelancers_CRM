@@ -81,7 +81,7 @@ export function EmptyState({ onAddClick }: EmptyStateProps) {
           Add your first client
           <ArrowRight className="w-4 h-4" />
         </Button>
-        <p className="text-[10px] font-bold tracking-wider text-muted-foreground bg-accent border border-border px-3 py-1 rounded-sm font-mono uppercase">Free forever — up to 5 clients on the free plan</p>
+        <p className="text-[10px] font-bold tracking-wider text-muted-foreground bg-accent border border-border px-3 py-1 rounded-sm font-mono uppercase">Free forever — up to 10 clients on the free plan</p>
       </div>
     </div>
   );

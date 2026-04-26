@@ -130,7 +130,7 @@ export function ClientList() {
       <Modal isOpen={isUpsellOpen} onClose={() => setIsUpsellOpen(false)} title="Upgrade to Pro">
         <div className="space-y-4">
           <p className="text-body font-mono">
-            Your free plan allows up to 5 clients. Upgrade to add unlimited clients and access advanced features.
+            Your free plan allows up to 10 clients. Upgrade to add unlimited clients and access advanced features.
           </p>
           <div className="flex gap-3">
             <Button variant="primary" onClick={() => console.log("Upgrade clicked")}>

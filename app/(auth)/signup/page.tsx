@@ -57,9 +57,9 @@ export default function SignupPage() {
   };
 
   const perks = [
-    { label: "Up to 5 clients free", sub: "No credit card needed" },
+    { label: "Up to 10 clients free", sub: "No credit card needed" },
     { label: "Notes & activity logs", sub: "Every interaction tracked" },
-    { label: "Email reminders", sub: "Pro feature — never miss a follow-up" },
+    { label: "Email reminders", sub: "Never miss a follow-up" },
   ];
 
   return (

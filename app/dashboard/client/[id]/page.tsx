@@ -256,11 +256,10 @@ export default function ClientPage() {
               <Button 
                 variant="outline" 
                 className="w-full justify-start text-muted-foreground hover:text-foreground"
-                onClick={() => isPro ? setIsReminderModalOpen(true) : setIsPricingModalOpen(true)}
+                onClick={() => setIsReminderModalOpen(true)}
               >
-                {!isPro && <span className="mr-2 opacity-60">🔒</span>}
                 <Plus className="w-4 h-4 mr-2" />
-                {isPro ? "Set Reminder" : "Set Pro Reminder"}
+                Set Reminder
               </Button>
 
               {reminders.length > 0 && (

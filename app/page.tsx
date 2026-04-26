@@ -72,7 +72,7 @@ export default function LandingPage() {
                 Start for free <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">No credit card · Up to 5 clients free</p>
+            <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">No credit card · Up to 10 clients free</p>
           </div>
         </div>
       </section>
@@ -150,7 +150,7 @@ export default function LandingPage() {
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3 text-sm font-mono">
                     <Check className="w-4 h-4 text-primary shrink-0" />
-                    Up to 5 clients
+                    Up to 10 clients
                   </li>
                   <li className="flex items-center gap-3 text-sm font-mono">
                     <Check className="w-4 h-4 text-primary shrink-0" />
@@ -223,7 +223,7 @@ export default function LandingPage() {
                 a: "Absolutely. Your data is stored with Firebase (Google Cloud) and protected with industry-standard encryption. We never sell or share your information.",
               },
               {
-                q: "What happens when I hit 5 clients on the Free plan?",
+                q: "What happens when I hit 10 clients on the Free plan?",
                 a: "You'll need to upgrade to Pro to add more clients. Your existing clients and data remain accessible — you just can't add new ones until you upgrade.",
               },
               {
