@@ -29,6 +29,42 @@ export async function createProCheckout(userId: string, userEmail: string) {
       throw new Error(`Config Missing: API:${!!apiKey} Store:${!!storeId} Var:${!!variantId}`);
     }
 
+    const payload = {
+      data: {
+        type: "checkouts",
+        attributes: {
+          test_mode: process.env.LEMON_SQUEEZY_TEST_MODE === "true",
+          checkout_data: {
+            email: userEmail,
+            custom: {
+              userId: userId,
+            },
+          },
+          product_options: {
+            redirect_url: `${baseUrl}/dashboard?payment=success`,
+            receipt_button_text: "Go to Dashboard",
+          },
+        },
+        relationships: {
+          store: {
+            data: {
+              type: "stores",
+              id: storeId?.toString(),
+            },
+          },
+          variant: {
+            data: {
+              type: "variants",
+              id: variantId?.toString(),
+            },
+          },
+        },
+      },
+    };
+
+    console.log("--- Lemon Squeezy Payload ---");
+    console.log(JSON.stringify(payload, null, 2));
+
     const response = await fetch("https://api.lemonsqueezy.com/v1/checkouts", {
       method: "POST",
       headers: {
@@ -36,54 +72,24 @@ export async function createProCheckout(userId: string, userEmail: string) {
         "Content-Type": "application/vnd.api+json",
         "Authorization": `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({
-        data: {
-          type: "checkouts",
-          attributes: {
-            test_mode: process.env.LEMON_SQUEEZY_TEST_MODE === "true",
-            checkout_data: {
-              email: userEmail,
-              custom: {
-                userId: userId,
-              },
-            },
-            product_options: {
-              redirect_url: `${baseUrl}/dashboard?payment=success`,
-              receipt_button_text: "Go to Dashboard",
-            },
-          },
-          relationships: {
-            store: {
-              data: {
-                type: "stores",
-                id: storeId.toString(),
-              },
-            },
-            variant: {
-              data: {
-                type: "variants",
-                id: variantId.toString(),
-              },
-            },
-          },
-        },
-      }),
+      body: JSON.stringify(payload),
     });
 
     const result = await response.json();
     console.log("Lemon Squeezy API Status:", response.status);
 
     if (!response.ok) {
-      console.error("Lemon Squeezy API Detail:", JSON.stringify(result, null, 2));
-      const detail = result.errors?.[0]?.detail || "Lemon Squeezy API rejected the request";
-      throw new Error(detail);
+      console.error("Lemon Squeezy API Error:", JSON.stringify(result, null, 2));
+      // Return the full error detail to the UI
+      const detail = result.errors?.[0]?.detail || result.errors?.[0]?.title || "Request rejected";
+      const pointer = result.errors?.[0]?.source?.pointer || "";
+      return { error: `${detail} ${pointer}`.trim() };
     }
 
     return { url: result.data.attributes.url };
   } catch (err: any) {
     console.error("--- Payment Action Failure ---");
     console.error(err);
-    // Throwing here triggers the 500. We'll return an object instead to catch it in the UI.
     return { error: err.message || "Internal server error" };
   }
 }
