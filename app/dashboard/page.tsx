@@ -7,7 +7,7 @@ import { getClients, deleteClient, getAllUserInvoices, Client, Invoice } from "@
 import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 import { ClientCard } from "@/components/dashboard/ClientCard";
 import { EmptyState } from "@/components/dashboard/EmptyState";
-import { UpgradeModal } from "@/components/dashboard/UpgradeModal";
+import { PricingModal } from "@/components/dashboard/PricingModal";
 import { Button } from "@/components/ui/button";
 import { Plus, Wallet, FileCheck, AlertTriangle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,12 +17,11 @@ import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 
 export default function DashboardPage() {
   const { user, loading: authLoading } = useUser();
-  const { profile, setIsAddClientModalOpen, refreshTrigger } = useDashboardContext();
+  const { profile, setIsAddClientModalOpen, setIsPricingModalOpen, refreshTrigger } = useDashboardContext();
   const searchParams = useSearchParams();
   const [clients, setClients] = useState<Client[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const plan = profile?.plan || "free";
 
   const fetchData = useCallback(async () => {
@@ -62,13 +61,13 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (searchParams.get("upgrade") === "true") {
-      setIsUpgradeModalOpen(true);
+      setIsPricingModalOpen(true);
     }
-  }, [searchParams]);
+  }, [searchParams, setIsPricingModalOpen]);
 
   const handleAddClick = () => {
     if (plan === "free" && clients.length >= FREE_PLAN_CLIENT_LIMIT) {
-      setIsUpgradeModalOpen(true);
+      setIsPricingModalOpen(true);
     } else {
       setIsAddClientModalOpen(true);
     }
@@ -187,10 +186,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <UpgradeModal
-        isOpen={isUpgradeModalOpen}
-        onClose={() => setIsUpgradeModalOpen(false)}
-      />
+      {/* Pricing Modal is now handled globally in the layout, but we keep it here for direct triggers if needed */}
     </div>
   );
 }
