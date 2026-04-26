@@ -23,12 +23,13 @@ import { toast } from "sonner";
 import { Timestamp } from "firebase/firestore";
 
 interface InvoiceListProps {
-  clientId: string;
+  clientId?: string;
   invoices: Invoice[];
   onUpdate: () => void;
+  hideClientName?: boolean;
 }
 
-export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) {
+export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideClientName = true }: InvoiceListProps) {
   const { user } = useUser();
   const [updating, setUpdating] = useState<string | null>(null);
 
@@ -52,10 +53,16 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
     );
   };
 
-  const handleMarkAsPaid = async (invoiceId: string) => {
-    setUpdating(invoiceId);
+  const handleMarkAsPaid = async (invoice: Invoice) => {
+    setUpdating(invoice.id);
+    const targetClientId = propClientId || invoice.clientId;
+    if (!targetClientId) {
+      toast.error("Could not find client ID for this invoice");
+      return;
+    }
+
     try {
-      await updateInvoice(clientId, invoiceId, { 
+      await updateInvoice(targetClientId, invoice.id, { 
         status: "paid",
         paidAt: Timestamp.now()
       });
@@ -94,8 +101,14 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
     
     // 1. Update status to 'sent'
     setUpdating(invoice.id);
+    const targetClientId = propClientId || invoice.clientId;
+    if (!targetClientId) {
+      toast.error("Could not find client ID for this invoice");
+      return;
+    }
+
     try {
-      await updateInvoice(clientId, invoice.id, { 
+      await updateInvoice(targetClientId, invoice.id, { 
         status: "sent",
         sentAt: Timestamp.now()
       });
@@ -128,6 +141,7 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
           <thead className="bg-secondary/30 uppercase tracking-widest text-[10px] font-black text-muted-foreground border-b border-border">
             <tr>
               <th className="px-4 py-3">INV #</th>
+              {!hideClientName && <th className="px-4 py-3">Client</th>}
               <th className="px-4 py-3">Date</th>
               <th className="px-4 py-3">Due</th>
               <th className="px-4 py-3">Total</th>
@@ -139,6 +153,11 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
             {invoices.map((invoice) => (
               <tr key={invoice.id} className="hover:bg-secondary/10 transition-colors">
                 <td className="px-4 py-4 font-bold text-foreground">{invoice.invoiceNumber}</td>
+                {!hideClientName && (
+                  <td className="px-4 py-4 text-muted-foreground uppercase font-bold text-[10px]">
+                    {invoice.clientName || "Unknown"}
+                  </td>
+                )}
                 <td className="px-4 py-4 text-muted-foreground">{formatDate(invoice.issueDate)}</td>
                 <td className="px-4 py-4 text-muted-foreground">{formatDate(invoice.dueDate)}</td>
                 <td className="px-4 py-4 font-bold text-foreground">
@@ -164,7 +183,7 @@ export function InvoiceList({ clientId, invoices, onUpdate }: InvoiceListProps) 
                         </>
                       )}
                       {invoice.status !== "paid" && (
-                        <DropdownMenuItem onClick={() => handleMarkAsPaid(invoice.id)}>
+                        <DropdownMenuItem onClick={() => handleMarkAsPaid(invoice)}>
                           <CheckCircle2 className="w-3.5 h-3.5 mr-2 text-green-500" /> Mark as Paid
                         </DropdownMenuItem>
                       )}

@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { formatDate } from "@/lib/utils";
 import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
 import { PayerRatingBadge } from "@/components/dashboard/PayerRatingBadge";
+import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 import posthog from "posthog-js";
 
 export default function ClientPage() {
@@ -38,6 +39,8 @@ export default function ClientPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
   const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState(false);
+  const { profile, setIsPricingModalOpen } = useDashboardContext();
+  const isPro = profile?.plan === "pro";
 
   const fetchData = useCallback(async (): Promise<void> => {
     if (!id) return;
@@ -102,10 +105,24 @@ export default function ClientPage() {
           Back to Dashboard
         </Link>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" className="flex justify-start gap-2">
-            <a href={`mailto:${client.email}`} className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="flex justify-start gap-2"
+            onClick={(e) => {
+              if (!isPro) {
+                e.preventDefault();
+                setIsPricingModalOpen(true);
+              }
+            }}
+          >
+            {!isPro && <span className="opacity-60">🔒</span>}
+            <a 
+              href={isPro ? `mailto:${client.email}` : "#"} 
+              className="flex items-center gap-2"
+            >
               <Mail className="w-4 h-4 mr-2" />
-              Email Client
+              {isPro ? "Email Client" : "Pro Email"}
             </a>
           </Button>
           <Button variant="destructive" size="sm" onClick={handleDelete}>
@@ -144,7 +161,16 @@ export default function ClientPage() {
                 Add Note
               </h2>
             </div>
-            <AddNote clientId={client.id} onSuccess={fetchData} />
+            <div className="relative">
+              {!isPro && (
+                <div className="absolute inset-0 z-10 bg-background/60 backdrop-blur-[2px] flex items-center justify-center border border-dashed border-border rounded-sm">
+                  <Button onClick={() => setIsPricingModalOpen(true)} className="bg-primary text-primary-foreground font-mono text-[10px] uppercase tracking-widest rounded-sm">
+                    Unlock Notes with Pro
+                  </Button>
+                </div>
+              )}
+              <AddNote clientId={client.id} onSuccess={fetchData} />
+            </div>
           </section>
 
           <section className="space-y-6">
@@ -156,7 +182,12 @@ export default function ClientPage() {
                   {invoices.length}
                 </span>
               </h2>
-              <Button onClick={() => setIsInvoiceModalOpen(true)} size="sm" className="font-mono text-[10px] uppercase tracking-wider rounded-sm h-8">
+              <Button 
+                onClick={() => isPro ? setIsInvoiceModalOpen(true) : setIsPricingModalOpen(true)} 
+                size="sm" 
+                className="font-mono text-[10px] uppercase tracking-wider rounded-sm h-8"
+              >
+                {!isPro && <span className="mr-1.5 opacity-60">🔒</span>}
                 <Plus className="w-3.5 h-3.5 mr-1.5" />
                 New Invoice
               </Button>
@@ -225,10 +256,11 @@ export default function ClientPage() {
               <Button 
                 variant="outline" 
                 className="w-full justify-start text-muted-foreground hover:text-foreground"
-                onClick={() => setIsReminderModalOpen(true)}
+                onClick={() => isPro ? setIsReminderModalOpen(true) : setIsPricingModalOpen(true)}
               >
+                {!isPro && <span className="mr-2 opacity-60">🔒</span>}
                 <Plus className="w-4 h-4 mr-2" />
-                Set Reminder
+                {isPro ? "Set Reminder" : "Set Pro Reminder"}
               </Button>
 
               {reminders.length > 0 && (

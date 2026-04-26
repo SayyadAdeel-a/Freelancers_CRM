@@ -2,6 +2,7 @@
 import type { Client, Note } from "@/lib/firebase/firestore";
 
 import { useEffect, useState, useMemo, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { getClients, getNotesByClient, createNote } from "@/lib/firebase/firestore";
 import { useUser } from "@/hooks/use-user";
 import { Button } from "@/components/ui/button";
@@ -20,8 +21,24 @@ function getInitials(name: string) {
     .slice(0, 2);
 }
 
+import { useDashboardContext } from "@/components/dashboard/DashboardContext";
+
 export default function NotesPage() {
   const { user } = useUser();
+  const { profile, setIsPricingModalOpen } = useDashboardContext();
+  const isPro = profile?.plan === "pro";
+  const router = useRouter();
+
+  useEffect(() => {
+    if (profile && !isPro) {
+      router.push("/dashboard");
+      setIsPricingModalOpen(true);
+      toast.error("Pro Feature", {
+        description: "Access to Notes requires a Pro plan."
+      });
+    }
+  }, [profile, isPro, router, setIsPricingModalOpen]);
+
   const [clients, setClients] = useState<Client[]>([]);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [loadingClients, setLoadingClients] = useState(true);

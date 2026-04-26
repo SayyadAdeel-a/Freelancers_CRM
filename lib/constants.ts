@@ -1,4 +1,4 @@
-export const FREE_PLAN_CLIENT_LIMIT = 5;
+export const FREE_PLAN_CLIENT_LIMIT = 10;
 export const PRO_PLAN_CLIENT_LIMIT = Infinity;
 
 export const APP_CONFIG = {
