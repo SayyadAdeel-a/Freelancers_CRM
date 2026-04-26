@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from "@/hooks/use-user";
-import { Bell, Search, Plus } from "lucide-react";
+import { Bell, Search, Plus, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Navbar() {
   const { user } = useUser();
-  const { setIsAddClientModalOpen, profile } = useDashboardContext();
+  const { setIsAddClientModalOpen, setIsPricingModalOpen, profile } = useDashboardContext();
   const [search, setSearch] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -55,6 +55,19 @@ export function Navbar() {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        {/* Upgrade Button */}
+        {profile?.plan === 'free' && (
+          <Button
+            size="sm"
+            variant="outline"
+            className="hidden xs:flex items-center gap-2 border-red-600/30 text-red-600 hover:bg-red-600/10 hover:text-red-500 transition-all font-mono uppercase text-[10px] tracking-widest h-8 px-3 rounded-none bg-red-600/5 group"
+            onClick={() => setIsPricingModalOpen(true)}
+          >
+            <Sparkles className="w-3 h-3 group-hover:animate-pulse" />
+            Upgrade
+          </Button>
+        )}
+
         {/* Theme toggle */}
         <ThemeToggle />
 

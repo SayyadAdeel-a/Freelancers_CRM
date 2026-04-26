@@ -12,11 +12,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { addClient } from "@/lib/firebase/firestore";
+import { addClient, getClientCount } from "@/lib/firebase/firestore";
 import { PayerRating } from "./PayerRatingBadge";
 import { useUser } from "@/hooks/use-user";
+import { useDashboardContext } from "./DashboardContext";
 import { toast } from "sonner";
 import posthog from "posthog-js";
+import { Sparkles } from "lucide-react";
 
 interface AddClientModalProps {
   isOpen: boolean;
@@ -26,6 +28,7 @@ interface AddClientModalProps {
 
 export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalProps) {
   const { user } = useUser();
+  const { profile, setIsPricingModalOpen } = useDashboardContext();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -34,12 +37,25 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
     payerRating: ""
   });
 
+  const isLimitReached = async () => {
+    if (profile?.plan === 'pro') return false;
+    const count = await getClientCount(user?.uid || "");
+    return count >= 5;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
     
     setLoading(true);
     try {
+      if (await isLimitReached()) {
+        toast.error("Limit reached: You can only have 5 clients on the free plan.");
+        setIsPricingModalOpen(true);
+        onClose();
+        return;
+      }
+
       await addClient(user.uid, {
         ...formData,
         payerRating: (formData.payerRating || null) as PayerRating
@@ -65,11 +81,17 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
           <div className="bg-primary h-1 w-full" />
           <div className="p-6">
             <DialogHeader>
-              <DialogTitle className="text-3xl font-bold tracking-tight text-foreground font-sans">Add New Client</DialogTitle>
+              <DialogTitle className="text-3xl font-bold tracking-tight text-foreground font-sans">
+                {profile?.plan === 'free' ? "New Client" : "Add New Client"}
+              </DialogTitle>
               <DialogDescription className="mt-2 text-muted-foreground font-mono uppercase tracking-wider text-xs">
-                Enter the details of your new client. You can add notes and reminders later.
+                {profile?.plan === 'free' 
+                  ? "Free plan limit: 5 clients. Keep growing."
+                  : "Enter the details of your new client. You can add notes and reminders later."}
               </DialogDescription>
             </DialogHeader>
+
+            {/* Form Fields... */}
             <div className="grid gap-5 py-8">
               <div className="grid gap-2.5">
                 <Label htmlFor="name" className="text-xs font-black uppercase tracking-wider text-muted-foreground ml-1">Full Name</Label>

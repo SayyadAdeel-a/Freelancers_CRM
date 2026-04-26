@@ -4,11 +4,15 @@ import { Sidebar } from "@/components/dashboard/Sidebar";
 import { Navbar } from "@/components/dashboard/Navbar";
 import { MobileNav } from "@/components/dashboard/MobileNav";
 import { AddClientModal } from "@/components/dashboard/AddClientModal";
+import { PricingModal } from "@/components/dashboard/PricingModal";
 import { DashboardProvider, useDashboardContext } from "@/components/dashboard/DashboardContext";
 
 function DashboardShell({ children }: { children: React.ReactNode }) {
-  const { isAddClientModalOpen, setIsAddClientModalOpen, triggerRefresh } =
-    useDashboardContext();
+  const { 
+    isAddClientModalOpen, setIsAddClientModalOpen, 
+    isPricingModalOpen, setIsPricingModalOpen,
+    triggerRefresh 
+  } = useDashboardContext();
 
   return (
     <>
@@ -27,6 +31,11 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         isOpen={isAddClientModalOpen}
         onClose={() => setIsAddClientModalOpen(false)}
         onSuccess={triggerRefresh}
+      />
+
+      <PricingModal
+        isOpen={isPricingModalOpen}
+        onClose={() => setIsPricingModalOpen(false)}
       />
     </>
   );

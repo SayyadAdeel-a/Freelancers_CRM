@@ -7,6 +7,8 @@ import { UserProfile } from "@/lib/firebase/firestore";
 interface DashboardContextValue {
   isAddClientModalOpen: boolean;
   setIsAddClientModalOpen: (open: boolean) => void;
+  isPricingModalOpen: boolean;
+  setIsPricingModalOpen: (open: boolean) => void;
   refreshTrigger: number;
   triggerRefresh: () => void;
   profile: UserProfile | null;
@@ -17,6 +19,8 @@ interface DashboardContextValue {
 export const DashboardContext = createContext<DashboardContextValue>({
   isAddClientModalOpen: false,
   setIsAddClientModalOpen: () => {},
+  isPricingModalOpen: false,
+  setIsPricingModalOpen: () => {},
   refreshTrigger: 0,
   triggerRefresh: () => {},
   profile: null,
@@ -26,6 +30,7 @@ export const DashboardContext = createContext<DashboardContextValue>({
 
 export function DashboardProvider({ children }: { children: ReactNode }) {
   const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const { profile, loading: profileLoading, refreshProfile } = useProfile();
 
@@ -36,12 +41,14 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
   const value = useMemo(() => ({
     isAddClientModalOpen,
     setIsAddClientModalOpen,
+    isPricingModalOpen,
+    setIsPricingModalOpen,
     refreshTrigger,
     triggerRefresh,
     profile,
     profileLoading,
     refreshProfile
-  }), [isAddClientModalOpen, refreshTrigger, profile, profileLoading, refreshProfile, triggerRefresh]);
+  }), [isAddClientModalOpen, isPricingModalOpen, refreshTrigger, profile, profileLoading, refreshProfile, triggerRefresh]);
 
   return (
     <DashboardContext.Provider value={value}>

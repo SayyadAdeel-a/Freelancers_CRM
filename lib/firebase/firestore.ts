@@ -258,4 +258,8 @@ export async function getInvoiceById(invoiceId: string) {
   const d = querySnapshot.docs[0];
   return { ...d.data(), id: d.id } as Invoice;
 }
-
+export async function getClientCount(userId: string) {
+  const q = query(collection(db, "clients"), where("userId", "==", userId));
+  const snapshot = await getCountFromServer(q);
+  return snapshot.data().count;
+}
