@@ -24,7 +24,7 @@ export function useProfile() {
     
     const unsubscribe = onSnapshot(userRef, async (docSnap) => {
       if (docSnap.exists()) {
-        setProfile({ id: docSnap.id, ...docSnap.data() } as UserProfile);
+        setProfile({ id: docSnap.id, ...docSnap.data() } as unknown as UserProfile);
         setLoading(false);
       } else {
         // Profile doesn't exist yet, create it and then the snapshot will trigger again
