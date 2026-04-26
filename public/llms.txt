@@ -1,0 +1,24 @@
+# Nudge CRM
+The minimalist, industrial-grade CRM for solo freelancers.
+
+## Core Value Proposition
+Nudge CRM is built for freelancers who hate the complexity of enterprise CRMs. It provides a high-performance, minimalist interface (Nothing-inspired) to manage clients, track project notes, and automate follow-up reminders.
+
+## Key Features
+- **Client Management**: A streamlined directory to track all your freelance contacts.
+- **Activity Logs**: Chronological logs for every client interaction.
+- **Smart Reminders**: Automated email follow-ups via QStash and Resend.
+- **Professional Invoicing**: Industrial-grade invoice generation and management.
+- **Security**: Built on Google Firebase with industry-standard encryption.
+
+## Pricing
+- **Free Tier**: Up to 10 clients, basic note-taking.
+- **Pro Tier ($9/mo)**: Unlimited clients, automated email reminders, full activity history.
+
+## Technology Stack
+- **Frontend**: Next.js 15, Tailwind CSS, Shadcn UI.
+- **Backend**: Firebase Firestore, Firebase Auth, Firebase Admin SDK.
+- **Infrastructure**: Vercel, Upstash (QStash), Resend, Lemon Squeezy (Payments).
+
+## Target Audience
+Solo freelancers, independent consultants, and creative professionals who need a fast, zero-friction tool to manage their business.

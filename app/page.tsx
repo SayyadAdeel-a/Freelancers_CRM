@@ -107,7 +107,15 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 relative">
+              <div className="absolute -inset-4 bg-primary/5 blur-3xl rounded-full z-0 opacity-50" />
+              <div className="col-span-2 mb-8 relative z-10 border border-border/50 rounded-sm overflow-hidden shadow-2xl animate-in zoom-in-95 duration-700">
+                <img 
+                  src="/og-image.png" 
+                  alt="Nudge CRM Industrial Dashboard - Client Management & Invoicing Interface" 
+                  className="w-full h-auto grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
               {[
                 { icon: Users, title: "Client Directory", desc: "All your contacts in one clean, scannable list.", delay: "200ms" },
                 { icon: FileText, title: "Activity Notes", desc: "Chronological logs of every interaction.", delay: "300ms" },

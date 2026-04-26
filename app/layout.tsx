@@ -39,15 +39,25 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://app.adeelsayyad.tech",
     siteName: "Nudge CRM",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nudge CRM Dashboard Preview",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nudge CRM | Premium Invoicing",
     description: "Manage your freelance business with an industrial-grade interface.",
+    images: ["/og-image.png"],
   }
 };
 
 import { PostHogProvider } from "@/components/providers/PostHogProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export default function RootLayout({
   children,
@@ -57,6 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${spaceMono.variable}`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col font-sans antialiased">
+        <JsonLd />
         <PostHogProvider>
           <ThemeProvider>
             <AuthProvider>
