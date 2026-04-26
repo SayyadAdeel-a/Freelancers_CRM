@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-import { updateDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase/config";
+import { adminDb } from "@/lib/firebase/admin";
+import * as admin from "firebase-admin";
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,18 +27,19 @@ export async function POST(req: NextRequest) {
     const eventName = payload.meta.event_name;
     const userId = payload.meta.custom_data?.userId;
 
-    // Handle successful payment events
     if (["order_created", "subscription_created", "subscription_updated"].includes(eventName)) {
       if (userId) {
-        await updateDoc(doc(db, "users", userId), {
+        // Use adminDb to bypass Firestore rules
+        await adminDb.collection("users").doc(userId).update({
           plan: "pro",
-          updatedAt: serverTimestamp(),
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         });
       }
     }
 
     return NextResponse.json({ message: "OK" });
   } catch (err: any) {
+    console.error("Webhook Error:", err);
     return NextResponse.json({ error: "Internal Error" }, { status: 500 });
   }
 }
