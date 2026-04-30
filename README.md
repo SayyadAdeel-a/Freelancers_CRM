@@ -1,42 +1,69 @@
-# Nudge CRM // Minimalist Freelance Operations
+<div align="center">
 
-**The CRM for people who hate CRMs.** Nudge is a high-performance, industrial-inspired command center designed specifically for solo freelancers. It replaces enterprise complexity with focused, zero-friction client management.
+# NUDGE // CRM
+**INDUSTRIAL MINIMALISM FOR SOLO FREELANCERS**
 
-![Nudge CRM Dashboard](<img width="1918" height="937" alt="Screenshot from 2026-04-30 16-57-39" src="https://github.com/user-attachments/assets/64667e0a-f9e6-44a7-81fe-1b050197de5c" />
-)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-Auth%20%26%20Firestore-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## // Vision
-Freelancers don't need a "747 cockpit" of pipelines and lead scores. They need a high-performance bicycle. Nudge provides the essential infrastructure to track relationships, log interactions, and automate follow-ups without the bloat.
+<br />
 
-## // Core Features
-- **Client Command Center**: A consolidated, high-density directory of all your contacts.
-- **Activity Stream**: Chronological interaction logs to ensure you never lose context.
-- **Smart Reminders**: Automated email follow-ups powered by QStash and Resend.
-- **Pro Tier Architecture**: Integrated subscription management via Lemon Squeezy.
-- **Industrial Design System**: Built with the "Nothing" aesthetic—technical grids, mono-spaced utility, and high-contrast glassmorphism.
+"The CRM for people who hate CRMs."
 
-## // Tech Stack
-- **Framework**: Next.js 15+ (App Router)
-- **Database**: Firebase Firestore
-- **Authentication**: Firebase Auth (Email/Password & Google OAuth)
-- **Infrastructure**: Firebase Admin SDK
-- **Styling**: Tailwind CSS 4 + Shadcn/UI
-- **Automation**: Upstash QStash
-- **Communications**: Resend
-- **Payments**: Lemon Squeezy
-- **Observability**: Sentry & PostHog
+[**Live Demo**](https://freelancers-crm-one.vercel.app) • [**Report Bug**](https://github.com/yourusername/nudge-crm/issues) • [**Request Feature**](https://github.com/yourusername/nudge-crm/issues)
 
-## // Getting Started
+<br />
 
-### 1. Clone & Install
+<img width="1918" height="937" alt="Nudge CRM Dashboard Preview" src="https://github.com/user-attachments/assets/64667e0a-f9e6-44a7-81fe-1b050197de5c" />
+
+</div>
+
+---
+
+## ⚡ // VISION
+Freelancers don't need a **"747 cockpit"** of complex pipelines and lead scoring. They need a **high-performance bicycle**. 
+
+Nudge provides the essential industrial infrastructure to track relationships, log interactions, and automate follow-ups with zero friction and zero bloat.
+
+---
+
+## 🛠 // CORE ARCHITECTURE
+
+| Feature | Description |
+| :--- | :--- |
+| **Command Center** | High-density directory for rapid client management. |
+| **Activity Stream** | Chronological logs of every interaction. |
+| **Smart Reminders** | Automated email follow-ups via QStash & Resend. |
+| **Pro Infrastructure** | Subscription scaling via Lemon Squeezy integration. |
+| **Industrial UI** | Technical grids, mono typography, and glassmorphism. |
+
+---
+
+## 🚀 // TECH STACK
+
+- **Frontend**: Next.js 15 (App Router), React 19, Lucide Icons
+- **Styling**: Tailwind CSS 4, Shadcn/UI, Framer Motion
+- **Backend**: Firebase Firestore (NoSQL), Firebase Auth
+- **Server**: Next.js Server Actions, Firebase Admin SDK
+- **DevOps**: Sentry (Error Tracking), PostHog (Analytics)
+- **Services**: Upstash QStash (Cron), Resend (Email), Lemon Squeezy (Billing)
+
+---
+
+## ⚙️ // SETUP & DEPLOYMENT
+
+### 1. Installation
 ```bash
 git clone https://github.com/yourusername/nudge-crm.git
 cd nudge-crm
 npm install
 ```
 
-### 2. Environment Configuration
-Create a `.env.local` file in the root directory and populate it with your credentials:
+### 2. Environment Variables
+<details>
+<summary><b>Click to expand .env.local configuration</b></summary>
 
 ```bash
 # Firebase Client (Public)
@@ -66,27 +93,36 @@ RESEND_API_KEY="..."
 NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN="..."
 NEXT_PUBLIC_POSTHOG_HOST="..."
 ```
+</details>
 
-### 3. Development Mode
+### 3. Local Development
 ```bash
 npm run dev
 ```
 
-## // Security Posture
-Nudge is built with a "Security-First" architecture:
-- **Strict CSP**: A hardened Content Security Policy prevents XSS and unauthorized data exfiltration.
-- **Admin Boundary**: All write operations are gated behind Firebase ID token verification and executed via the Server-Side Admin SDK.
-- **Encrypted Webhooks**: Signature verification ensures all payment events are authentic.
+---
 
-## // Roadmap
-- [ ] Native Mobile Application (Responsive Web live)
-- [ ] Client Portal for shared note viewing
-- [ ] Direct Invoice Generation
-- [ ] Multi-currency support for global freelancers
-
-## // License
-Distributed under the MIT License. See `LICENSE` for more information.
+## 🔐 // SECURITY PROTOCOL
+Nudge implements a **Security-First** industrial posture:
+*   **Hardened CSP**: Strict Content Security Policy to eliminate XSS.
+*   **Admin Boundary**: All write operations verified via Firebase ID tokens on the server.
+*   **Signed Webhooks**: HMAC signature verification for all billing events.
 
 ---
-**Built for the focused.**  
+
+## 🗺 // ROADMAP
+- [x] Industrial UI Redesign
+- [x] Pro Plan Integration
+- [ ] Native Mobile Application
+- [ ] Shared Client Portal
+- [ ] Automated Invoicing Engine
+
+---
+
+<div align="center">
+
+**BUILT FOR THE FOCUSED.**
+
 [adeelsayyad.tech](https://adeelsayyad.tech)
+
+</div>
