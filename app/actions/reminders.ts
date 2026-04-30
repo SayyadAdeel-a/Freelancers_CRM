@@ -30,8 +30,6 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
     // Remove trailing slash if present to avoid // in URL
     baseUrl = baseUrl.replace(/\/$/, "");
 
-    console.log(`[QStash] Using Base URL: ${baseUrl}`);
-    console.log(`[QStash] Scheduling reminder for ${userEmail} at ${remindAt}...`);
 
     // 2. Schedule with QStash
     if (!qstashClient) {
@@ -49,7 +47,6 @@ export async function scheduleReminderAction(params: ScheduleReminderParams) {
       notBefore: Math.floor(new Date(remindAt).getTime() / 1000),
     });
 
-    console.log(`[QStash] Success! Message ID: ${result.messageId}`);
     return { success: true };
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "An unexpected error occurred";

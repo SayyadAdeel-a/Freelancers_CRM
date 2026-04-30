@@ -31,15 +31,8 @@ export async function createProCheckout(token: string) {
     // Clean trailing slash
     baseUrl = baseUrl.replace(/\/$/, "");
 
-    console.log("--- Payment Action Debug ---");
-    console.log("User ID:", userId);
-    console.log("Base URL:", baseUrl);
-    console.log("Store ID:", storeId);
-    console.log("Variant ID:", variantId);
-    console.log("Has API Key:", !!apiKey);
-
     if (!apiKey || !storeId || !variantId) {
-      throw new Error(`Config Missing: API:${!!apiKey} Store:${!!storeId} Var:${!!variantId}`);
+      throw new Error("Payment configuration is incomplete.");
     }
 
     const payload = {
@@ -75,8 +68,6 @@ export async function createProCheckout(token: string) {
       },
     };
 
-    console.log("--- Lemon Squeezy Payload ---");
-    console.log(JSON.stringify(payload, null, 2));
 
     const response = await fetch("https://api.lemonsqueezy.com/v1/checkouts", {
       method: "POST",
@@ -89,7 +80,6 @@ export async function createProCheckout(token: string) {
     });
 
     const result = await response.json();
-    console.log("Lemon Squeezy API Status:", response.status);
 
     if (!response.ok) {
       console.error("Lemon Squeezy API Error:", JSON.stringify(result, null, 2));
