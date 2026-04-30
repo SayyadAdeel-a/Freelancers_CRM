@@ -2,7 +2,8 @@
 
 **The CRM for people who hate CRMs.** Nudge is a high-performance, industrial-inspired command center designed specifically for solo freelancers. It replaces enterprise complexity with focused, zero-friction client management.
 
-![Nudge CRM Dashboard](public/dashboard-preview.png)
+![Nudge CRM Dashboard](<img width="1918" height="937" alt="Screenshot from 2026-04-30 16-57-39" src="https://github.com/user-attachments/assets/64667e0a-f9e6-44a7-81fe-1b050197de5c" />
+)
 
 ## // Vision
 Freelancers don't need a "747 cockpit" of pipelines and lead scores. They need a high-performance bicycle. Nudge provides the essential infrastructure to track relationships, log interactions, and automate follow-ups without the bloat.
