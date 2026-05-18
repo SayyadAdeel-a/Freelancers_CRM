@@ -127,11 +127,13 @@ export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideCl
       reader.onloadend = async () => {
         try {
           const base64data = (reader.result as string).split(',')[1];
-          
+          const idToken = await (user as any)?.getIdToken();
+
           const res = await fetch("/api/invoices/send", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${idToken}`
             },
             body: JSON.stringify({
               invoiceId: invoice.id,
