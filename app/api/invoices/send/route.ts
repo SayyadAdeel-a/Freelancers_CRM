@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { invoiceId, userEmail, userName } = await req.json();
+    const { invoiceId, userEmail, userName, pdfBase64 } = await req.json();
 
     if (!invoiceId || !userEmail) {
       return NextResponse.json({ error: "Missing required data (invoiceId and userEmail)" }, { status: 400 });
@@ -65,6 +65,12 @@ export async function POST(req: NextRequest) {
       to: [recipientEmail],
       replyTo: userEmail,
       subject: `Invoice ${invoiceNumber} from ${senderName}`,
+      attachments: pdfBase64 ? [
+        {
+          filename: `Invoice_${invoiceNumber || "Statement"}.pdf`,
+          content: Buffer.from(pdfBase64, 'base64'),
+        }
+      ] : undefined,
       html: `
         <!DOCTYPE html>
         <html>

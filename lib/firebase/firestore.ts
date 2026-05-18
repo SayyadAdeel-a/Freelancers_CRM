@@ -62,19 +62,35 @@ export interface Note {
   createdAt: Timestamp | FieldValue;
 }
 
+export interface InvoiceLineItem {
+  description: string;
+  quantity: number;
+  rate: number;
+  amount: number;
+}
+
 export interface Invoice {
   id: string;
   invoiceNumber: string;
   clientId: string;
   clientName: string;
   clientEmail: string;
+  clientCompany?: string;
   userId: string;
   issueDate: Timestamp | FieldValue;
   dueDate: Timestamp | FieldValue;
-  lineItems: { description: string; amount: number }[];
+  lineItems: InvoiceLineItem[];
+  subtotal?: number;
+  taxRate?: number;
+  taxAmount?: number;
+  discount?: number;
   total: number;
   status: "draft" | "sent" | "paid" | "overdue";
   notes?: string;
+  paymentUrl?: string;
+  pdfUrl?: string;
+  viewsCount?: number;
+  lastViewedAt?: Timestamp | FieldValue | null;
   createdAt: Timestamp | FieldValue;
   sentAt?: Timestamp | FieldValue | null;
   paidAt?: Timestamp | FieldValue | null;
@@ -257,6 +273,22 @@ export async function getInvoiceById(invoiceId: string) {
   if (querySnapshot.empty) return null;
   const d = querySnapshot.docs[0];
   return { ...d.data(), id: d.id } as Invoice;
+}
+
+export async function logInvoiceViewById(invoiceId: string) {
+  try {
+    const q = query(collectionGroup(db, "invoices"), where("__name__", "==", invoiceId));
+    const querySnapshot = await getDocsFn(q);
+    if (querySnapshot.empty) return;
+    const d = querySnapshot.docs[0];
+    const data = d.data();
+    await updateDoc(d.ref, {
+      viewsCount: (data.viewsCount || 0) + 1,
+      lastViewedAt: serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Error logging invoice view:", error);
+  }
 }
 export async function getClientCount(userId: string) {
   const q = query(collection(db, "clients"), where("userId", "==", userId));
