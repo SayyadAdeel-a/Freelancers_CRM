@@ -1,4 +1,13 @@
 import { LegalPageLayout } from "@/components/LegalPageLayout";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Nudge CRM",
+  description: "Learn how Nudge CRM collects, stores, and protects your database, client lists, and invoicing data with industry-leading encryption and GDPR-compliant measures.",
+  alternatives: {
+    canonical: "https://app.adeelsayyad.tech/privacy",
+  },
+};
 
 export default function PrivacyPolicyPage() {
   return (

@@ -1,4 +1,13 @@
 import { LegalPageLayout } from "@/components/LegalPageLayout";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Nudge CRM",
+  description: "Read the Terms of Service for Nudge CRM. Understand user rights, storage policies, acceptable usage parameters, and billing guidelines for freelancers.",
+  alternatives: {
+    canonical: "https://app.adeelsayyad.tech/terms",
+  },
+};
 
 export default function TermsOfServicePage() {
   return (

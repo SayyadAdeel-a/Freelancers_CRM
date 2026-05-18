@@ -66,6 +66,8 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
+      <title>Login | Nudge CRM</title>
+      <meta name="robots" content="noindex, nofollow" />
       {/* Left brand panel — full height, hidden on mobile */}
       <div className="hidden lg:flex flex-col justify-between bg-[#0A0A0A] text-white p-12 relative overflow-hidden border-r border-white/10">
         {/* Grid texture */}

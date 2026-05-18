@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
         '/api/',
         '/_next/',
         '/static/',
+        '/login',
+        '/signup',
       ],
     },
     sitemap: 'https://app.adeelsayyad.tech/sitemap.xml',
