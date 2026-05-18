@@ -1,29 +1,9 @@
 /**
  * Dynamic Client-Side PDF Generation Utility.
  * Converts styled HTML templates into pixel-perfect downloadable or uploadable PDF blobs.
- * Bypasses build bundle size limits by pulling jsPDF + html2canvas from trusted CDNs at runtime.
+ * Bypasses build bundle size limits and Content Security Policy (CSP) errors by utilizing
+ * dynamic imports (code-splitting) from local bundled assets.
  */
-
-/**
- * Loads dynamic CDN script files for jsPDF and html2canvas if they aren't loaded already.
- */
-const loadCDNScript = (src: string): Promise<void> => {
-  return new Promise<void>((resolve, reject) => {
-    if (typeof window === "undefined") {
-      resolve();
-      return;
-    }
-    if (document.querySelector(`script[src="${src}"]`)) {
-      resolve();
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
-    document.body.appendChild(script);
-  });
-};
 
 /**
  * Renders a high-fidelity retro-industrial A4 invoice off-screen and compiles it into a PDF binary Blob.
@@ -36,12 +16,9 @@ export async function generateInvoicePdf(invoice: any): Promise<Blob> {
     throw new Error("PDF compiler must be run within a browser environment.");
   }
 
-  // Load compiler binaries
-  await loadCDNScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
-  await loadCDNScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
-
-  const { jsPDF } = (window as any).jspdf;
-  const html2canvas = (window as any).html2canvas;
+  // Load compilers dynamically from local bundle (CSP Compliant & Zero initial bundle overhead!)
+  const html2canvas = (await import("html2canvas")).default;
+  const { jsPDF } = await import("jspdf");
 
   // Create A4 canvas container (794px width matches A4 aspect ratio at 96 DPI)
   const container = document.createElement("div");
