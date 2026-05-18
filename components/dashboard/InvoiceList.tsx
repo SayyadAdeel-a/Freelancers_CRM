@@ -21,7 +21,6 @@ import {
 import { toast } from "sonner";
 import { Timestamp } from "firebase/firestore";
 import { generateInvoicePdf } from "@/lib/pdf/client";
-import { uploadInvoicePdf } from "@/lib/firebase/storage";
 
 interface InvoiceListProps {
   clientId?: string;
@@ -121,20 +120,8 @@ export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideCl
       // 1. Generate local PDF blob
       const pdfBlob = await generateInvoicePdf(invoice);
       
-      // 2. Upload to Firebase Storage in background
-      toast.loading("Uploading securely to Nudge cloud...", { id: toastId });
-      const pdfUrl = await uploadInvoicePdf(user?.uid || "", invoice.id, pdfBlob);
-      
-      // 3. Mark in database as sent
-      toast.loading("Updating invoice state...", { id: toastId });
-      await updateInvoice(targetClientId, invoice.id, { 
-        status: "sent",
-        sentAt: Timestamp.now(),
-        pdfUrl
-      });
-
-      // 4. Convert blob to Base64 to transmit as attachment
-      toast.loading("Dispatching trackable statement via Resend...", { id: toastId });
+      // 2. Convert blob to Base64 to transmit as attachment (Atomic Server-Side Storage Upload & Resend dispatch)
+      toast.loading("Uploading securely and dispatching statement...", { id: toastId });
       const reader = new FileReader();
       reader.readAsDataURL(pdfBlob);
       reader.onloadend = async () => {

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { verifySession } from "@/lib/firebase/server-auth";
-import { adminDb } from "@/lib/firebase/admin";
+import { adminDb, adminStorage } from "@/lib/firebase/admin";
+import * as admin from "firebase-admin";
 
 export async function POST(req: NextRequest) {
   if (!process.env.RESEND_API_KEY) {
@@ -40,7 +41,41 @@ export async function POST(req: NextRequest) {
     const invoiceDoc = invoiceQuery.docs[0];
     const invoice = invoiceDoc.data();
     
-    // 3. Extract verified data
+    // 3. Upload PDF to Storage from Server Side (Bypasses CORS completely!)
+    let pdfUrl = invoice.pdfUrl || "";
+    if (pdfBase64) {
+      try {
+        const bucket = adminStorage.bucket();
+        const filePath = `users/${decodedToken.uid}/invoices/${invoiceId}.pdf`;
+        const fileRef = bucket.file(filePath);
+        const buffer = Buffer.from(pdfBase64, "base64");
+        
+        await fileRef.save(buffer, {
+          metadata: {
+            contentType: "application/pdf",
+          }
+        });
+        
+        const [signedUrl] = await fileRef.getSignedUrl({
+          action: "read",
+          expires: Date.now() + 1000 * 60 * 60 * 24 * 365 * 50, // 50 years
+        });
+        
+        pdfUrl = signedUrl;
+      } catch (uploadErr) {
+        console.error("Firebase GCS upload error:", uploadErr);
+        pdfUrl = `https://firebasestorage.googleapis.com/v0/b/${adminStorage.bucket().name}/o/${encodeURIComponent(`users/${decodedToken.uid}/invoices/${invoiceId}.pdf`)}?alt=media`;
+      }
+    }
+
+    // 4. Update the Firestore invoice state
+    await invoiceDoc.ref.update({
+      status: "sent",
+      sentAt: admin.firestore.Timestamp.now(),
+      pdfUrl
+    });
+
+    // 5. Extract verified data
     let { invoiceNumber, clientName, clientEmail, total, lineItems, dueDate, notes } = invoice;
     const senderName = userName || "Nudge CRM User";
     
