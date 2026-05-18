@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Refund Policy | Nudge CRM",
   description: "Review the Nudge CRM Refund and Cancellation Policy. Learn about our 7-day refund window and hassle-free Pro plan cancellation procedures.",
-  alternatives: {
+  alternates: {
     canonical: "https://app.adeelsayyad.tech/refund",
   },
 };

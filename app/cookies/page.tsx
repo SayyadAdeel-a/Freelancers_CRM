@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Cookie Policy | Nudge CRM",
   description: "Read the Nudge CRM Cookie Policy to understand how we use cookies, analytical tracking, and error monitoring tools to keep your CRM secure and reliable.",
-  alternatives: {
+  alternates: {
     canonical: "https://app.adeelsayyad.tech/cookies",
   },
 };
