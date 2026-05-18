@@ -137,6 +137,7 @@ export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideCl
             },
             body: JSON.stringify({
               invoiceId: invoice.id,
+              clientId: invoice.clientId,
               userEmail: user?.email,
               userName: user?.displayName,
               pdfBase64: base64data

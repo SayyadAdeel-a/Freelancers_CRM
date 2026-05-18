@@ -21,25 +21,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { invoiceId, userEmail, userName, pdfBase64 } = await req.json();
+    const { invoiceId, clientId, userEmail, userName, pdfBase64 } = await req.json();
 
-    if (!invoiceId || !userEmail) {
-      return NextResponse.json({ error: "Missing required data (invoiceId and userEmail)" }, { status: 400 });
+    if (!invoiceId || !clientId || !userEmail) {
+      return NextResponse.json({ error: "Missing required data (invoiceId, clientId, and userEmail)" }, { status: 400 });
     }
 
-    // 2. Fetch the invoice from Firestore using Admin SDK (Collection Group)
-    const invoiceQuery = await adminDb.collectionGroup("invoices")
-      .where("userId", "==", decodedToken.uid)
-      .where("__name__", "==", invoiceId)
-      .limit(1)
-      .get();
+    // 2. Fetch the invoice directly from the subcollection
+    const invoiceRef = adminDb.collection("clients").doc(clientId).collection("invoices").doc(invoiceId);
+    const invoiceSnap = await invoiceRef.get();
 
-    if (invoiceQuery.empty) {
-      return NextResponse.json({ error: "Invoice not found or unauthorized" }, { status: 404 });
+    if (!invoiceSnap.exists) {
+      return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
     }
 
-    const invoiceDoc = invoiceQuery.docs[0];
-    const invoice = invoiceDoc.data();
+    const invoice = invoiceSnap.data();
+    if (!invoice || invoice.userId !== decodedToken.uid) {
+      return NextResponse.json({ error: "Unauthorized access to invoice" }, { status: 403 });
+    }
     
     // 3. Upload PDF to Storage from Server Side (Bypasses CORS completely!)
     let pdfUrl = invoice.pdfUrl || "";
@@ -69,7 +68,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Update the Firestore invoice state
-    await invoiceDoc.ref.update({
+    await invoiceRef.update({
       status: "sent",
       sentAt: admin.firestore.Timestamp.now(),
       pdfUrl
@@ -92,7 +91,7 @@ export async function POST(req: NextRequest) {
       </tr>
     `).join("");
 
-    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoiceDoc.id}`;
+    const publicUrl = `https://app.adeelsayyad.tech/invoice/${invoiceId}`;
     
     // 4. Send verified email
     const { error } = await resend.emails.send({
