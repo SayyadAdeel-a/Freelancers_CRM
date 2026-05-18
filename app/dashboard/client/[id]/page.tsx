@@ -27,6 +27,7 @@ import { ClientDetailSkeleton } from "@/components/dashboard/Skeletons";
 import { PayerRatingBadge } from "@/components/dashboard/PayerRatingBadge";
 import { useDashboardContext } from "@/components/dashboard/DashboardContext";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 
 export default function ClientPage() {
   const { id } = useParams();
@@ -81,7 +82,7 @@ export default function ClientPage() {
         toast.success("Client deleted successfully");
         router.push("/dashboard");
       } catch (error) {
-        posthog.captureException(error);
+        Sentry.captureException(error);
         console.error("Error deleting client:", error);
         toast.error("Failed to delete client");
       }

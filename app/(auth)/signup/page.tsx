@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function SignupPage() {
@@ -29,7 +30,7 @@ export default function SignupPage() {
       toast.success("Account created! Welcome to Nudge.");
       router.push("/dashboard");
     } catch (error: unknown) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       const message = error instanceof Error ? error.message : "An unexpected error occurred";
       setError(message);
       toast.error("Signup failed. Please check your details.");
@@ -47,7 +48,7 @@ export default function SignupPage() {
       toast.success("Signed in with Google!");
       router.push("/dashboard");
     } catch (error: unknown) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       const message = error instanceof Error ? error.message : "An unexpected error occurred";
       setError(message);
       toast.error("Google sign in failed.");

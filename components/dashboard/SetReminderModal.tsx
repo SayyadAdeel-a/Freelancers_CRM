@@ -26,6 +26,7 @@ import { scheduleReminderAction } from "@/app/actions/reminders";
 import { addReminder } from "@/lib/firebase/firestore";
 import { toast } from "sonner";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 
 export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSuccess }: SetReminderModalProps) {
   const { user } = useUser();
@@ -64,7 +65,7 @@ export function SetReminderModal({ clientId, clientName, isOpen, onClose, onSucc
         toast.error(`Failed to schedule email: ${result.error}`);
       }
     } catch (error: unknown) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       console.error("Error adding reminder:", error);
       const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
       toast.error(`Error: ${errorMessage}`);

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function LoginPage() {
@@ -30,7 +31,7 @@ export default function LoginPage() {
       toast.success("Welcome back!");
       router.push("/dashboard");
     } catch (error: unknown) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       const message = error instanceof Error ? error.message : "An unexpected error occurred";
       setError(message);
       toast.error("Invalid credentials. Please try again.");
@@ -48,7 +49,7 @@ export default function LoginPage() {
       toast.success("Signed in with Google!");
       router.push("/dashboard");
     } catch (error: unknown) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       const message = error instanceof Error ? error.message : "An unexpected error occurred";
       setError(message);
       toast.error("Google sign in failed.");

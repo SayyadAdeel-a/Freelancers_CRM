@@ -7,6 +7,7 @@ import { useUser } from "@/hooks/use-user";
 import { createNote } from "@/lib/firebase/firestore";
 import { toast } from "sonner";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 
 interface AddNoteProps {
   clientId: string;
@@ -30,7 +31,7 @@ export function AddNote({ clientId, onSuccess }: AddNoteProps) {
       onSuccess();
       toast.success("Note added successfully!");
     } catch (error) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       console.error("Error adding note:", error);
       toast.error("Failed to add note. Please try again.");
     } finally {

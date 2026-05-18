@@ -18,6 +18,7 @@ import { useUser } from "@/hooks/use-user";
 import { useDashboardContext } from "./DashboardContext";
 import { toast } from "sonner";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/nextjs";
 import { Sparkles } from "lucide-react";
 import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 import { addClientAction } from "@/app/actions/clients";
@@ -67,7 +68,7 @@ export function AddClientModal({ isOpen, onClose, onSuccess }: AddClientModalPro
       onClose();
       toast.success("Client added successfully!");
     } catch (error) {
-      posthog.captureException(error);
+      Sentry.captureException(error);
       console.error("Error adding client:", error);
       toast.error("Failed to add client. Please try again.");
     } finally {
