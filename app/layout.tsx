@@ -16,8 +16,6 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
-import { APP_CONFIG } from "@/lib/constants";
-
 export const metadata: Metadata = {
   title: "Nudge CRM | Premium Invoicing & Client Management for Freelancers",
   description: "The industrial-grade CRM for modern freelancers. Manage clients, send stunning invoices, and track projects with a high-performance, Nothing-inspired interface.",

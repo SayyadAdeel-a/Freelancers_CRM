@@ -11,7 +11,9 @@
  * @param invoice Full Invoice metadata payload
  * @returns Binary Blob of the generated PDF document
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateInvoicePdf(invoice: any): Promise<Blob> {
+
   if (typeof window === "undefined") {
     throw new Error("PDF compiler must be run within a browser environment.");
   }
@@ -49,6 +51,7 @@ export async function generateInvoicePdf(invoice: any): Promise<Blob> {
   });
 
   // Compile line items HTML
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lineItemsHtml = invoice.lineItems.map((item: any) => `
     <tr style="border-bottom: 1px solid #e2e8f0;">
       <td style="padding: 14px 0; text-align: left; font-size: 13px; font-weight: 600; color: #0f172a;">

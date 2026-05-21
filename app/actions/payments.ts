@@ -90,9 +90,9 @@ export async function createProCheckout(token: string) {
     }
 
     return { url: result.data.attributes.url };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("--- Payment Action Failure ---");
     console.error(err);
-    return { error: err.message || "Internal server error" };
+    return { error: err instanceof Error ? err.message : "Internal server error" };
   }
 }

@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
     });
 
     // 5. Extract verified data
-    let { invoiceNumber, clientName, clientEmail, total, lineItems, dueDate, notes } = invoice;
+    const { invoiceNumber, clientName, clientEmail, total, lineItems, dueDate, notes } = invoice;
     const senderName = userName || "Nudge CRM User";
     
     const recipientEmail = clientEmail || userEmail; 
@@ -84,6 +84,7 @@ export async function POST(req: NextRequest) {
     const formatCurrency = (amt: number) => 
       new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amt);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const itemsHtml = lineItems.map((item: any) => `
       <tr style="border-bottom: 1px solid #e5e5e5;">
         <td style="padding: 12px 0; font-family: ui-monospace, 'Cascadia Code', monospace; font-size: 13px; color: #1a1a1a;">${item.description}</td>
@@ -238,8 +239,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Invoice Send Error:", error);
-    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Internal Server Error" }, { status: 500 });
   }
 }
