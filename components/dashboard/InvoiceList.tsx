@@ -54,6 +54,7 @@ export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideCl
         {invoice.viewsCount && invoice.viewsCount > 0 ? (
           <span 
             className="flex items-center gap-1 text-[9px] font-bold text-green-600 bg-green-500/10 px-1.5 py-0.5 rounded-sm border border-green-500/20 font-mono tracking-tight cursor-help"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             title={`Opened ${invoice.viewsCount} time${invoice.viewsCount > 1 ? 's' : ''}. Last read: ${invoice.lastViewedAt ? formatDate(invoice.lastViewedAt as any) : 'Unknown'}`}
           >
             <span>👁</span>
@@ -127,6 +128,7 @@ export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideCl
       reader.onloadend = async () => {
         try {
           const base64data = (reader.result as string).split(',')[1];
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const idToken = await (user as any)?.getIdToken();
 
           const res = await fetch("/api/invoices/send", {
@@ -151,16 +153,16 @@ export function InvoiceList({ clientId: propClientId, invoices, onUpdate, hideCl
 
           toast.success("Invoice sent via Nudge with attached PDF!", { id: toastId });
           onUpdate();
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error("Error dispatching email:", error);
-          toast.error(`Email dispatch failed: ${error.message || "Unknown error"}`, { id: toastId });
+          toast.error(`Email dispatch failed: ${error instanceof Error ? error.message : "Unknown error"}`, { id: toastId });
         } finally {
           setUpdating(null);
         }
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Nudge send process failed:", error);
-      toast.error(`Failed to send invoice: ${error.message || "Unknown error"}`, { id: toastId });
+      toast.error(`Failed to send invoice: ${error instanceof Error ? error.message : "Unknown error"}`, { id: toastId });
       setUpdating(null);
     }
   };

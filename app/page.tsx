@@ -31,10 +31,10 @@ export default function LandingPage() {
  
           <div className="hidden md:flex items-center gap-10">
             <a href="#features" className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors">
-              // Features
+              {`// Features`}
             </a>
             <a href="#pricing" className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors">
-              // Pricing
+              {`// Pricing`}
             </a>
             <Link href="/login" className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors">
               Log In
@@ -108,7 +108,7 @@ export default function LandingPage() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold font-mono uppercase tracking-widest">
-                  // Core Infrastructure
+                  {`// Core Infrastructure`}
                 </div>
                 <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase italic leading-none">
                   Ditch the &quot;747&quot; complexity.
@@ -149,13 +149,13 @@ export default function LandingPage() {
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               </div>
  
-              <div className="grid grid-cols-2 gap-4 mt-8 relative z-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 relative z-10">
                 {[
                   { icon: Users, title: "Client Directory", desc: "All your contacts in one clean list.", delay: "200ms" },
                   { icon: FileText, title: "Activity Notes", desc: "Chronological logs of interactions.", delay: "300ms" },
                   { icon: Bell, title: "Reminders", desc: "Smart email follow-ups.", delay: "400ms" },
                   { icon: Check, title: "Simplicity", desc: "No dashboards. No noise.", delay: "500ms" },
-                ].map(({ icon: Icon, title, desc, delay }, i) => (
+                ].map(({ icon: Icon, title, desc, delay }) => (
                   <div
                     key={title}
                     className={`bg-card/50 backdrop-blur-sm border border-border/50 rounded-none p-4 space-y-2 hover:border-primary/50 transition-all animate-in fade-in slide-in-from-bottom-4`}
@@ -302,7 +302,7 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 mt-12 md:mt-0">
               {[
                 { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }] },
                 { title: "Account", links: [{ label: "Login", href: "/login" }, { label: "Sign Up", href: "/signup" }] },

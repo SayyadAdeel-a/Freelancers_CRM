@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
   const triggerError = searchParams.get("error") === "true";
   const triggerEvent = searchParams.get("event") === "true";
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const diagnostics: any = {
     timestamp: new Date().toISOString(),
     sentry: {
@@ -43,8 +44,8 @@ export async function GET(req: NextRequest) {
         message: testError.message,
       };
     }
-  } catch (err: any) {
-    diagnostics.sentry.error = err.message;
+  } catch (err: unknown) {
+    diagnostics.sentry.error = err instanceof Error ? err.message : "Unknown error";
     diagnostics.status = "degraded";
   }
 
@@ -70,8 +71,8 @@ export async function GET(req: NextRequest) {
         distinct_id: mockUserId,
       };
     }
-  } catch (err: any) {
-    diagnostics.posthog.error = err.message;
+  } catch (err: unknown) {
+    diagnostics.posthog.error = err instanceof Error ? err.message : "Unknown error";
     diagnostics.status = "degraded";
   }
 

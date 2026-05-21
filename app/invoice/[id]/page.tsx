@@ -1,4 +1,5 @@
-import { getInvoiceById, logInvoiceViewById } from "@/lib/firebase/firestore";
+import { adminDb } from "@/lib/firebase/admin";
+import * as admin from "firebase-admin";
 import { formatDate } from "@/lib/utils";
 import { Printer, ShieldCheck, ArrowUpRight, Wallet, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,17 +22,28 @@ interface PageProps {
 }
 
 export default async function PublicInvoicePage({ params }: PageProps) {
-  // Trigger background view receipts logging automatically when route compiles
-  await logInvoiceViewById(params.id);
+  const querySnapshot = await adminDb.collectionGroup("invoices").where(admin.firestore.FieldPath.documentId(), "==", params.id).get();
 
-  const invoice = await getInvoiceById(params.id);
-
-  if (!invoice) {
+  if (querySnapshot.empty) {
     notFound();
   }
 
-  const dueDate = invoice.dueDate && 'toDate' in (invoice.dueDate as any)
-    ? (invoice.dueDate as any).toDate()
+  const invoiceDoc = querySnapshot.docs[0];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const invoice = { ...invoiceDoc.data(), id: invoiceDoc.id } as any;
+
+  // Log view count serverside bypassing rules
+  try {
+    await invoiceDoc.ref.update({
+      viewsCount: admin.firestore.FieldValue.increment(1),
+      lastViewedAt: admin.firestore.FieldValue.serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Failed to log view:", error);
+  }
+
+  const dueDate = invoice.dueDate && 'toDate' in (invoice.dueDate as unknown as { toDate: () => Date })
+    ? (invoice.dueDate as unknown as { toDate: () => Date }).toDate()
     : invoice.dueDate instanceof Date
       ? invoice.dueDate
       : new Date();
@@ -124,7 +136,8 @@ export default async function PublicInvoicePage({ params }: PageProps) {
               </div>
               
               <div className="space-y-4">
-                {invoice.lineItems.map((item, i) => (
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {invoice.lineItems.map((item: any, i: number) => (
                   <div key={i} className="grid grid-cols-12 items-center py-4 border-b border-white/5 last:border-0">
                     <div className="col-span-6">
                       <p className="text-lg font-bold text-white transition-colors">{item.description}</p>
@@ -176,7 +189,7 @@ export default async function PublicInvoicePage({ params }: PageProps) {
             {/* Note Box */}
             {invoice.notes && (
               <div className="p-8 bg-[#1A1A1A] border-l-2 border-red-500 rounded-sm">
-                <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-3 italic">// Technical Notes</p>
+                <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-3 italic">{`// Technical Notes`}</p>
                 <p className="text-sm leading-relaxed text-white/80 whitespace-pre-wrap">{invoice.notes}</p>
               </div>
             )}

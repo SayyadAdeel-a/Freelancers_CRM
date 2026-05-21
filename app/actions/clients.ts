@@ -4,6 +4,7 @@ import { adminDb } from "@/lib/firebase/admin";
 import { verifySession } from "@/lib/firebase/server-auth";
 import { FREE_PLAN_CLIENT_LIMIT } from "@/lib/constants";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function addClientAction(token: string, clientData: any) {
   try {
     // 1. Verify Authentication
@@ -43,11 +44,11 @@ export async function addClientAction(token: string, clientData: any) {
       success: true, 
       clientId: docRef.id 
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Add Client Action Error:", error);
     return { 
       success: false, 
-      error: error.message || "Failed to add client. Please try again." 
+      error: error instanceof Error ? error.message : "Failed to add client. Please try again."
     };
   }
 }
